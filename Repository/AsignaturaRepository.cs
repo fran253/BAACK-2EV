@@ -136,6 +136,8 @@ namespace reto2_api.Repositories
                 }
             }
         }
+
+        ///METODO PARA OBTENER LAS ASIGNATURAS POR CURSO
         public async Task<List<Asignatura>> GetByCursoIdAsync(int idCurso)
         {
             var asignaturas = new List<Asignatura>();
@@ -165,5 +167,7 @@ namespace reto2_api.Repositories
 
             return asignaturas;
         }
+
+        
     }
 }

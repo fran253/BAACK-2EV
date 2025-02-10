@@ -75,5 +75,14 @@ namespace reto2_api.Service
 
             await _preguntaRepository.DeleteAsync(id);
         }
+
+        ///METODO PREGUNTAS DE UN TEST
+        public async Task<List<Pregunta>> GetByTestIdAsync(int idTest)
+        {
+            if (idTest <= 0)
+                throw new ArgumentException("el id del test debe ser un número positivo.", nameof(idTest));
+
+            return await _preguntaRepository.GetByTestIdAsync(idTest);
+        }
     }
 }

@@ -44,6 +44,7 @@ namespace reto2_api.Service
             await _asignaturaRepository.DeleteAsync(id);
         }
         
+        ///METODO PARA OBTENER ASIGNATURAS POR ID DE CURSO
         public async Task<List<Asignatura>> GetByCursoIdAsync(int idCurso)
         {
             if (idCurso <= 0)

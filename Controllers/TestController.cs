@@ -85,5 +85,16 @@ namespace reto2_api.Controllers
            await _serviceTest.DeleteAsync(id);
            return NoContent();
        }
+
+        ///METODO TESTS DE UN TEMA
+       [HttpGet("temario/{idTemario}")]
+        public async Task<ActionResult<List<Test>>> GetByTemarioId(int idTemario)
+        {
+            var tests = await _testService.GetByTemarioIdAsync(idTemario);
+            if (tests == null || tests.Count == 0)
+                return NotFound("no se encontraron tests para este temario.");
+
+            return Ok(tests);
+        }
    }
 }

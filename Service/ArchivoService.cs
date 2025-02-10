@@ -43,5 +43,14 @@ namespace reto2_api.Service
             }
             await _archivoRepository.DeleteAsync(id);
         }
+
+        ///METODO ARCHIVOS DE UN TEMA
+        public async Task<List<Archivo>> GetByTemarioIdAsync(int idTemario)
+        {
+            if (idTemario <= 0)
+                throw new ArgumentException("el id del temario debe ser un número positivo.", nameof(idTemario));
+
+            return await _archivoRepository.GetByTemarioIdAsync(idTemario);
+        }
     }
 }

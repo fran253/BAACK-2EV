@@ -49,6 +49,14 @@ namespace reto2_api.Service
             throw new NotImplementedException();
         }
 
+        ///METODO TEST DE UN TEMA
+        public async Task<List<Test>> GetByTemarioIdAsync(int idTemario)
+        {
+            if (idTemario <= 0)
+                throw new ArgumentException("el id del temario debe ser un número positivo.", nameof(idTemario));
+
+            return await _testRepository.GetByTemarioIdAsync(idTemario);
+        }
         
     }
 }

@@ -68,5 +68,16 @@ namespace reto2_api.Controllers
             await _preguntaService.DeleteAsync(id);
             return NoContent();
         }
+
+        ///METODO PREGUNTAS DE UN TEST
+        [HttpGet("test/{idTest}")]
+        public async Task<ActionResult<List<Pregunta>>> GetByTestId(int idTest)
+        {
+            var preguntas = await _preguntaService.GetByTestIdAsync(idTest);
+            if (preguntas == null || preguntas.Count == 0)
+                return NotFound("no se encontraron preguntas para este test.");
+
+            return Ok(preguntas);
+        }
     }
 }

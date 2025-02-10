@@ -69,5 +69,16 @@ namespace reto2_api.Controllers
             await _opcionService.DeleteAsync(id);
             return NoContent();
         }
+
+        ///METODO OPCIONES DE PREGUNTA
+        [HttpGet("pregunta/{idPregunta}")]
+        public async Task<ActionResult<List<Opcion>>> GetByPreguntaId(int idPregunta)
+        {
+            var opciones = await _opcionService.GetByPreguntaIdAsync(idPregunta);
+            if (opciones == null || opciones.Count == 0)
+                return NotFound("no se encontraron opciones para esta pregunta.");
+
+            return Ok(opciones);
+        }
     }
 }

@@ -85,5 +85,16 @@ namespace reto2_api.Controllers
            await _serviceTemario.DeleteAsync(id);
            return NoContent();
        }
+
+        ///METODO PARA OBTENER LOS TEMARIOS POR ASIGNATURA
+       [HttpGet("asignatura/{idAsignatura}")]
+        public async Task<ActionResult<List<Temario>>> GetByAsignaturaId(int idAsignatura)
+        {
+            var temarios = await _temarioService.GetByAsignaturaIdAsync(idAsignatura);
+            if (temarios == null || temarios.Count == 0)
+                return NotFound("no se encontraron temarios para esta asignatura.");
+
+            return Ok(temarios);
+        }
    }
 }

@@ -128,5 +128,37 @@ namespace reto2_api.Repositories
                 }
             }
         }
+
+        ///METODO TEST DE UN TEMA
+         public async Task<List<Test>> GetByTemarioIdAsync(int idTemario)
+        {
+            var tests = new List<Test>();
+
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                await connection.OpenAsync();
+
+                string query = "SELECT IdTest, Titulo, FechaCreacion FROM Test WHERE IdTemario = @IdTemario";
+                using (var command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@IdTemario", idTemario);
+
+                    using (var reader = await command.ExecuteReaderAsync())
+                    {
+                        while (await reader.ReadAsync())
+                        {
+                            tests.Add(new Test
+                            {
+                                IdTest = reader.GetInt32(0),
+                                Titulo = reader.GetString(1),
+                                FechaCreacion = reader.GetDateTime(2)
+                            });
+                        }
+                    }
+                }
+            }
+
+            return tests;
+        }
     }
 }
