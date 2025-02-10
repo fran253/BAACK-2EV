@@ -136,5 +136,34 @@ namespace reto2_api.Repositories
                 }
             }
         }
+        public async Task<List<Asignatura>> GetByCursoIdAsync(int idCurso)
+        {
+            var asignaturas = new List<Asignatura>();
+
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                await connection.OpenAsync();
+
+                string query = "SELECT IdAsignatura, Nombre, Imagen FROM Asignatura WHERE IdCurso = @IdCurso";
+                using (var command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@IdCurso", idCurso);
+
+                    using (var reader = await command.ExecuteReaderAsync())
+                    {
+                        while (await reader.ReadAsync())
+                        {
+                            asignaturas.Add(new Asignatura
+                            {
+                                IdAsignatura = reader.GetInt32(0),
+                                Nombre = reader.GetString(1)
+                            });
+                        }
+                    }
+                }
+            }
+
+            return asignaturas;
+        }
     }
 }

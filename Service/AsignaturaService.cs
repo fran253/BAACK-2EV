@@ -43,5 +43,13 @@ namespace reto2_api.Service
             }
             await _asignaturaRepository.DeleteAsync(id);
         }
+        
+        public async Task<List<Asignatura>> GetByCursoIdAsync(int idCurso)
+        {
+            if (idCurso <= 0)
+                throw new ArgumentException("el id del curso debe ser un número positivo.", nameof(idCurso));
+
+            return await _asignaturaRepository.GetByCursoIdAsync(idCurso);
+        }
     }
 }
