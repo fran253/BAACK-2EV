@@ -2083,19 +2083,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\franr\\.nuget\\packages\\": {}
+    "C:\\Users\\Diego\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\GRADO SUPERIOR (año2)\\SEGUNDO TRIMESTRE\\RETO FINAL\\BAACK-2EV\\reto2_api.csproj",
+      "projectUniqueName": "C:\\GRADOSUPERIOR 2año\\ZRETO BACK 2EVA\\BAACK-2EV\\reto2_api.csproj",
       "projectName": "reto2_api",
-      "projectPath": "D:\\GRADO SUPERIOR (año2)\\SEGUNDO TRIMESTRE\\RETO FINAL\\BAACK-2EV\\reto2_api.csproj",
-      "packagesPath": "C:\\Users\\franr\\.nuget\\packages\\",
-      "outputPath": "D:\\GRADO SUPERIOR (año2)\\SEGUNDO TRIMESTRE\\RETO FINAL\\BAACK-2EV\\obj\\",
+      "projectPath": "C:\\GRADOSUPERIOR 2año\\ZRETO BACK 2EVA\\BAACK-2EV\\reto2_api.csproj",
+      "packagesPath": "C:\\Users\\Diego\\.nuget\\packages\\",
+      "outputPath": "C:\\GRADOSUPERIOR 2año\\ZRETO BACK 2EVA\\BAACK-2EV\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\franr\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\Diego\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net8.0"
@@ -2152,7 +2152,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.403/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.404/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

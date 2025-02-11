@@ -42,6 +42,9 @@ new ResultadoRepository(connectionString));
 builder.Services.AddScoped<IUsuarioCursoRepository, UsuarioCursoRepository>(provider =>
 new UsuarioCursoRepository(connectionString));
 
+builder.Services.AddScoped<IArchivoUsuarioRepository, ArchivoUsuarioRepository>(provider =>
+new ArchivoUsuarioRepository(connectionString));
+
 
 
 
@@ -58,7 +61,7 @@ builder.Services.AddScoped<IPreguntaService,PreguntaService>();
 builder.Services.AddScoped<IOpcionService,OpcionService>();
 builder.Services.AddScoped<IResultadoService,ResultadoService>();
 builder.Services.AddScoped<IUsuarioCursoService,UsuarioCursoService>();
-
+builder.Services.AddScoped<IArchivoUsuarioService,ArchivoUsuarioService>();
 
 
 // Add services to the container.
