@@ -37,8 +37,4 @@ public class Resultado
 
     public Resultado() { }
 
-    public void MostrarDetalles()
-    {
-        Console.WriteLine($"resultado: {Puntuacion}, fecha: {Fecha}, usuario: {Usuario.Nombre}, pregunta id: {IdPregunta}");
-    }
 }

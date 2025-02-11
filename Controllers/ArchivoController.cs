@@ -93,7 +93,7 @@ namespace reto2_api.Controllers
         [HttpGet("temario/{idTemario}")]
         public async Task<ActionResult<List<Archivo>>> GetByTemarioId(int idTemario)
         {
-            var archivos = await _archivoService.GetByTemarioIdAsync(idTemario);
+            var archivos = await _serviceArchivo.GetByTemarioIdAsync(idTemario);
             if (archivos == null || archivos.Count == 0)
                 return NotFound("no se encontraron archivos para este temario.");
 

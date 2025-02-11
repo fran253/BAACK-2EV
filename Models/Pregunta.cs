@@ -24,8 +24,4 @@ public class Pregunta
 
     public Pregunta() { }
 
-    public void MostrarDetalles()
-    {
-        Console.WriteLine($"pregunta: {Enunciado}, id pregunta: {IdPregunta}, id test: {Test.IdTest}, título test: {Test.Titulo}");
-    }
 }

@@ -143,7 +143,7 @@ namespace reto2_api.Repositories
         }
 
         ///METODO ARCHIVOS DE UN TEMA
-         public async Task<List<Archivo>> GetByTemarioIdAsync(int idTemario)
+        public async Task<List<Archivo>> GetByTemarioIdAsync(int idTemario)
         {
             var archivos = new List<Archivo>();
 
@@ -151,7 +151,7 @@ namespace reto2_api.Repositories
             {
                 await connection.OpenAsync();
 
-                string query = "SELECT IdArchivo, Nombre, FechaSubida FROM Archivo WHERE IdTemario = @IdTemario";
+                string query = "SELECT IdArchivo, Titulo, Url, Tipo, FechaCreacion, IdUsuario, IdTemario FROM Archivo WHERE IdTemario = @IdTemario";
                 using (var command = new SqlCommand(query, connection))
                 {
                     command.Parameters.AddWithValue("@IdTemario", idTemario);
@@ -163,8 +163,12 @@ namespace reto2_api.Repositories
                             archivos.Add(new Archivo
                             {
                                 IdArchivo = reader.GetInt32(0),
-                                Nombre = reader.GetString(1),
-                                FechaSubida = reader.GetDateTime(2)
+                                Titulo = reader.GetString(1),
+                                Url = reader.GetString(2),
+                                Tipo = reader.GetString(3),
+                                FechaCreacion = reader.GetDateTime(4),
+                                IdUsuario = reader.GetInt32(5),
+                                IdTemario = reader.GetInt32(6)
                             });
                         }
                     }

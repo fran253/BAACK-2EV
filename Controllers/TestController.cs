@@ -87,10 +87,10 @@ namespace reto2_api.Controllers
        }
 
         ///METODO TESTS DE UN TEMA
-       [HttpGet("temario/{idTemario}")]
+         [HttpGet("temario/{idTemario}")]
         public async Task<ActionResult<List<Test>>> GetByTemarioId(int idTemario)
         {
-            var tests = await _testService.GetByTemarioIdAsync(idTemario);
+            var tests = await _serviceTest.GetByTemarioIdAsync(idTemario);
             if (tests == null || tests.Count == 0)
                 return NotFound("no se encontraron tests para este temario.");
 

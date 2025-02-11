@@ -1,28 +1,28 @@
 using Microsoft.AspNetCore.Mvc;
-using reto2_api.Repositories;
 using reto2_api.Service;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace reto2_api.Controllers
 {
-   [Route("api/[controller]")]
-   [ApiController]
-   public class TemarioController : ControllerBase
-   {
-    private static List<Temario> temarios = new List<Temario>();
+    [Route("api/[controller]")]
+    [ApiController]
+    public class TemarioController : ControllerBase
+    {
+        private readonly ITemarioService _serviceTemario;
 
-    private readonly ITemarioService _serviceTemario;
-
-    public TemarioController(ITemarioService service)
+        public TemarioController(ITemarioService temarioService)
         {
-            _serviceTemario = service;
+            _serviceTemario = temarioService;
         }
-    
+
         [HttpGet]
         public async Task<ActionResult<List<Temario>>> GetTemario()
         {
             var temarios = await _serviceTemario.GetAllAsync();
             return Ok(temarios);
         }
+
         [HttpGet("{id}")]
         public async Task<ActionResult<Temario>> GetTemario(int id)
         {
@@ -41,7 +41,7 @@ namespace reto2_api.Controllers
             return CreatedAtAction(nameof(GetTemario), new { id = temario.IdTemario }, temario);
         }
 
-       [HttpPut("{id}")]
+        [HttpPut("{id}")]
         public async Task<IActionResult> UpdateTemario(int id, [FromBody] Temario updatedTemario)
         {
             if (updatedTemario == null || id != updatedTemario.IdTemario)
@@ -57,13 +57,12 @@ namespace reto2_api.Controllers
 
             try
             {
-                // Actualizar los campos correctos de Temario
                 existingTemario.Titulo = updatedTemario.Titulo;
                 existingTemario.Descripcion = updatedTemario.Descripcion;
                 existingTemario.IdAsignatura = updatedTemario.IdAsignatura;
 
                 await _serviceTemario.UpdateAsync(existingTemario);
-                return NoContent(); // Código 204, éxito sin contenido
+                return NoContent();
             }
             catch (Exception ex)
             {
@@ -71,30 +70,27 @@ namespace reto2_api.Controllers
             }
         }
 
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteTest(int id)
+        {
+            var curso = await _serviceTemario.GetByIdAsync(id);
+            if (curso == null)
+            {
+                return NotFound();
+            }
+            await _serviceTemario.DeleteAsync(id);
+            return NoContent();
+        }
 
-        ///Cambio necesario///
-  
-       [HttpDelete("{id}")]
-       public async Task<IActionResult> DeleteTest(int id)
-       {
-           var curso = await _serviceTemario.GetByIdAsync(id);
-           if (curso == null)
-           {
-               return NotFound();
-           }
-           await _serviceTemario.DeleteAsync(id);
-           return NoContent();
-       }
-
-        ///METODO PARA OBTENER LOS TEMARIOS POR ASIGNATURA
-       [HttpGet("asignatura/{idAsignatura}")]
+        ///METODO TEMARIOS ASIGNATURA
+        [HttpGet("asignatura/{idAsignatura}")]
         public async Task<ActionResult<List<Temario>>> GetByAsignaturaId(int idAsignatura)
         {
-            var temarios = await _temarioService.GetByAsignaturaIdAsync(idAsignatura);
+            var temarios = await _serviceTemario.GetByAsignaturaIdAsync(idAsignatura);
             if (temarios == null || temarios.Count == 0)
-                return NotFound("no se encontraron temarios para esta asignatura.");
+                return NotFound("No se encontraron temarios para esta asignatura.");
 
             return Ok(temarios);
         }
-   }
+    }
 }

@@ -160,5 +160,37 @@ namespace reto2_api.Repositories
 
             return opciones;
         }
+
+        ///METODO SOLUCION DE PREGUNTA
+        public async Task<Opcion?> GetSolucionByPreguntaIdAsync(int idPregunta)
+        {
+            Opcion? opcionCorrecta = null;
+
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                await connection.OpenAsync();
+
+                string query = "SELECT IdOpcion, Texto, EsCorrecta FROM Opcion WHERE IdPregunta = @IdPregunta AND EsCorrecta = 1";
+                using (var command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@IdPregunta", idPregunta);
+
+                    using (var reader = await command.ExecuteReaderAsync())
+                    {
+                        if (await reader.ReadAsync())
+                        {
+                            opcionCorrecta = new Opcion
+                            {
+                                IdOpcion = reader.GetInt32(0),
+                                Texto = reader.GetString(1),
+                                EsCorrecta = reader.GetBoolean(2)
+                            };
+                        }
+                    }
+                }
+            }
+
+            return opcionCorrecta;
+        }
     }
 }

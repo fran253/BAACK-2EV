@@ -6,13 +6,13 @@
   "compilationOptions": {},
   "targets": {
     ".NETCoreApp,Version=v8.0": {
-      "restaurant_api/1.0.0": {
+      "reto2_api/1.0.0": {
         "dependencies": {
           "Microsoft.Data.SqlClient": "6.0.0",
           "Swashbuckle.AspNetCore": "6.4.0"
         },
         "runtime": {
-          "restaurant_api.dll": {}
+          "reto2_api.dll": {}
         }
       },
       "Azure.Core/1.38.0": {
@@ -456,7 +456,7 @@
     }
   },
   "libraries": {
-    "restaurant_api/1.0.0": {
+    "reto2_api/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

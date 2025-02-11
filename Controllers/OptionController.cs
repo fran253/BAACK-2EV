@@ -80,5 +80,16 @@ namespace reto2_api.Controllers
 
             return Ok(opciones);
         }
+
+        ///METODO SOLUCION DE PREGUNTA
+        [HttpGet("pregunta/{idPregunta}/solucion")]
+        public async Task<ActionResult<Opcion>> GetSolucionByPreguntaId(int idPregunta)
+        {
+            var opcionCorrecta = await _opcionService.GetSolucionByPreguntaIdAsync(idPregunta);
+            if (opcionCorrecta == null)
+                return NotFound("no se encontró una opción correcta para esta pregunta.");
+
+            return Ok(opcionCorrecta);
+        }
     }
 }

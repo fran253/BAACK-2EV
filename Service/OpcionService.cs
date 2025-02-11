@@ -70,5 +70,14 @@ namespace reto2_api.Service
 
             return await _opcionRepository.GetByPreguntaIdAsync(idPregunta);
         }
+
+        ///METODO SOLUCION DE PREGUNTA
+        public async Task<Opcion?> GetSolucionByPreguntaIdAsync(int idPregunta)
+        {
+            if (idPregunta <= 0)
+                throw new ArgumentException("el id de la pregunta debe ser un número positivo.", nameof(idPregunta));
+
+            return await _opcionRepository.GetSolucionByPreguntaIdAsync(idPregunta);
+        }
     }
 }

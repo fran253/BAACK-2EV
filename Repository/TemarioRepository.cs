@@ -138,7 +138,9 @@ namespace reto2_api.Repositories
             {
                 await connection.OpenAsync();
 
-                string query = "SELECT IdTemario, Nombre FROM Temario WHERE IdAsignatura = @IdAsignatura";
+                // 🔹 Se añadió `Descripcion` e `IdAsignatura` a la consulta
+                string query = "SELECT IdTemario, Titulo, Descripcion, IdAsignatura FROM Temario WHERE IdAsignatura = @IdAsignatura";
+
                 using (var command = new SqlCommand(query, connection))
                 {
                     command.Parameters.AddWithValue("@IdAsignatura", idAsignatura);
@@ -150,7 +152,9 @@ namespace reto2_api.Repositories
                             temarios.Add(new Temario
                             {
                                 IdTemario = reader.GetInt32(0),
-                                Nombre = reader.GetString(1)
+                                Titulo = reader.GetString(1),
+                                Descripcion = reader.GetString(2),  // 🔹 Ahora se incluye la descripción correctamente
+                                IdAsignatura = reader.GetInt32(3)   // 🔹 Se asigna `IdAsignatura` al modelo
                             });
                         }
                     }

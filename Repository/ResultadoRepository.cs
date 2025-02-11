@@ -132,5 +132,33 @@ namespace reto2_api.Repositories
                 }
             }
         }
+
+        ///METODO RESILTADO DE USUARIO
+        public async Task<int> GetResultadoFinalPorUsuarioTestAsync(int idUsuario, int idTest)
+        {
+            int puntuacionTotal = 0;
+
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                await connection.OpenAsync();
+
+                string query = @"
+                    SELECT SUM(Puntuacion)
+                    FROM Resultado r
+                    JOIN Pregunta p ON r.IdPregunta = p.IdPregunta
+                    WHERE r.IdUsuario = @IdUsuario AND p.IdTest = @IdTest";
+
+                using (var command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@IdUsuario", idUsuario);
+                    command.Parameters.AddWithValue("@IdTest", idTest);
+
+                    var result = await command.ExecuteScalarAsync();
+                    puntuacionTotal = result != DBNull.Value ? Convert.ToInt32(result) : 0;
+                }
+            }
+
+            return puntuacionTotal;
+        }
     }
 }

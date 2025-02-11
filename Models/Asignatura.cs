@@ -1,4 +1,5 @@
 using System.Diagnostics;
+
 public class Asignatura 
 {
     public int IdAsignatura { get; set; }
@@ -23,8 +24,4 @@ public class Asignatura
     }
     public Asignatura(){}
 
-    public void MostrarDetalles() 
-    {
-        Console.WriteLine($"Asignatura: {Nombre}, Descripción: {Descripcion}, Curso: {(Curso != null ? Curso.Nombre : "No asignado")}");
-    }
 }

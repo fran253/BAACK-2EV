@@ -89,10 +89,10 @@ namespace reto2_api.Controllers
        }
 
        //Metodo Mostrar todas las asignaturas de un curso
-       [HttpGet("curso/{idCurso}")]
-        public async Task<ActionResult<List<Asignatura>>> GetByCursoId(int idCurso)
+        [HttpGet("curso/{cursoId}")]
+        public async Task<ActionResult<List<Asignatura>>> GetByCursoId(int cursoId)
         {
-            var asignaturas = await _asignaturaService.GetByCursoIdAsync(idCurso);
+            var asignaturas = await _serviceAsignatura.GetByCursoIdAsync(cursoId);
             if (asignaturas == null || asignaturas.Count == 0)
                 return NotFound("no se encontraron asignaturas para este curso.");
 

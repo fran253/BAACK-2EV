@@ -146,7 +146,7 @@ namespace reto2_api.Repositories
             {
                 await connection.OpenAsync();
 
-                string query = "SELECT IdAsignatura, Nombre, Imagen FROM Asignatura WHERE IdCurso = @IdCurso";
+                string query = "SELECT IdAsignatura, Nombre FROM Asignatura WHERE IdCurso = @IdCurso";
                 using (var command = new SqlCommand(query, connection))
                 {
                     command.Parameters.AddWithValue("@IdCurso", idCurso);
@@ -165,7 +165,7 @@ namespace reto2_api.Repositories
                 }
             }
 
-            return asignaturas;
+            return asignaturas; // Devuelve una lista, no un solo objeto
         }
 
         
