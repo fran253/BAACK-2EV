@@ -141,5 +141,41 @@ namespace reto2_api.Repositories
                 }
             }
         }
+
+        ///METODO ARCHIVOS DE UN TEMA
+        public async Task<List<Archivo>> GetByTemarioIdAsync(int idTemario)
+        {
+            var archivos = new List<Archivo>();
+
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                await connection.OpenAsync();
+
+                string query = "SELECT IdArchivo, Titulo, Url, Tipo, FechaCreacion, IdUsuario, IdTemario FROM Archivo WHERE IdTemario = @IdTemario";
+                using (var command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@IdTemario", idTemario);
+
+                    using (var reader = await command.ExecuteReaderAsync())
+                    {
+                        while (await reader.ReadAsync())
+                        {
+                            archivos.Add(new Archivo
+                            {
+                                IdArchivo = reader.GetInt32(0),
+                                Titulo = reader.GetString(1),
+                                Url = reader.GetString(2),
+                                Tipo = reader.GetString(3),
+                                FechaCreacion = reader.GetDateTime(4),
+                                IdUsuario = reader.GetInt32(5),
+                                IdTemario = reader.GetInt32(6)
+                            });
+                        }
+                    }
+                }
+            }
+
+            return archivos;
+        }
     }
 }

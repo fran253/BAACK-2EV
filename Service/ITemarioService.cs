@@ -5,6 +5,7 @@ namespace reto2_api.Service
     {
         Task<List<Temario>> GetAllAsync();
         Task<Temario?> GetByIdAsync(int id);
+        Task<List<Temario>> GetByAsignaturaIdAsync(int idAsignatura); ///METODO PARA OBTENER LOS TEMARIOS POR ASIGNATURA
         Task AddAsync(Temario temario);
         Task UpdateAsync(Temario temario);
         Task DeleteAsync(int id);

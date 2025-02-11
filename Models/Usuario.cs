@@ -41,8 +41,4 @@ public class Usuario
     }
 
     public Usuario() { }
-    public void MostrarDetalles()
-    {
-        Console.WriteLine($"usuario: {Nombre} {Apellido}, email: {Gmail}, teléfono: {Telefono},contraseña : {Contraseña}, rol: {Rol.IdRol}");
-    }
 }

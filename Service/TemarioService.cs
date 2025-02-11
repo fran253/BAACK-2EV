@@ -50,6 +50,14 @@ namespace reto2_api.Service
             throw new NotImplementedException();
         }
 
+        ///METODO PARA OBTENER LOS TEMARIOS POR ASIGNATURA
+        public async Task<List<Temario>> GetByAsignaturaIdAsync(int idAsignatura)
+        {
+            if (idAsignatura <= 0)
+                throw new ArgumentException("el id de la asignatura debe ser un número positivo.", nameof(idAsignatura));
+
+            return await _temarioRepository.GetByAsignaturaIdAsync(idAsignatura);
+        }
         
     }
 }

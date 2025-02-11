@@ -67,5 +67,17 @@ namespace reto2_api.Service
 
             await _resultadoRepository.DeleteAsync(id);
         }
+
+        ///METODO RESILTADO DE USUARIO
+         public async Task<int> GetResultadoFinalPorUsuarioTestAsync(int idUsuario, int idTest)
+        {
+            if (idUsuario <= 0)
+                throw new ArgumentException("el id del usuario debe ser un número positivo.", nameof(idUsuario));
+
+            if (idTest <= 0)
+                throw new ArgumentException("el id del test debe ser un número positivo.", nameof(idTest));
+
+            return await _resultadoRepository.GetResultadoFinalPorUsuarioTestAsync(idUsuario, idTest);
+        }
     }
 }

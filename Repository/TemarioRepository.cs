@@ -128,5 +128,40 @@ namespace reto2_api.Repositories
                 }
             }
         }
+
+        ///METODO PARA OBTENER LOS TEMARIOS POR ASIGNATURA
+        public async Task<List<Temario>> GetByAsignaturaIdAsync(int idAsignatura)
+        {
+            var temarios = new List<Temario>();
+
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                await connection.OpenAsync();
+
+                // 🔹 Se añadió `Descripcion` e `IdAsignatura` a la consulta
+                string query = "SELECT IdTemario, Titulo, Descripcion, IdAsignatura FROM Temario WHERE IdAsignatura = @IdAsignatura";
+
+                using (var command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@IdAsignatura", idAsignatura);
+
+                    using (var reader = await command.ExecuteReaderAsync())
+                    {
+                        while (await reader.ReadAsync())
+                        {
+                            temarios.Add(new Temario
+                            {
+                                IdTemario = reader.GetInt32(0),
+                                Titulo = reader.GetString(1),
+                                Descripcion = reader.GetString(2),  // 🔹 Ahora se incluye la descripción correctamente
+                                IdAsignatura = reader.GetInt32(3)   // 🔹 Se asigna `IdAsignatura` al modelo
+                            });
+                        }
+                    }
+                }
+            }
+
+            return temarios;
+        }
     }
 }

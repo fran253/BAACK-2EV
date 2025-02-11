@@ -124,5 +124,36 @@ namespace reto2_api.Repositories
                 }
             }
         }
+
+        ///METODO PREGUNTAS DE UN TEST
+        public async Task<List<Pregunta>> GetByTestIdAsync(int idTest)
+        {
+            var preguntas = new List<Pregunta>();
+
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                await connection.OpenAsync();
+
+                string query = "SELECT IdPregunta, Enunciado FROM Pregunta WHERE IdTest = @IdTest";
+                using (var command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@IdTest", idTest);
+
+                    using (var reader = await command.ExecuteReaderAsync())
+                    {
+                        while (await reader.ReadAsync())
+                        {
+                            preguntas.Add(new Pregunta
+                            {
+                                IdPregunta = reader.GetInt32(0),
+                                Enunciado = reader.GetString(1)
+                            });
+                        }
+                    }
+                }
+            }
+
+            return preguntas;
+        }
     }
 }

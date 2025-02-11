@@ -88,5 +88,16 @@ namespace reto2_api.Controllers
            await _serviceArchivo.DeleteAsync(id);
            return NoContent();
        }
+       
+       ///METODO ARCHIVOS DE UN TEMA
+        [HttpGet("temario/{idTemario}")]
+        public async Task<ActionResult<List<Archivo>>> GetByTemarioId(int idTemario)
+        {
+            var archivos = await _serviceArchivo.GetByTemarioIdAsync(idTemario);
+            if (archivos == null || archivos.Count == 0)
+                return NotFound("no se encontraron archivos para este temario.");
+
+            return Ok(archivos);
+        }
    }
 }

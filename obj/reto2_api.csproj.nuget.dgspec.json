@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "c:\\GRADOSUPERIOR 2año\\AQUI DENTRO VA EL BACK DE TFG\\BACK-2EV\\restaurant_api.csproj": {}
+    "D:\\GRADO SUPERIOR (año2)\\SEGUNDO TRIMESTRE\\RETO FINAL\\BAACK-2EV\\reto2_api.csproj": {}
   },
   "projects": {
-    "c:\\GRADOSUPERIOR 2año\\AQUI DENTRO VA EL BACK DE TFG\\BACK-2EV\\restaurant_api.csproj": {
+    "D:\\GRADO SUPERIOR (año2)\\SEGUNDO TRIMESTRE\\RETO FINAL\\BAACK-2EV\\reto2_api.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "c:\\GRADOSUPERIOR 2año\\AQUI DENTRO VA EL BACK DE TFG\\BACK-2EV\\restaurant_api.csproj",
-        "projectName": "restaurant_api",
-        "projectPath": "c:\\GRADOSUPERIOR 2año\\AQUI DENTRO VA EL BACK DE TFG\\BACK-2EV\\restaurant_api.csproj",
-        "packagesPath": "C:\\Users\\Diego\\.nuget\\packages\\",
-        "outputPath": "c:\\GRADOSUPERIOR 2año\\AQUI DENTRO VA EL BACK DE TFG\\BACK-2EV\\obj\\",
+        "projectUniqueName": "D:\\GRADO SUPERIOR (año2)\\SEGUNDO TRIMESTRE\\RETO FINAL\\BAACK-2EV\\reto2_api.csproj",
+        "projectName": "reto2_api",
+        "projectPath": "D:\\GRADO SUPERIOR (año2)\\SEGUNDO TRIMESTRE\\RETO FINAL\\BAACK-2EV\\reto2_api.csproj",
+        "packagesPath": "C:\\Users\\franr\\.nuget\\packages\\",
+        "outputPath": "D:\\GRADO SUPERIOR (año2)\\SEGUNDO TRIMESTRE\\RETO FINAL\\BAACK-2EV\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Diego\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\franr\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
@@ -71,7 +71,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.404/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.403/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

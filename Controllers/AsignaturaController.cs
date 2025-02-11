@@ -87,5 +87,16 @@ namespace reto2_api.Controllers
            await _serviceAsignatura.DeleteAsync(id);
            return NoContent();
        }
+
+       //Metodo Mostrar todas las asignaturas de un curso
+        [HttpGet("curso/{cursoId}")]
+        public async Task<ActionResult<List<Asignatura>>> GetByCursoId(int cursoId)
+        {
+            var asignaturas = await _serviceAsignatura.GetByCursoIdAsync(cursoId);
+            if (asignaturas == null || asignaturas.Count == 0)
+                return NotFound("no se encontraron asignaturas para este curso.");
+
+            return Ok(asignaturas);
+        }
    }
 }

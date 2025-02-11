@@ -5,6 +5,8 @@ public class Opcion
     public int IdOpcion { get; set; } 
     public string Texto { get; set; }
     public bool EsCorrecta { get; set; }
+
+    // Clave foránea Archivo
     public int IdPregunta { get; set; } 
     public Pregunta Pregunta { get; set; } 
 

@@ -70,5 +70,13 @@ namespace reto2_api.Controllers
             await _resultadoService.DeleteAsync(id);
             return NoContent();
         }
+
+        ///METODO RESILTADO DE USUARIO
+        [HttpGet("usuario/{idUsuario}/test/{idTest}")]
+        public async Task<ActionResult<int>> GetResultadoFinalPorUsuarioTest(int idUsuario, int idTest)
+        {
+            int resultado = await _resultadoService.GetResultadoFinalPorUsuarioTestAsync(idUsuario, idTest);
+            return Ok(new { idUsuario, idTest, puntuacionFinal = resultado });
+        }
     }
 }
