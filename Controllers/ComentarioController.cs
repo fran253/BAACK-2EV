@@ -34,12 +34,32 @@ namespace reto2_api.Controllers
             return Ok(comentario);
         }
 
-        [HttpPost]
-        public async Task<ActionResult<Comentario>> CreateComentario(Comentario comentario)
+        [HttpPost("publicar")]
+        public async Task<IActionResult> CreateComentario([FromBody] Comentario comentario)
         {
-            await _serviceComentario.AddAsync(comentario);
-            return CreatedAtAction(nameof(GetComentario), new { id = comentario.IdComentario }, comentario);
+            if (comentario == null)
+                return BadRequest("El comentario no puede ser nulo.");
+
+            if (comentario.IdUsuario <= 0)
+                return BadRequest("El ID del usuario no es válido.");
+
+            if (comentario.IdArchivo <= 0)
+                return BadRequest("El ID del archivo no es válido.");
+
+            if (string.IsNullOrWhiteSpace(comentario.Contenido))
+                return BadRequest("El comentario no puede estar vacío.");
+
+            try
+            {
+                await _serviceComentario.AddAsync(comentario);
+                return CreatedAtAction(nameof(CreateComentario), new { id = comentario.IdComentario }, comentario);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Error interno del servidor: {ex.Message}");
+            }
         }
+
 
        [HttpPut("{id}")]
         public async Task<IActionResult> UpdateComentario(int id, [FromBody] Comentario UpdateComentario)
