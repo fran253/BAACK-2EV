@@ -15,3 +15,7 @@ docker run --name reto2_api \
   -v reto2_data:/var/opt/mssql \
   -d mcr.microsoft.com/mssql/server:2019-CU21-ubuntu-20.04
 
+
+//////////////////////////////////PARA INICIAR SWAGGER
+dotnet build .\reto2_api.csproj
+dotnet run

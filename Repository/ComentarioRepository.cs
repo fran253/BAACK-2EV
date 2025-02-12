@@ -1,4 +1,4 @@
-using Microsoft.Data.SqlClient;
+using MySql.Data.MySqlClient;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -17,12 +17,12 @@ namespace reto2_api.Repositories
         {
             var comentarios = new List<Comentario>();
 
-            using (var connection = new SqlConnection(_connectionString))
+            using (var connection = new MySqlConnection(_connectionString))
             {
                 await connection.OpenAsync();
 
                 string query = "SELECT IdComentario, Contenido, FechaCreacion, IdUsuario, IdArchivo FROM Comentario";
-                using (var command = new SqlCommand(query, connection))
+                using (var command = new MySqlCommand(query, connection))
                 {
                     using (var reader = await command.ExecuteReaderAsync())
                     {
@@ -50,12 +50,12 @@ namespace reto2_api.Repositories
         {
             Comentario comentario = null;
 
-            using (var connection = new SqlConnection(_connectionString))
+            using (var connection = new MySqlConnection(_connectionString))
             {
                 await connection.OpenAsync();
 
                 string query = "SELECT IdComentario, Contenido, FechaCreacion, IdUsuario, IdArchivo FROM Comentario WHERE IdComentario = @IdComentario";
-                using (var command = new SqlCommand(query, connection))
+                using (var command = new MySqlCommand(query, connection))
                 {
                     command.Parameters.AddWithValue("@IdComentario", id);
 
@@ -80,12 +80,12 @@ namespace reto2_api.Repositories
 
         public async Task AddAsync(Comentario comentario)
         {
-            using (var connection = new SqlConnection(_connectionString))
+            using (var connection = new MySqlConnection(_connectionString))
             {
                 await connection.OpenAsync();
 
                 string query = "INSERT INTO Comentario (Contenido, FechaCreacion, IdUsuario, IdArchivo) VALUES (@Contenido, @FechaCreacion, @IdUsuario, @IdArchivo)";
-                using (var command = new SqlCommand(query, connection))
+                using (var command = new MySqlCommand(query, connection))
                 {
                     command.Parameters.AddWithValue("@Contenido", comentario.Contenido);
                     command.Parameters.AddWithValue("@FechaCreacion", comentario.FechaCreacion);
@@ -99,12 +99,12 @@ namespace reto2_api.Repositories
 
         public async Task UpdateAsync(Comentario comentario)
         {
-            using (var connection = new SqlConnection(_connectionString))
+            using (var connection = new MySqlConnection(_connectionString))
             {
                 await connection.OpenAsync();
 
                 string query = "UPDATE Comentario SET Contenido = @Contenido, FechaCreacion = @FechaCreacion, IdUsuario = @IdUsuario, IdArchivo = @IdArchivo WHERE IdComentario = @IdComentario";
-                using (var command = new SqlCommand(query, connection))
+                using (var command = new MySqlCommand(query, connection))
                 {
                     command.Parameters.AddWithValue("@IdComentario", comentario.IdArchivo);
                     command.Parameters.AddWithValue("@Contenido", comentario.Contenido);
@@ -119,12 +119,12 @@ namespace reto2_api.Repositories
 
         public async Task<bool> DeleteAsync(int id)
         {
-            using (var connection = new SqlConnection(_connectionString))
+            using (var connection = new MySqlConnection(_connectionString))
             {
                 await connection.OpenAsync();
 
                 string query = "DELETE FROM Comentario WHERE IdComentario = @IdComentario";
-                using (var command = new SqlCommand(query, connection))
+                using (var command = new MySqlCommand(query, connection))
                 {
                     command.Parameters.AddWithValue("@IdComentario", id);
 

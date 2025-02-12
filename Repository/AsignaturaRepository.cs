@@ -1,4 +1,4 @@
-using Microsoft.Data.SqlClient;
+using MySql.Data.MySqlClient;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -17,12 +17,12 @@ namespace reto2_api.Repositories
         {
             var asignaturas = new List<Asignatura>();
 
-            using (var connection = new SqlConnection(_connectionString))
+            using (var connection = new MySqlConnection(_connectionString))
             {
                 await connection.OpenAsync();
 
-                string query = "SELECT IdAsignatura, Nombre, Descripcion, Imagen, FechaCreacion, CursoId FROM Asignatura";
-                using (var command = new SqlCommand(query, connection))
+                string query = "SELECT idAsignatura, nombre, descripcion, imagen, fechaCreacion, idCurso FROM Asignatura";
+                using (var command = new MySqlCommand(query, connection))
                 {
                     using (var reader = await command.ExecuteReaderAsync())
                     {
@@ -50,12 +50,12 @@ namespace reto2_api.Repositories
         {
             Asignatura asignatura = null;
 
-            using (var connection = new SqlConnection(_connectionString))
+            using (var connection = new MySqlConnection(_connectionString))
             {
                 await connection.OpenAsync();
 
                 string query = "SELECT IdAsignatura, Nombre, Descripcion, Imagen, FechaCreacion, CursoId FROM Asignatura WHERE IdAsignatura = @IdAsignatura";
-                using (var command = new SqlCommand(query, connection))
+                using (var command = new MySqlCommand(query, connection))
                 {
                     command.Parameters.AddWithValue("@IdAsignatura", id);
 
@@ -81,12 +81,12 @@ namespace reto2_api.Repositories
 
         public async Task AddAsync(Asignatura asignatura)
         {
-            using (var connection = new SqlConnection(_connectionString))
+            using (var connection = new MySqlConnection(_connectionString))
             {
                 await connection.OpenAsync();
 
                 string query = "INSERT INTO Asignatura (Nombre, Descripcion, Imagen, FechaCreacion, CursoId) VALUES (@Nombre, @Descripcion, @Imagen, @FechaCreacion, @CursoId)";
-                using (var command = new SqlCommand(query, connection))
+                using (var command = new MySqlCommand(query, connection))
                 {
                     command.Parameters.AddWithValue("@Nombre", asignatura.Nombre);
                     command.Parameters.AddWithValue("@Descripcion", asignatura.Descripcion);
@@ -101,12 +101,12 @@ namespace reto2_api.Repositories
 
         public async Task UpdateAsync(Asignatura asignatura)
         {
-            using (var connection = new SqlConnection(_connectionString))
+            using (var connection = new MySqlConnection(_connectionString))
             {
                 await connection.OpenAsync();
 
                 string query = "UPDATE Asignatura SET Nombre = @Nombre, Descripcion = @Descripcion, Imagen = @Imagen, FechaCreacion = @FechaCreacion, CursoId = @CursoId WHERE IdAsignatura = @IdAsignatura";
-                using (var command = new SqlCommand(query, connection))
+                using (var command = new MySqlCommand(query, connection))
                 {
                     command.Parameters.AddWithValue("@IdAsignatura", asignatura.IdAsignatura);
                     command.Parameters.AddWithValue("@Nombre", asignatura.Nombre);
@@ -122,12 +122,12 @@ namespace reto2_api.Repositories
 
         public async Task<bool> DeleteAsync(int id)
         {
-            using (var connection = new SqlConnection(_connectionString))
+            using (var connection = new MySqlConnection(_connectionString))
             {
                 await connection.OpenAsync();
 
                 string query = "DELETE FROM Asignatura WHERE IdAsignatura = @IdAsignatura";
-                using (var command = new SqlCommand(query, connection))
+                using (var command = new MySqlCommand(query, connection))
                 {
                     command.Parameters.AddWithValue("@IdAsignatura", id);
 
@@ -142,12 +142,12 @@ namespace reto2_api.Repositories
         {
             var asignaturas = new List<Asignatura>();
 
-            using (var connection = new SqlConnection(_connectionString))
+            using (var connection = new MySqlConnection(_connectionString))
             {
                 await connection.OpenAsync();
 
                 string query = "SELECT IdAsignatura, Nombre FROM Asignatura WHERE IdCurso = @IdCurso";
-                using (var command = new SqlCommand(query, connection))
+                using (var command = new MySqlCommand(query, connection))
                 {
                     command.Parameters.AddWithValue("@IdCurso", idCurso);
 

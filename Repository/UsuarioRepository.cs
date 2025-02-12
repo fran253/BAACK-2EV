@@ -1,4 +1,4 @@
-using Microsoft.Data.SqlClient;
+using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -18,12 +18,12 @@ namespace reto2_api.Repositories
         {
             var usuarios = new List<Usuario>();
 
-            using (var connection = new SqlConnection(_connectionString))
+            using (var connection = new MySqlConnection(_connectionString))
             {
                 await connection.OpenAsync();
 
-                string query = "SELECT IdUsuario, Nombre, Apellido, Gmail, Telefono, Contraseña, IdRol FROM Usuario";
-                using (var command = new SqlCommand(query, connection))
+                string query = "SELECT idUsuario, nombre, apellidos, gmail, telefono, contraseña, idRol FROM Usuario";
+                using (var command = new MySqlCommand(query, connection))
                 {
                     using (var reader = await command.ExecuteReaderAsync())
                     {
@@ -52,12 +52,12 @@ namespace reto2_api.Repositories
         {
             Usuario usuario = null;
 
-            using (var connection = new SqlConnection(_connectionString))
+            using (var connection = new MySqlConnection(_connectionString))
             {
                 await connection.OpenAsync();
 
-                string query = "SELECT IdUsuario, Nombre, Apellido, Gmail, Telefono, Contraseña, IdRol FROM Usuario WHERE IdUsuario = @Id";
-                using (var command = new SqlCommand(query, connection))
+                string query = "SELECT idUsuario, nombre, apellidos, gmail, telefono, contraseña, idRol FROM Usuario WHERE IdUsuario = @Id";
+                using (var command = new MySqlCommand(query, connection))
                 {
                     command.Parameters.AddWithValue("@Id", id);
 
@@ -84,12 +84,12 @@ namespace reto2_api.Repositories
 
         public async Task AddAsync(Usuario usuario)
         {
-            using (var connection = new SqlConnection(_connectionString))
+            using (var connection = new MySqlConnection(_connectionString))
             {
                 await connection.OpenAsync();
 
-                string query = "INSERT INTO Usuario (Nombre, Apellido, Gmail, Telefono, Contraseña, IdRol) VALUES (@Nombre, @Apellido, @Gmail, @Telefono, @Contraseña, @IdRol)";
-                using (var command = new SqlCommand(query, connection))
+                string query = "INSERT INTO Usuario (nombre, apellido, gmail, telefono, contraseña, IdRol) VALUES (@Nombre, @Apellido, @Gmail, @Telefono, @Contraseña, @IdRol)";
+                using (var command = new MySqlCommand(query, connection))
                 {
                     command.Parameters.AddWithValue("@Nombre", usuario.Nombre);
                     command.Parameters.AddWithValue("@Apellido", usuario.Apellido);
@@ -105,12 +105,12 @@ namespace reto2_api.Repositories
 
         public async Task UpdateAsync(Usuario usuario)
         {
-            using (var connection = new SqlConnection(_connectionString))
+            using (var connection = new MySqlConnection(_connectionString))
             {
                 await connection.OpenAsync();
 
                 string query = "UPDATE Usuario SET Nombre = @Nombre, Apellido = @Apellido, Gmail = @Gmail, Telefono = @Telefono, Contraseña = @Contraseña, IdRol = @IdRol WHERE IdUsuario = @Id";
-                using (var command = new SqlCommand(query, connection))
+                using (var command = new MySqlCommand(query, connection))
                 {
                     command.Parameters.AddWithValue("@Id", usuario.IdUsuario);
                     command.Parameters.AddWithValue("@Nombre", usuario.Nombre);
@@ -127,12 +127,12 @@ namespace reto2_api.Repositories
 
         public async Task<bool> DeleteAsync(int id)
         {
-            using (var connection = new SqlConnection(_connectionString))
+            using (var connection = new MySqlConnection(_connectionString))
             {
                 await connection.OpenAsync();
 
                 string query = "DELETE FROM Usuario WHERE IdUsuario = @Id";
-                using (var command = new SqlCommand(query, connection))
+                using (var command = new MySqlCommand(query, connection))
                 {
                     command.Parameters.AddWithValue("@Id", id);
 
@@ -144,7 +144,7 @@ namespace reto2_api.Repositories
 
         public async Task InicializarDatosAsync()
         {
-            using (var connection = new SqlConnection(_connectionString))
+            using (var connection = new MySqlConnection(_connectionString))
             {
                 await connection.OpenAsync();
 
@@ -154,7 +154,7 @@ namespace reto2_api.Repositories
                     (@Nombre1, @Apellido1, @Gmail1, @Telefono1, @Contraseña1, @IdRol1),
                     (@Nombre2, @Apellido2, @Gmail2, @Telefono2, @Contraseña2, @IdRol2)";
 
-                using (var command = new SqlCommand(query, connection))
+                using (var command = new MySqlCommand(query, connection))
                 {
                     command.Parameters.AddWithValue("@Nombre1", "Juan");
                     command.Parameters.AddWithValue("@Apellido1", "Pérez");
