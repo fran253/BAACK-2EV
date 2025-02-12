@@ -8,13 +8,14 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: "FMfcgzQZTCqZPnrwkWsNZDNDsqtphSfr"
       MYSQL_DATABASE: "Reto_2ev"
-      MYSQL_USER: "diego"
+      MYSQL_USER: "fran"
       MYSQL_PASSWORD: "FMfcgzQZTCqZPnrwkWsNZDNDsqtphSfr"
     command: --default-authentication-plugin=mysql_native_password
     ports:
       - "3306:3306"
-    volumes:
+    volumes: 
       - mysql_data:/var/lib/mysql
 
 volumes:
   mysql_data:
+

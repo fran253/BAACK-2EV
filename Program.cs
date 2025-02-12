@@ -1,54 +1,89 @@
-using reto2_api.Controllers;
+using MySql.Data.MySqlClient;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using reto2_api.Repositories;
 using reto2_api.Service;
 
 var builder = WebApplication.CreateBuilder(args);
-var connectionString = builder.Configuration.GetConnectionString("reto2_api");
+var ConnectionStrings = builder.Configuration.GetConnectionString("reto2_api");
 
-//REPOSITORY
-builder.Services.AddScoped<ICursoRepository, CursoRepository>(provider =>
-new CursoRepository(connectionString));
+// 🔥 Configuración manual para inyectar la conexión MySQL
+builder.Services.AddScoped<MySqlConnection>(_ => new MySqlConnection(ConnectionStrings));
 
-builder.Services.AddScoped<IAsignaturaRepository, AsignaturaRepository>(provider =>
-new AsignaturaRepository(connectionString));
+// 🔥 Inyección de Dependencias para los Repositorios
+builder.Services.AddScoped<ICursoRepository>(provider =>
+{
+    var ConnectionStrings = provider.GetRequiredService<IConfiguration>().GetConnectionString("reto2_api");
+    return new CursoRepository(ConnectionStrings);
+});
 
-builder.Services.AddScoped<ITemarioRepository, TemarioRepository>(provider =>
-new TemarioRepository(connectionString));
+builder.Services.AddScoped<IAsignaturaRepository>(provider =>
+{
+    var ConnectionStrings = provider.GetRequiredService<IConfiguration>().GetConnectionString("reto2_api");
+    return new AsignaturaRepository(ConnectionStrings);
+});
 
-builder.Services.AddScoped<IArchivoRepository, ArchivoRepository>(provider =>
-new ArchivoRepository(connectionString));
+builder.Services.AddScoped<ITemarioRepository>(provider =>
+{
+    var ConnectionStrings = provider.GetRequiredService<IConfiguration>().GetConnectionString("reto2_api");
+    return new TemarioRepository(ConnectionStrings);
+});
 
-builder.Services.AddScoped<IComentarioRepository, ComentarioRepository>(provider =>
-new ComentarioRepository(connectionString));
+builder.Services.AddScoped<IArchivoRepository>(provider =>
+{
+    var ConnectionStrings = provider.GetRequiredService<IConfiguration>().GetConnectionString("reto2_api");
+    return new ArchivoRepository(ConnectionStrings);
+});
 
-builder.Services.AddScoped<ITestRepository, TestRepository>(provider =>
-new TestRepository(connectionString));
+builder.Services.AddScoped<IComentarioRepository>(provider =>
+{
+    var ConnectionStrings = provider.GetRequiredService<IConfiguration>().GetConnectionString("reto2_api");
+    return new ComentarioRepository(ConnectionStrings);
+});
 
-builder.Services.AddScoped<IUsuarioRepository, UsuariosRepository>(provider =>
-new UsuariosRepository(connectionString));
+builder.Services.AddScoped<ITestRepository>(provider =>
+{
+    var ConnectionStrings = provider.GetRequiredService<IConfiguration>().GetConnectionString("reto2_api");
+    return new TestRepository(ConnectionStrings);
+});
 
-builder.Services.AddScoped<IRolRepository, RolRepository>(provider =>
-new RolRepository(connectionString));
+builder.Services.AddScoped<IUsuarioRepository>(provider =>
+{
+    var ConnectionStrings = provider.GetRequiredService<IConfiguration>().GetConnectionString("reto2_api");
+    return new UsuariosRepository(ConnectionStrings);
+});
 
-builder.Services.AddScoped<IPreguntaRepository, PreguntaRepository>(provider =>
-new PreguntaRepository(connectionString));
+builder.Services.AddScoped<IRolRepository>(provider =>
+{
+    var ConnectionStrings = provider.GetRequiredService<IConfiguration>().GetConnectionString("reto2_api");
+    return new RolRepository(ConnectionStrings);
+});
 
-builder.Services.AddScoped<IOpcionRepository, OpcionRepository>(provider =>
-new OpcionRepository(connectionString));
+builder.Services.AddScoped<IPreguntaRepository>(provider =>
+{
+    var ConnectionStrings = provider.GetRequiredService<IConfiguration>().GetConnectionString("reto2_api");
+    return new PreguntaRepository(ConnectionStrings);
+});
 
-builder.Services.AddScoped<IResultadoRepository, ResultadoRepository>(provider =>
-new ResultadoRepository(connectionString));
+builder.Services.AddScoped<IOpcionRepository>(provider =>
+{
+    var ConnectionStrings = provider.GetRequiredService<IConfiguration>().GetConnectionString("reto2_api");
+    return new OpcionRepository(ConnectionStrings);
+});
 
-builder.Services.AddScoped<IUsuarioCursoRepository, UsuarioCursoRepository>(provider =>
-new UsuarioCursoRepository(connectionString));
+builder.Services.AddScoped<IResultadoRepository>(provider =>
+{
+    var ConnectionStrings = provider.GetRequiredService<IConfiguration>().GetConnectionString("reto2_api");
+    return new ResultadoRepository(ConnectionStrings);
+});
 
-builder.Services.AddScoped<IArchivoUsuarioRepository, ArchivoUsuarioRepository>(provider =>
-new ArchivoUsuarioRepository(connectionString));
+builder.Services.AddScoped<IUsuarioCursoRepository>(provider =>
+{
+    var ConnectionStrings = provider.GetRequiredService<IConfiguration>().GetConnectionString("reto2_api");
+    return new UsuarioCursoRepository(ConnectionStrings);
+});
 
-
-
-
-//SERVICE
+// 🔥 Inyección de Dependencias para los Servicios (Incluyendo CursoService)
 builder.Services.AddScoped<ICursoService, CursoService>();
 builder.Services.AddScoped<IAsignaturaService, AsignaturaService>();
 builder.Services.AddScoped<ITemarioService, TemarioService>();
@@ -57,25 +92,19 @@ builder.Services.AddScoped<IComentarioService, ComentarioService>();
 builder.Services.AddScoped<ITestService, TestService>();
 builder.Services.AddScoped<IUsuarioService, UsuarioService>();
 builder.Services.AddScoped<IRolService, RolService>();
-builder.Services.AddScoped<IPreguntaService,PreguntaService>();
-builder.Services.AddScoped<IOpcionService,OpcionService>();
-builder.Services.AddScoped<IResultadoService,ResultadoService>();
-builder.Services.AddScoped<IUsuarioCursoService,UsuarioCursoService>();
-builder.Services.AddScoped<IArchivoUsuarioService,ArchivoUsuarioService>();
+builder.Services.AddScoped<IPreguntaService, PreguntaService>();
+builder.Services.AddScoped<IOpcionService, OpcionService>();
+builder.Services.AddScoped<IResultadoService, ResultadoService>();
+builder.Services.AddScoped<IUsuarioCursoService, UsuarioCursoService>();
 
-
-// Add services to the container.
-
+// 🔥 Agregar controladores y Swagger
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-
-
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+// 🔥 Configurar Swagger solo en desarrollo
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -83,12 +112,6 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
 app.UseAuthorization();
-
 app.MapControllers();
-
-
-
-//PlatoPrincipalController.InicializarDatos();
 app.Run();
