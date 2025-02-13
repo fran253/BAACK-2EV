@@ -21,7 +21,7 @@ namespace reto2_api.Repositories
             {
                 await connection.OpenAsync();
 
-                string query = "SELECT IdTest, Titulo, FechaCreacion, IdTemario FROM Test";
+                string query = "SELECT idTest, titulo, fechaCreacion, idTemario FROM Test";
                 using (var command = new MySqlCommand(query, connection))
                 {
                     using (var reader = await command.ExecuteReaderAsync())
@@ -52,7 +52,7 @@ namespace reto2_api.Repositories
             {
                 await connection.OpenAsync();
 
-                string query = "SELECT IdTest, Titulo, FechaCreacion, IdTemario FROM Test WHERE IdTest = @IdTest";
+                string query = "SELECT idTest, titulo, fechaCreacion, idTemario FROM Test WHERE idTest = @IdTest";
                 using (var command = new MySqlCommand(query, connection))
                 {
                     command.Parameters.AddWithValue("@IdTest", id);
@@ -81,7 +81,7 @@ namespace reto2_api.Repositories
             {
                 await connection.OpenAsync();
 
-                string query = "INSERT INTO Test (Titulo, FechaCreacion, IdTemario) VALUES (@Titulo, @FechaCreacion, @IdTemario)";
+                string query = "INSERT INTO Test (titulo, fechaCreacion, idTemario) VALUES (@Titulo, @FechaCreacion, @IdTemario)";
                 using (var command = new MySqlCommand(query, connection))
                 {
                     command.Parameters.AddWithValue("@Titulo", test.Titulo);
@@ -99,7 +99,7 @@ namespace reto2_api.Repositories
             {
                 await connection.OpenAsync();
 
-                string query = "UPDATE Test SET Titulo = @Titulo, FechaCreacion = @FechaCreacion, IdTemario = @IdTemario WHERE IdTest = @IdTest";
+                string query = "UPDATE Test SET titulo = @Titulo, fechaCreacion = @FechaCreacion, idTemario = @IdTemario WHERE idTest = @IdTest";
                 using (var command = new MySqlCommand(query, connection))
                 {
                     command.Parameters.AddWithValue("@IdTest", test.IdTest);
@@ -118,7 +118,7 @@ namespace reto2_api.Repositories
             {
                 await connection.OpenAsync();
 
-                string query = "DELETE FROM Test WHERE IdTest = @IdTest";
+                string query = "DELETE FROM Test WHERE idTest = @IdTest";
                 using (var command = new MySqlCommand(query, connection))
                 {
                     command.Parameters.AddWithValue("@IdTest", id);
@@ -138,7 +138,7 @@ namespace reto2_api.Repositories
             {
                 await connection.OpenAsync();
 
-                string query = "SELECT IdTest, Titulo, FechaCreacion FROM Test WHERE IdTemario = @IdTemario";
+                string query = "SELECT idTest, titulo, fechaCreacion FROM Test WHERE idTemario = @IdTemario";
                 using (var command = new MySqlCommand(query, connection))
                 {
                     command.Parameters.AddWithValue("@IdTemario", idTemario);

@@ -79,7 +79,7 @@ namespace reto2_api.Repositories
             {
                 await connection.OpenAsync();
 
-                string query = "INSERT INTO Pregunta (Enunciado, IdTest) VALUES (@Enunciado, @IdTest)";
+                string query = "INSERT INTO Pregunta (enunciado, idTest) VALUES (@Enunciado, @IdTest)";
                 using (var command = new MySqlCommand(query, connection))
                 {
                     command.Parameters.AddWithValue("@Enunciado", pregunta.Enunciado);
@@ -96,7 +96,7 @@ namespace reto2_api.Repositories
             {
                 await connection.OpenAsync();
 
-                string query = "UPDATE Pregunta SET Enunciado = @Enunciado, IdTest = @IdTest WHERE IdPregunta = @IdPregunta";
+                string query = "UPDATE Pregunta SET enunciado = @Enunciado, idTest = @IdTest WHERE idPregunta = @IdPregunta";
                 using (var command = new MySqlCommand(query, connection))
                 {
                     command.Parameters.AddWithValue("@IdPregunta", pregunta.IdPregunta);
@@ -114,7 +114,7 @@ namespace reto2_api.Repositories
             {
                 await connection.OpenAsync();
 
-                string query = "DELETE FROM Pregunta WHERE IdPregunta = @IdPregunta";
+                string query = "DELETE FROM Pregunta WHERE idPregunta = @IdPregunta";
                 using (var command = new MySqlCommand(query, connection))
                 {
                     command.Parameters.AddWithValue("@IdPregunta", id);
@@ -134,7 +134,7 @@ namespace reto2_api.Repositories
             {
                 await connection.OpenAsync();
 
-                string query = "SELECT IdPregunta, Enunciado FROM Pregunta WHERE IdTest = @IdTest";
+                string query = "SELECT idPregunta, enunciado FROM Pregunta WHERE idTest = @IdTest";
                 using (var command = new MySqlCommand(query, connection))
                 {
                     command.Parameters.AddWithValue("@IdTest", idTest);

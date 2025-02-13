@@ -9,7 +9,7 @@ public class Asignatura
     public DateTime FechaCreacion { get; set; }
 
     // Clave foránea
-    public int CursoId { get; set; }
+    public int IdCurso { get; set; }
     public Curso Curso { get; set; }
 
     // Constructor
@@ -20,7 +20,7 @@ public class Asignatura
         Imagen = imagen;
         Descripcion = descripcion;
         FechaCreacion = fechaCreacion;
-        CursoId = cursoId;
+        IdCurso = cursoId;
     }
     public Asignatura(){}
 

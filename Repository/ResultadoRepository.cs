@@ -13,37 +13,38 @@ namespace reto2_api.Repositories
             _connectionString = connectionString;
         }
 
-        public async Task<List<Resultado>> GetAllAsync()
+public async Task<List<Resultado>> GetAllAsync()
+{
+    var resultados = new List<Resultado>();
+
+    using (var connection = new MySqlConnection(_connectionString))
+    {
+        await connection.OpenAsync();
+
+        string query = "SELECT idResultado, puntuacion, fecha, idUsuario, idPregunta FROM Resultado";
+        using (var command = new MySqlCommand(query, connection))
         {
-            var resultados = new List<Resultado>();
-
-            using (var connection = new MySqlConnection(_connectionString))
+            using (var reader = await command.ExecuteReaderAsync())
             {
-                await connection.OpenAsync();
-
-                string query = "SELECT IdResultado, Puntuacion, Fecha, IdUsuario, IdPregunta FROM Resultado";
-                using (var command = new MySqlCommand(query, connection))
+                while (await reader.ReadAsync())
                 {
-                    using (var reader = await command.ExecuteReaderAsync())
+                    var resultado = new Resultado
                     {
-                        while (await reader.ReadAsync())
-                        {
-                            var resultado = new Resultado
-                            {
-                                IdResultado = reader.GetInt32(0),
-                                Puntuacion = reader.GetInt32(1),
-                                Fecha = reader.GetDateTime(2),
-                                Usuario = new Usuario { IdUsuario = reader.GetInt32(3) },
-                                Pregunta = new Pregunta { IdPregunta = reader.GetInt32(4) }
-                            };
+                        IdResultado = reader.GetInt32(0),
+                        Puntuacion = reader.GetInt32(1),
+                        Fecha = reader.IsDBNull(2) ? DateTime.UtcNow : reader.GetDateTime(2),
+                        Usuario = reader.IsDBNull(3) ? null : new Usuario { IdUsuario = reader.GetInt32(3) },
+                        Pregunta = reader.IsDBNull(4) ? null : new Pregunta { IdPregunta = reader.GetInt32(4) } 
+                    };
 
-                            resultados.Add(resultado);
-                        }
-                    }
+                    resultados.Add(resultado);
                 }
             }
-            return resultados;
         }
+    }
+    return resultados;
+}
+
 
         public async Task<Resultado?> GetByIdAsync(int id)
         {
@@ -53,7 +54,7 @@ namespace reto2_api.Repositories
             {
                 await connection.OpenAsync();
 
-                string query = "SELECT IdResultado, Puntuacion, Fecha, IdUsuario, IdPregunta FROM Resultado WHERE IdResultado = @IdResultado";
+                string query = "SELECT idResultado, puntuacion, fecha, idUsuario, idPregunta FROM Resultado WHERE idResultado = @IdResultado";
                 using (var command = new MySqlCommand(query, connection))
                 {
                     command.Parameters.AddWithValue("@IdResultado", id);
@@ -83,7 +84,7 @@ namespace reto2_api.Repositories
             {
                 await connection.OpenAsync();
 
-                string query = "INSERT INTO Resultado (Puntuacion, Fecha, IdUsuario, IdPregunta) VALUES (@Puntuacion, @Fecha, @IdUsuario, @IdPregunta)";
+                string query = "INSERT INTO Resultado (puntuacion, fecha, idUsuario, idPregunta) VALUES (@Puntuacion, @Fecha, @IdUsuario, @IdPregunta)";
                 using (var command = new MySqlCommand(query, connection))
                 {
                     command.Parameters.AddWithValue("@Puntuacion", resultado.Puntuacion);
@@ -102,7 +103,7 @@ namespace reto2_api.Repositories
             {
                 await connection.OpenAsync();
 
-                string query = "UPDATE Resultado SET Puntuacion = @Puntuacion, Fecha = @Fecha, IdUsuario = @IdUsuario, IdPregunta = @IdPregunta WHERE IdResultado = @IdResultado";
+                string query = "UPDATE Resultado SET puntuacion = @Puntuacion, fecha = @Fecha, idUsuario = @IdUsuario, idPregunta = @IdPregunta WHERE idResultado = @IdResultado";
                 using (var command = new MySqlCommand(query, connection))
                 {
                     command.Parameters.AddWithValue("@IdResultado", resultado.IdResultado);
@@ -122,7 +123,7 @@ namespace reto2_api.Repositories
             {
                 await connection.OpenAsync();
 
-                string query = "DELETE FROM Resultado WHERE IdResultado = @IdResultado";
+                string query = "DELETE FROM Resultado WHERE idResultado = @IdResultado";
                 using (var command = new MySqlCommand(query, connection))
                 {
                     command.Parameters.AddWithValue("@IdResultado", id);
@@ -143,10 +144,10 @@ namespace reto2_api.Repositories
                 await connection.OpenAsync();
 
                 string query = @"
-                    SELECT SUM(Puntuacion)
+                    SELECT SUM(puntuacion)
                     FROM Resultado r
-                    JOIN Pregunta p ON r.IdPregunta = p.IdPregunta
-                    WHERE r.IdUsuario = @IdUsuario AND p.IdTest = @IdTest";
+                    JOIN Pregunta p ON r.idPregunta = p.idPregunta
+                    WHERE r.idUsuario = @IdUsuario AND p.idTest = @IdTest";
 
                 using (var command = new MySqlCommand(query, connection))
                 {

@@ -32,10 +32,10 @@ namespace reto2_api.Repositories
                             {
                                 IdAsignatura = reader.GetInt32(0),
                                 Nombre = reader.GetString(1),
-                                Descripcion = reader.GetString(2),
-                                Imagen = reader.GetString(3),
+                                Descripcion = reader.IsDBNull(2) ? null : reader.GetString(2),
+                                Imagen = reader.IsDBNull(3) ? null : reader.GetString(3),
                                 FechaCreacion = reader.GetDateTime(4),
-                                CursoId = reader.GetInt32(5)
+                                IdCurso = reader.GetInt32(5)
                             };
 
                             asignaturas.Add(asignatura);
@@ -54,7 +54,7 @@ namespace reto2_api.Repositories
             {
                 await connection.OpenAsync();
 
-                string query = "SELECT IdAsignatura, Nombre, Descripcion, Imagen, FechaCreacion, CursoId FROM Asignatura WHERE IdAsignatura = @IdAsignatura";
+                string query = "SELECT idAsignatura, nombre, descripcion, imagen, fechaCreacion, idCurso FROM Asignatura WHERE idAsignatura = @IdAsignatura";
                 using (var command = new MySqlCommand(query, connection))
                 {
                     command.Parameters.AddWithValue("@IdAsignatura", id);
@@ -67,10 +67,10 @@ namespace reto2_api.Repositories
                             {
                                 IdAsignatura = reader.GetInt32(0),
                                 Nombre = reader.GetString(1),
-                                Descripcion = reader.GetString(2),
-                                Imagen = reader.GetString(3),
+                                Descripcion = reader.IsDBNull(2) ? null : reader.GetString(2),
+                                Imagen = reader.IsDBNull(3) ? null : reader.GetString(3),
                                 FechaCreacion = reader.GetDateTime(4),
-                                CursoId = reader.GetInt32(5)
+                                IdCurso = reader.GetInt32(5)
                             };
                         }
                     }
@@ -85,40 +85,76 @@ namespace reto2_api.Repositories
             {
                 await connection.OpenAsync();
 
-                string query = "INSERT INTO Asignatura (Nombre, Descripcion, Imagen, FechaCreacion, CursoId) VALUES (@Nombre, @Descripcion, @Imagen, @FechaCreacion, @CursoId)";
+                string query = "INSERT INTO Asignatura (Nombre, Descripcion, Imagen, FechaCreacion, IdCurso) VALUES (@Nombre, @Descripcion, @Imagen, @FechaCreacion, @IdCurso)";
                 using (var command = new MySqlCommand(query, connection))
                 {
                     command.Parameters.AddWithValue("@Nombre", asignatura.Nombre);
                     command.Parameters.AddWithValue("@Descripcion", asignatura.Descripcion);
                     command.Parameters.AddWithValue("@Imagen", asignatura.Imagen);
                     command.Parameters.AddWithValue("@FechaCreacion", asignatura.FechaCreacion);
-                    command.Parameters.AddWithValue("@CursoId", asignatura.CursoId);
+                    command.Parameters.AddWithValue("@IdCurso", asignatura.IdCurso);
 
                     await command.ExecuteNonQueryAsync();
                 }
             }
         }
 
-        public async Task UpdateAsync(Asignatura asignatura)
+public async Task UpdateAsync(Asignatura asignatura)
+{
+    using (var connection = new MySqlConnection(_connectionString))
+    {
+        await connection.OpenAsync();
+
+        // 🔹 Obtener los valores actuales de la asignatura
+        string selectQuery = "SELECT Nombre, Descripcion, Imagen, FechaCreacion, IdCurso FROM Asignatura WHERE IdAsignatura = @IdAsignatura";
+        Asignatura asignaturaActual = null;
+
+        using (var selectCommand = new MySqlCommand(selectQuery, connection))
         {
-            using (var connection = new MySqlConnection(_connectionString))
+            selectCommand.Parameters.AddWithValue("@IdAsignatura", asignatura.IdAsignatura);
+
+            using (var reader = await selectCommand.ExecuteReaderAsync())
             {
-                await connection.OpenAsync();
-
-                string query = "UPDATE Asignatura SET Nombre = @Nombre, Descripcion = @Descripcion, Imagen = @Imagen, FechaCreacion = @FechaCreacion, CursoId = @CursoId WHERE IdAsignatura = @IdAsignatura";
-                using (var command = new MySqlCommand(query, connection))
+                if (await reader.ReadAsync())
                 {
-                    command.Parameters.AddWithValue("@IdAsignatura", asignatura.IdAsignatura);
-                    command.Parameters.AddWithValue("@Nombre", asignatura.Nombre);
-                    command.Parameters.AddWithValue("@Descripcion", asignatura.Descripcion);
-                    command.Parameters.AddWithValue("@Imagen", asignatura.Imagen);
-                    command.Parameters.AddWithValue("@FechaCreacion", asignatura.FechaCreacion);
-                    command.Parameters.AddWithValue("@CursoId", asignatura.CursoId);
-
-                    await command.ExecuteNonQueryAsync();
+                    asignaturaActual = new Asignatura
+                    {
+                        IdAsignatura = asignatura.IdAsignatura,
+                        Nombre = reader.GetString(0),
+                        Descripcion = reader.IsDBNull(1) ? null : reader.GetString(1),
+                        Imagen = reader.IsDBNull(2) ? null : reader.GetString(2),
+                        FechaCreacion = reader.GetDateTime(3),
+                        IdCurso = reader.GetInt32(4)
+                    };
                 }
             }
         }
+
+        if (asignaturaActual == null)
+            throw new Exception("La asignatura no existe.");
+
+        string query = @"
+            UPDATE Asignatura 
+            SET 
+                Nombre = @Nombre, 
+                Descripcion = @Descripcion, 
+                Imagen = @Imagen, 
+                IdCurso = @IdCurso
+            WHERE IdAsignatura = @IdAsignatura";
+
+        using (var command = new MySqlCommand(query, connection))
+        {
+            command.Parameters.AddWithValue("@IdAsignatura", asignatura.IdAsignatura);
+            command.Parameters.AddWithValue("@Nombre", asignatura.Nombre ?? asignaturaActual.Nombre);
+            command.Parameters.AddWithValue("@Descripcion", asignatura.Descripcion ?? asignaturaActual.Descripcion);
+            command.Parameters.AddWithValue("@Imagen", asignatura.Imagen ?? asignaturaActual.Imagen);
+            command.Parameters.AddWithValue("@IdCurso", asignatura.IdCurso > 0 ? asignatura.IdCurso : asignaturaActual.IdCurso);
+
+            await command.ExecuteNonQueryAsync();
+        }
+    }
+}
+
 
         public async Task<bool> DeleteAsync(int id)
         {
@@ -138,7 +174,7 @@ namespace reto2_api.Repositories
         }
 
         ///METODO PARA OBTENER LAS ASIGNATURAS POR CURSO
-        public async Task<List<Asignatura>> GetByCursoIdAsync(int idCurso)
+        public async Task<List<Asignatura>> GetByIdCursoAsync(int idCurso)
         {
             var asignaturas = new List<Asignatura>();
 
@@ -146,7 +182,8 @@ namespace reto2_api.Repositories
             {
                 await connection.OpenAsync();
 
-                string query = "SELECT IdAsignatura, Nombre FROM Asignatura WHERE IdCurso = @IdCurso";
+                string query = "SELECT idAsignatura, nombre, descripcion, imagen, fechaCreacion FROM Asignatura WHERE idCurso = @IdCurso";
+                
                 using (var command = new MySqlCommand(query, connection))
                 {
                     command.Parameters.AddWithValue("@IdCurso", idCurso);
@@ -158,7 +195,10 @@ namespace reto2_api.Repositories
                             asignaturas.Add(new Asignatura
                             {
                                 IdAsignatura = reader.GetInt32(0),
-                                Nombre = reader.GetString(1)
+                                Nombre = reader.GetString(1),
+                                Descripcion = reader.IsDBNull(2) ? null : reader.GetString(2),
+                                Imagen = reader.IsDBNull(3) ? null : reader.GetString(3),
+                                FechaCreacion = reader.IsDBNull(4) ? DateTime.UtcNow : reader.GetDateTime(4)
                             });
                         }
                     }
@@ -167,6 +207,7 @@ namespace reto2_api.Repositories
 
             return asignaturas; // Devuelve una lista, no un solo objeto
         }
+
 
         
     }

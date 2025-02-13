@@ -31,9 +31,9 @@ namespace reto2_api.Controllers
         }
 
         [HttpGet("curso/{idCurso}")]
-        public async Task<ActionResult<List<UsuarioCurso>>> GetByCursoId(int idCurso)
+        public async Task<ActionResult<List<UsuarioCurso>>> GetByIdCurso(int idCurso)
         {
-            var inscripciones = await _usuarioCursoService.GetByCursoIdAsync(idCurso);
+            var inscripciones = await _usuarioCursoService.GetByIdCursoAsync(idCurso);
             return Ok(inscripciones);
         }
 

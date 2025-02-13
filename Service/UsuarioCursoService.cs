@@ -24,9 +24,9 @@ namespace reto2_api.Service
             return await _usuarioCursoRepository.GetByUsuarioIdAsync(idUsuario);
         }
 
-        public async Task<List<UsuarioCurso>> GetByCursoIdAsync(int idCurso)
+        public async Task<List<UsuarioCurso>> GetByIdCursoAsync(int idCurso)
         {
-            return await _usuarioCursoRepository.GetByCursoIdAsync(idCurso);
+            return await _usuarioCursoRepository.GetByIdCursoAsync(idCurso);
         }
 
         public async Task AddAsync(UsuarioCurso usuarioCurso)

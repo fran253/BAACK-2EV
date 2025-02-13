@@ -13,38 +13,40 @@ namespace reto2_api.Repositories
             _connectionString = connectionString;
         }
 
-        public async Task<List<Comentario>> GetAllAsync()
+public async Task<List<Comentario>> GetAllAsync()
+{
+    var comentarios = new List<Comentario>();
+
+    using (var connection = new MySqlConnection(_connectionString))
+    {
+        await connection.OpenAsync();
+
+        string query = "SELECT idComentario, contenido, fechaCreacion, idUsuario, idArchivo FROM Comentario"; // ✅ Se cambió idArchivo por idTemario
+        
+        using (var command = new MySqlCommand(query, connection))
         {
-            var comentarios = new List<Comentario>();
-
-            using (var connection = new MySqlConnection(_connectionString))
+            using (var reader = await command.ExecuteReaderAsync())
             {
-                await connection.OpenAsync();
-
-                string query = "SELECT IdComentario, Contenido, FechaCreacion, IdUsuario, IdArchivo FROM Comentario";
-                using (var command = new MySqlCommand(query, connection))
+                while (await reader.ReadAsync())
                 {
-                    using (var reader = await command.ExecuteReaderAsync())
+                    var comentario = new Comentario
                     {
-                        while (await reader.ReadAsync())
-                        {
-                            var comentario = new Comentario
-                            {
-                                IdComentario = reader.GetInt32(0),
-                                Contenido = reader.GetString(1),
-                                FechaCreacion = reader.GetDateTime(4),
-                                IdUsuario = reader.GetInt32(5),
-                                IdArchivo = reader.GetInt32(6)
+                        IdComentario = reader.GetInt32(0),
+                        Contenido = reader.GetString(1),
+                        FechaCreacion = reader.IsDBNull(2) ? DateTime.UtcNow : reader.GetDateTime(2),
+                        IdUsuario = reader.GetInt32(3),
+                        IdArchivo = reader.GetInt32(4)
+                    };
 
-                            };
-
-                            comentarios.Add(comentario);
-                        }
-                    }
+                    comentarios.Add(comentario);
                 }
             }
-            return comentarios;
         }
+    }
+    return comentarios;
+}
+
+
 
         public async Task<Comentario> GetByIdAsync(int id)
         {
@@ -54,7 +56,7 @@ namespace reto2_api.Repositories
             {
                 await connection.OpenAsync();
 
-                string query = "SELECT IdComentario, Contenido, FechaCreacion, IdUsuario, IdArchivo FROM Comentario WHERE IdComentario = @IdComentario";
+                string query = "SELECT idComentario, contenido, fechaCreacion, idUsuario, idArchivo FROM Comentario WHERE idComentario = @IdComentario";
                 using (var command = new MySqlCommand(query, connection))
                 {
                     command.Parameters.AddWithValue("@IdComentario", id);
@@ -65,11 +67,11 @@ namespace reto2_api.Repositories
                         {
                             comentario = new Comentario
                             {
-                                IdComentario = reader.GetInt32(0),
-                                Contenido = reader.GetString(1),
-                                FechaCreacion = reader.GetDateTime(4),
-                                IdUsuario = reader.GetInt32(5),
-                                IdArchivo = reader.GetInt32(6)
+                            IdComentario = reader.GetInt32(0),
+                            Contenido = reader.GetString(1),
+                            FechaCreacion = reader.IsDBNull(2) ? DateTime.UtcNow : reader.GetDateTime(2),
+                            IdUsuario = reader.GetInt32(3),
+                            IdArchivo = reader.GetInt32(4)
                             };
                         }
                     }
@@ -84,7 +86,7 @@ namespace reto2_api.Repositories
             {
                 await connection.OpenAsync();
 
-                string query = "INSERT INTO Comentario (Contenido, FechaCreacion, IdUsuario, IdArchivo) VALUES (@Contenido, @FechaCreacion, @IdUsuario, @IdArchivo)";
+                string query = "INSERT INTO Comentario (contenido, fechaCreacion, idUsuario, idArchivo) VALUES (@Contenido, @FechaCreacion, @IdUsuario, @IdArchivo)";
                 using (var command = new MySqlCommand(query, connection))
                 {
                     command.Parameters.AddWithValue("@Contenido", comentario.Contenido);
@@ -103,7 +105,7 @@ namespace reto2_api.Repositories
             {
                 await connection.OpenAsync();
 
-                string query = "UPDATE Comentario SET Contenido = @Contenido, FechaCreacion = @FechaCreacion, IdUsuario = @IdUsuario, IdArchivo = @IdArchivo WHERE IdComentario = @IdComentario";
+                string query = "UPDATE Comentario SET contenido = @Contenido, fechaCreacion = @FechaCreacion, idUsuario = @IdUsuario, idArchivo = @IdArchivo WHERE idComentario = @IdComentario";
                 using (var command = new MySqlCommand(query, connection))
                 {
                     command.Parameters.AddWithValue("@IdComentario", comentario.IdArchivo);
@@ -123,7 +125,7 @@ namespace reto2_api.Repositories
             {
                 await connection.OpenAsync();
 
-                string query = "DELETE FROM Comentario WHERE IdComentario = @IdComentario";
+                string query = "DELETE FROM Comentario WHERE idComentario = @IdComentario";
                 using (var command = new MySqlCommand(query, connection))
                 {
                     command.Parameters.AddWithValue("@IdComentario", id);

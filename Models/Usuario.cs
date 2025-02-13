@@ -9,6 +9,8 @@ public class Usuario
     public string Gmail { get; set; }
     public string Telefono { get; set; }
     public string Contraseña { get; set; }
+    
+    public int IdRol {get; set;}
     public Rol Rol { get; set; }
 
     public Usuario(int idUsuario, string nombre, string apellido, string gmail, string telefono,string contraseña, Rol rol)
@@ -38,6 +40,7 @@ public class Usuario
         Telefono = telefono;
         Contraseña = contraseña;
         Rol = rol;
+        IdRol = Rol.IdRol;
     }
 
     public Usuario() { }

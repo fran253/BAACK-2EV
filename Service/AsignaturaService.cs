@@ -45,12 +45,12 @@ namespace reto2_api.Service
         }
         
         ///METODO PARA OBTENER ASIGNATURAS POR ID DE CURSO
-        public async Task<List<Asignatura>> GetByCursoIdAsync(int idCurso)
+        public async Task<List<Asignatura>> GetByIdCursoAsync(int idCurso)
         {
             if (idCurso <= 0)
                 throw new ArgumentException("el id del curso debe ser un número positivo.", nameof(idCurso));
 
-            return await _asignaturaRepository.GetByCursoIdAsync(idCurso);
+            return await _asignaturaRepository.GetByIdCursoAsync(idCurso);
         }
     }
 }

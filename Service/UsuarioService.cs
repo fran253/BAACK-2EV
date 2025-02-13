@@ -45,9 +45,6 @@ namespace reto2_api.Service
             await _usuarioRepository.DeleteAsync(id);
         }
 
-        public async Task InicializarDatosAsync()
-        {
-            await _usuarioRepository.InicializarDatosAsync();
-        }
+
     }
 }

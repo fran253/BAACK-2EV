@@ -21,7 +21,7 @@ namespace reto2_api.Repositories
             {
                 await connection.OpenAsync();
 
-                string query = "SELECT IdTemario, Titulo, Descripcion, FechaPublicacion, AsignaturaId FROM Temario";
+                string query = "SELECT idTemario, titulo, descripcion, idAsignatura FROM Temario";
                 using (var command = new MySqlCommand(query, connection))
                 {
                     using (var reader = await command.ExecuteReaderAsync())
@@ -52,7 +52,7 @@ namespace reto2_api.Repositories
             {
                 await connection.OpenAsync();
 
-                string query = "SELECT IdTemario, Titulo, Descripcion, IdAsignatura FROM Temario WHERE IdTemario = @IdTemario";
+                string query = "SELECT idTemario, titulo, descripcion, idAsignatura FROM Temario WHERE idTemario = @IdTemario";
                 using (var command = new MySqlCommand(query, connection))
                 {
                     command.Parameters.AddWithValue("@IdTemario", id);
@@ -81,7 +81,7 @@ namespace reto2_api.Repositories
             {
                 await connection.OpenAsync();
 
-                string query = "INSERT INTO Temario (Titulo, Descripcion, FechaPublicacion, IdAsignatura) VALUES (@Titulo, @Descripcion, @IdAsignatura)";
+                string query = "INSERT INTO Temario (titulo, descripcion, idAsignatura) VALUES (@Titulo, @Descripcion, @IdAsignatura)";
                 using (var command = new MySqlCommand(query, connection))
                 {
                     command.Parameters.AddWithValue("@Titulo", temario.Titulo);
@@ -99,7 +99,7 @@ namespace reto2_api.Repositories
             {
                 await connection.OpenAsync();
 
-                string query = "UPDATE Temario SET Titulo = @Titulo, Descripcion = @Descripcion, IdAsignatura = @IdAsignatura WHERE IdTemario = @IdTemario";
+                string query = "UPDATE Temario SET titulo = @Titulo, descripcion = @Descripcion, idAsignatura = @IdAsignatura WHERE idTemario = @IdTemario";
                 using (var command = new MySqlCommand(query, connection))
                 {
                     command.Parameters.AddWithValue("@IdTemario", temario.IdTemario);
@@ -118,7 +118,7 @@ namespace reto2_api.Repositories
             {
                 await connection.OpenAsync();
 
-                string query = "DELETE FROM Temario WHERE IdTemario = @IdTemario";
+                string query = "DELETE FROM Temario WHERE idTemario = @IdTemario";
                 using (var command = new MySqlCommand(query, connection))
                 {
                     command.Parameters.AddWithValue("@IdTemario", id);
@@ -139,7 +139,7 @@ namespace reto2_api.Repositories
                 await connection.OpenAsync();
 
                 // 🔹 Se añadió `Descripcion` e `IdAsignatura` a la consulta
-                string query = "SELECT IdTemario, Titulo, Descripcion, IdAsignatura FROM Temario WHERE IdAsignatura = @IdAsignatura";
+                string query = "SELECT idTemario, titulo, descripcion, idAsignatura FROM Temario WHERE idAsignatura = @IdAsignatura";
 
                 using (var command = new MySqlCommand(query, connection))
                 {

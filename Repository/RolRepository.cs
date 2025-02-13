@@ -23,7 +23,7 @@ namespace reto2_api.Repositories
             {
                 await connection.OpenAsync();
 
-                string query = "SELECT IdRol, Nombre FROM Rol";
+                string query = "SELECT idRol, nombre FROM Rol";
                 using (var command = new MySqlCommand(query, connection))
                 {
                     using (var reader = await command.ExecuteReaderAsync())
@@ -52,7 +52,7 @@ namespace reto2_api.Repositories
             {
                 await connection.OpenAsync();
 
-                string query = "SELECT IdRol, Nombre FROM Rol WHERE IdRol = @Id";
+                string query = "SELECT idRol, nombre FROM Rol WHERE idRol = @Id";
                 using (var command = new MySqlCommand(query, connection))
                 {
                     command.Parameters.AddWithValue("@Id", id);
@@ -79,7 +79,7 @@ namespace reto2_api.Repositories
             {
                 await connection.OpenAsync();
 
-                string query = "INSERT INTO Rol (Nombre) VALUES (@Nombre)";
+                string query = "INSERT INTO Rol (nombre) VALUES (@Nombre)";
                 using (var command = new MySqlCommand(query, connection))
                 {
                     command.Parameters.AddWithValue("@Nombre", rol.Nombre);
@@ -94,7 +94,7 @@ namespace reto2_api.Repositories
             {
                 await connection.OpenAsync();
 
-                string query = "UPDATE Rol SET Nombre = @Nombre WHERE IdRol = @IdRol";
+                string query = "UPDATE Rol SET nombre = @Nombre WHERE idRol = @IdRol";
                 using (var command = new MySqlCommand(query, connection))
                 {
                     command.Parameters.AddWithValue("@IdRol", rol.IdRol);
@@ -110,7 +110,7 @@ namespace reto2_api.Repositories
             {
                 await connection.OpenAsync();
 
-                string query = "DELETE FROM Rol WHERE IdRol = @IdRol";
+                string query = "DELETE FROM Rol WHERE idRol = @IdRol";
                 using (var command = new MySqlCommand(query, connection))
                 {
                     command.Parameters.AddWithValue("@IdRol", id);
@@ -121,26 +121,5 @@ namespace reto2_api.Repositories
             }
         }
 
-        public async Task InicializarDatosAsync()
-        {
-            using (var connection = new MySqlConnection(_connectionString))
-            {
-                await connection.OpenAsync();
-
-                var query = @"
-                    INSERT INTO Rol (Nombre)
-                    VALUES 
-                    (@Nombre1),
-                    (@Nombre2)";
-
-                using (var command = new MySqlCommand(query, connection))
-                {
-                    command.Parameters.AddWithValue("@Nombre1", "Administrador");
-                    command.Parameters.AddWithValue("@Nombre2", "Usuario");
-
-                    await command.ExecuteNonQueryAsync();
-                }
-            }
-        }
     }
 }

@@ -69,7 +69,7 @@ namespace reto2_api.Repositories
             return inscripciones;
         }
 
-        public async Task<List<UsuarioCurso>> GetByCursoIdAsync(int idCurso)
+        public async Task<List<UsuarioCurso>> GetByIdCursoAsync(int idCurso)
         {
             var inscripciones = new List<UsuarioCurso>();
 
