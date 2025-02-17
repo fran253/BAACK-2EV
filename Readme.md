@@ -3,8 +3,8 @@ docker run -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=yourStrong(!)Password" -p 14
 
 
 
+docker docker-compose up -d
 docker compose up -d
-
 
 //Para el reto 2
 

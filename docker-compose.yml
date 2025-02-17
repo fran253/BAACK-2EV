@@ -1,51 +1,41 @@
-version: '3.8'
+version: '3.4'
 
 networks:
   backend:
+    driver: bridge
 
 volumes:
-  sqlserver-data:
+  mysql-data:
     driver: local
 
 services:
   bbdd:
-    container_name: dbContainer
-    image: mcr.microsoft.com/mssql/server:2019-CU21-ubuntu-20.04
+    container_name: mysqlContainer
+    image: mysql:8.0  
     restart: always
-    environment:
-      ACCEPT_EULA: 'Y'
-      MSSQL_SA_PASSWORD: 'yourStrong.Password'
     ports:
-      - "1433:1433"
+      - "3306:3306"  
     networks:
       - backend
     volumes:
-      - sqlserver-data:/var/opt/mssql
+      - mysql-data:/var/lib/mysql 
+    environment:
+      MYSQL_ROOT_PASSWORD: "FMfcgzQZTCqZPnrwkWsNZDNDsqtphSfr"
+      MYSQL_DATABASE: "Reto_2ev"
+      MYSQL_USER: "fran"
+      MYSQL_PASSWORD: "FMfcgzQZTCqZPnrwkWsNZDNDsqtphSfr"
 
   api:
     container_name: apiContainer
-    image: reto2_api:1.0
-    restart: always
+    image: reto2_api:1.0  
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile  
     ports:
-      - "8001:80"
+      - "4444:80" 
     networks:
       - backend
     depends_on:
-      - bbdd
-
-  web:
-    container_name: webContainer
-    image: web:1.0
-    restart: always
-    build:
-      context: .
-      dockerfile: Dockerfile.web # Asegúrate de tener este Dockerfile para el frontend
-    ports:
-      - "9000:8080"
-    networks:
-      - backend
-    depends_on:
-      - api
+      - bbdd 
+    environment:
+      ConnectionStrings__DefaultConnection: "Server=mysqlContainer;Database=VideojuegosDB;User=fran;Password=G#tL9wX3r!sPzD7b;AllowPublicKeyRetrieval=True;SslMode=none"
