@@ -3560,11 +3560,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\S2-PC00\\Downloads\\frpmt\\BAACK-2EV\\reto2_api.csproj",
+      "projectUniqueName": "D:\\Diego Rodriguez\\BAACK\\BAACK-2EV\\reto2_api.csproj",
       "projectName": "reto2_api",
-      "projectPath": "C:\\Users\\S2-PC00\\Downloads\\frpmt\\BAACK-2EV\\reto2_api.csproj",
+      "projectPath": "D:\\Diego Rodriguez\\BAACK\\BAACK-2EV\\reto2_api.csproj",
       "packagesPath": "C:\\Users\\S2-PC00\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\S2-PC00\\Downloads\\frpmt\\BAACK-2EV\\obj\\",
+      "outputPath": "D:\\Diego Rodriguez\\BAACK\\BAACK-2EV\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

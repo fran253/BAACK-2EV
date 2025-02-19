@@ -21,8 +21,8 @@ services:
       - mysql-data:/var/lib/mysql 
     environment:
       MYSQL_ROOT_PASSWORD: "FMfcgzQZTCqZPnrwkWsNZDNDsqtphSfr"
-      MYSQL_DATABASE: "Reto_2ev"
-      MYSQL_USER: "fran"
+      MYSQL_DATABASE: "Reto2ev"
+      MYSQL_USER: "root"
       MYSQL_PASSWORD: "FMfcgzQZTCqZPnrwkWsNZDNDsqtphSfr"
 
   api:

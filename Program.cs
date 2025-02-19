@@ -3,7 +3,7 @@ using reto2_api.Repositories;
 using reto2_api.Service;
 
 var builder = WebApplication.CreateBuilder(args);
-var connectionString = builder.Configuration.GetConnectionString("reto2_api");
+var connectionString = builder.Configuration.GetConnectionString("AcademIQbbdd");
 
 //REPOSITORY
 builder.Services.AddScoped<ICursoRepository, CursoRepository>(provider =>
