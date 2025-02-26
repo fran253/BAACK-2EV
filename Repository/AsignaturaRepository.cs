@@ -80,24 +80,39 @@ namespace reto2_api.Repositories
         }
 
         public async Task AddAsync(Asignatura asignatura)
+{
+    using (var connection = new MySqlConnection(_connectionString))
+    {
+        await connection.OpenAsync();
+
+        // Verificar si el curso existe antes de insertar la asignatura
+        string checkCursoQuery = "SELECT COUNT(*) FROM Curso WHERE idCurso = @IdCurso";
+        using (var checkCommand = new MySqlCommand(checkCursoQuery, connection))
         {
-            using (var connection = new MySqlConnection(_connectionString))
+            checkCommand.Parameters.AddWithValue("@IdCurso", asignatura.IdCurso);
+            var cursoExiste = Convert.ToInt32(await checkCommand.ExecuteScalarAsync()) > 0;
+
+            if (!cursoExiste)
             {
-                await connection.OpenAsync();
-
-                string query = "INSERT INTO Asignatura (Nombre, Descripcion, Imagen, FechaCreacion, IdCurso) VALUES (@Nombre, @Descripcion, @Imagen, @FechaCreacion, @IdCurso)";
-                using (var command = new MySqlCommand(query, connection))
-                {
-                    command.Parameters.AddWithValue("@Nombre", asignatura.Nombre);
-                    command.Parameters.AddWithValue("@Descripcion", asignatura.Descripcion);
-                    command.Parameters.AddWithValue("@Imagen", asignatura.Imagen);
-                    command.Parameters.AddWithValue("@FechaCreacion", asignatura.FechaCreacion);
-                    command.Parameters.AddWithValue("@IdCurso", asignatura.IdCurso);
-
-                    await command.ExecuteNonQueryAsync();
-                }
+                throw new Exception("No se puede agregar la asignatura porque el curso asociado no existe.");
             }
         }
+
+        // Insertar la asignatura si el curso existe
+        string query = "INSERT INTO Asignatura (nombre, descripcion, imagen, fechaCreacion, idCurso) VALUES (@Nombre, @Descripcion, @Imagen, @FechaCreacion, @IdCurso)";
+        using (var command = new MySqlCommand(query, connection))
+        {
+            command.Parameters.AddWithValue("@Nombre", asignatura.Nombre);
+            command.Parameters.AddWithValue("@Descripcion", asignatura.Descripcion);
+            command.Parameters.AddWithValue("@Imagen", asignatura.Imagen);
+            command.Parameters.AddWithValue("@FechaCreacion", asignatura.FechaCreacion);
+            command.Parameters.AddWithValue("@IdCurso", asignatura.IdCurso);
+
+            await command.ExecuteNonQueryAsync();
+        }
+    }
+}
+
 
 public async Task UpdateAsync(Asignatura asignatura)
 {
