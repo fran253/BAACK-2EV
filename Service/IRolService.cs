@@ -10,6 +10,5 @@ namespace reto2_api.Service
         Task AddAsync(Rol rol);
         Task UpdateAsync(Rol rol);
         Task DeleteAsync(int id);
-        Task InicializarDatosAsync();
     }
 }

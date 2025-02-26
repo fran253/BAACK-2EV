@@ -77,12 +77,6 @@ namespace reto2_api.Controllers
            return NoContent();
        }
 
-       // Inicializar datos de prueba
-       [HttpPost("inicializar")]
-       public async Task<IActionResult> InicializarDatos()
-       {
-           await _usuarioService.InicializarDatosAsync();
-           return Ok("datos inicializados correctamente.");
-       }
+
    }
 }

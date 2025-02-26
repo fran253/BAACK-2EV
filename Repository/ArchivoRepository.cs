@@ -1,4 +1,4 @@
-using Microsoft.Data.SqlClient;
+using MySql.Data.MySqlClient;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -17,12 +17,12 @@ namespace reto2_api.Repositories
         {
             var archivos = new List<Archivo>();
 
-            using (var connection = new SqlConnection(_connectionString))
+            using (var connection = new MySqlConnection(_connectionString))
             {
                 await connection.OpenAsync();
 
-                string query = "SELECT IdArchivo, Titulo, Url, Tipo, FechaCreacion, IdUsuario, IdTemario FROM Archivo";
-                using (var command = new SqlCommand(query, connection))
+                string query = "SELECT idArchivo, titulo, url, tipo, fechaCreacion, idUsuario, idTemario FROM Archivo";
+                using (var command = new MySqlCommand(query, connection))
                 {
                     using (var reader = await command.ExecuteReaderAsync())
                     {
@@ -52,12 +52,12 @@ namespace reto2_api.Repositories
         {
             Archivo archivo = null;
 
-            using (var connection = new SqlConnection(_connectionString))
+            using (var connection = new MySqlConnection(_connectionString))
             {
                 await connection.OpenAsync();
 
-                string query = "SELECT IdArchivo, Titulo, Url, Tipo, FechaCreacion, IdUsuario, IdTemario FROM Archivo WHERE IdArchivo = @IdArchivo";
-                using (var command = new SqlCommand(query, connection))
+                string query = "SELECT idArchivo, titulo, url, tipo, fechaCreacion, idUsuario, idTemario FROM Archivo WHERE idArchivo = @IdArchivo";
+                using (var command = new MySqlCommand(query, connection))
                 {
                     command.Parameters.AddWithValue("@IdArchivo", id);
 
@@ -84,12 +84,12 @@ namespace reto2_api.Repositories
 
         public async Task AddAsync(Archivo archivo)
         {
-            using (var connection = new SqlConnection(_connectionString))
+            using (var connection = new MySqlConnection(_connectionString))
             {
                 await connection.OpenAsync();
 
-                string query = "INSERT INTO Archivo (Titulo, Url, Tipo, FechaCreacion, IdUsuario, IdTemario) VALUES (@Titulo, @Url, @Tipo, @FechaCreacion, @IdUsuario, @IdTemario)";
-                using (var command = new SqlCommand(query, connection))
+                string query = "INSERT INTO Archivo (titulo, url, tipo, fechaCreacion, idUsuario, idTemario) VALUES (@Titulo, @Url, @Tipo, @FechaCreacion, @IdUsuario, @IdTemario)";
+                using (var command = new MySqlCommand(query, connection))
                 {
                     command.Parameters.AddWithValue("@Titulo", archivo.Titulo);
                     command.Parameters.AddWithValue("@Url", archivo.Url);
@@ -105,12 +105,12 @@ namespace reto2_api.Repositories
 
         public async Task UpdateAsync(Archivo archivo)
         {
-            using (var connection = new SqlConnection(_connectionString))
+            using (var connection = new MySqlConnection(_connectionString))
             {
                 await connection.OpenAsync();
 
-                string query = "UPDATE Archivo SET Nombre = @Nombre, Descripcion = @Descripcion, Imagen = @Imagen, FechaCreacion = @FechaCreacion, CursoId = @CursoId WHERE IdArchivo = @IdArchivo";
-                using (var command = new SqlCommand(query, connection))
+                string query = "UPDATE Archivo SET nombre = @Nombre, descripcion = @Descripcion, imagen = @Imagen, fechaCreacion = @FechaCreacion, idCurso = @IdCurso WHERE idArchivo = @IdArchivo";
+                using (var command = new MySqlCommand(query, connection))
                 {
                     command.Parameters.AddWithValue("@IdArchivo", archivo.IdArchivo);
                     command.Parameters.AddWithValue("@Titulo", archivo.Titulo);
@@ -127,12 +127,12 @@ namespace reto2_api.Repositories
 
         public async Task<bool> DeleteAsync(int id)
         {
-            using (var connection = new SqlConnection(_connectionString))
+            using (var connection = new MySqlConnection(_connectionString))
             {
                 await connection.OpenAsync();
 
-                string query = "DELETE FROM Archivo WHERE IdArchivo = @IdArchivo";
-                using (var command = new SqlCommand(query, connection))
+                string query = "DELETE FROM Archivo WHERE idArchivo = @IdArchivo";
+                using (var command = new MySqlCommand(query, connection))
                 {
                     command.Parameters.AddWithValue("@IdArchivo", id);
 
@@ -147,12 +147,12 @@ namespace reto2_api.Repositories
         {
             var archivos = new List<Archivo>();
 
-            using (var connection = new SqlConnection(_connectionString))
+            using (var connection = new MySqlConnection(_connectionString))
             {
                 await connection.OpenAsync();
 
-                string query = "SELECT IdArchivo, Titulo, Url, Tipo, FechaCreacion, IdUsuario, IdTemario FROM Archivo WHERE IdTemario = @IdTemario";
-                using (var command = new SqlCommand(query, connection))
+                string query = "SELECT idArchivo, titulo, url, tipo, fechaCreacion, idUsuario, idTemario FROM Archivo WHERE idTemario = @IdTemario";
+                using (var command = new MySqlCommand(query, connection))
                 {
                     command.Parameters.AddWithValue("@IdTemario", idTemario);
 

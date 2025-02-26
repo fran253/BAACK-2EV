@@ -4,6 +4,8 @@ public class Pregunta
 {
     public int IdPregunta { get; set; }
     public string Enunciado { get; set; }
+
+    public int IdTest {get;set;}
     public Test Test { get; set; }
 
     public Pregunta(int idPregunta, string enunciado, Test test)
@@ -20,6 +22,7 @@ public class Pregunta
         IdPregunta = idPregunta;
         Enunciado = enunciado;
         Test = test;
+        IdTest = Test.IdTest;
     }
 
     public Pregunta() { }

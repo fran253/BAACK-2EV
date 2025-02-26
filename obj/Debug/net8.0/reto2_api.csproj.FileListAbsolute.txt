@@ -76,81 +76,395 @@ D:\GRADO SUPERIOR (año2)\SEGUNDO TRIMESTRE\RETO FINAL\BAACK-2EV\obj\Debug\net8.
 D:\GRADO SUPERIOR (año2)\SEGUNDO TRIMESTRE\RETO FINAL\BAACK-2EV\obj\Debug\net8.0\reto2_api.pdb
 D:\GRADO SUPERIOR (año2)\SEGUNDO TRIMESTRE\RETO FINAL\BAACK-2EV\obj\Debug\net8.0\reto2_api.genruntimeconfig.cache
 D:\GRADO SUPERIOR (año2)\SEGUNDO TRIMESTRE\RETO FINAL\BAACK-2EV\obj\Debug\net8.0\ref\reto2_api.dll
-C:\GRADOSUPERIOR 2año\ZRETO BACK 2EVA\BAACK-2EV\bin\Debug\net8.0\appsettings.Development.json
-C:\GRADOSUPERIOR 2año\ZRETO BACK 2EVA\BAACK-2EV\bin\Debug\net8.0\appsettings.json
-C:\GRADOSUPERIOR 2año\ZRETO BACK 2EVA\BAACK-2EV\bin\Debug\net8.0\reto2_api.exe
-C:\GRADOSUPERIOR 2año\ZRETO BACK 2EVA\BAACK-2EV\bin\Debug\net8.0\reto2_api.deps.json
-C:\GRADOSUPERIOR 2año\ZRETO BACK 2EVA\BAACK-2EV\bin\Debug\net8.0\reto2_api.runtimeconfig.json
-C:\GRADOSUPERIOR 2año\ZRETO BACK 2EVA\BAACK-2EV\bin\Debug\net8.0\reto2_api.dll
-C:\GRADOSUPERIOR 2año\ZRETO BACK 2EVA\BAACK-2EV\bin\Debug\net8.0\reto2_api.pdb
-C:\GRADOSUPERIOR 2año\ZRETO BACK 2EVA\BAACK-2EV\bin\Debug\net8.0\Azure.Core.dll
-C:\GRADOSUPERIOR 2año\ZRETO BACK 2EVA\BAACK-2EV\bin\Debug\net8.0\Azure.Identity.dll
-C:\GRADOSUPERIOR 2año\ZRETO BACK 2EVA\BAACK-2EV\bin\Debug\net8.0\Microsoft.Bcl.AsyncInterfaces.dll
-C:\GRADOSUPERIOR 2año\ZRETO BACK 2EVA\BAACK-2EV\bin\Debug\net8.0\Microsoft.Bcl.Cryptography.dll
-C:\GRADOSUPERIOR 2año\ZRETO BACK 2EVA\BAACK-2EV\bin\Debug\net8.0\Microsoft.Data.SqlClient.dll
-C:\GRADOSUPERIOR 2año\ZRETO BACK 2EVA\BAACK-2EV\bin\Debug\net8.0\Microsoft.Extensions.Caching.Memory.dll
-C:\GRADOSUPERIOR 2año\ZRETO BACK 2EVA\BAACK-2EV\bin\Debug\net8.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
-C:\GRADOSUPERIOR 2año\ZRETO BACK 2EVA\BAACK-2EV\bin\Debug\net8.0\Microsoft.Extensions.Logging.Abstractions.dll
-C:\GRADOSUPERIOR 2año\ZRETO BACK 2EVA\BAACK-2EV\bin\Debug\net8.0\Microsoft.Extensions.Options.dll
-C:\GRADOSUPERIOR 2año\ZRETO BACK 2EVA\BAACK-2EV\bin\Debug\net8.0\Microsoft.Identity.Client.dll
-C:\GRADOSUPERIOR 2año\ZRETO BACK 2EVA\BAACK-2EV\bin\Debug\net8.0\Microsoft.Identity.Client.Extensions.Msal.dll
-C:\GRADOSUPERIOR 2año\ZRETO BACK 2EVA\BAACK-2EV\bin\Debug\net8.0\Microsoft.IdentityModel.Abstractions.dll
-C:\GRADOSUPERIOR 2año\ZRETO BACK 2EVA\BAACK-2EV\bin\Debug\net8.0\Microsoft.IdentityModel.JsonWebTokens.dll
-C:\GRADOSUPERIOR 2año\ZRETO BACK 2EVA\BAACK-2EV\bin\Debug\net8.0\Microsoft.IdentityModel.Logging.dll
-C:\GRADOSUPERIOR 2año\ZRETO BACK 2EVA\BAACK-2EV\bin\Debug\net8.0\Microsoft.IdentityModel.Protocols.dll
-C:\GRADOSUPERIOR 2año\ZRETO BACK 2EVA\BAACK-2EV\bin\Debug\net8.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
-C:\GRADOSUPERIOR 2año\ZRETO BACK 2EVA\BAACK-2EV\bin\Debug\net8.0\Microsoft.IdentityModel.Tokens.dll
-C:\GRADOSUPERIOR 2año\ZRETO BACK 2EVA\BAACK-2EV\bin\Debug\net8.0\Microsoft.OpenApi.dll
-C:\GRADOSUPERIOR 2año\ZRETO BACK 2EVA\BAACK-2EV\bin\Debug\net8.0\Microsoft.SqlServer.Server.dll
-C:\GRADOSUPERIOR 2año\ZRETO BACK 2EVA\BAACK-2EV\bin\Debug\net8.0\Swashbuckle.AspNetCore.Swagger.dll
-C:\GRADOSUPERIOR 2año\ZRETO BACK 2EVA\BAACK-2EV\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerGen.dll
-C:\GRADOSUPERIOR 2año\ZRETO BACK 2EVA\BAACK-2EV\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerUI.dll
-C:\GRADOSUPERIOR 2año\ZRETO BACK 2EVA\BAACK-2EV\bin\Debug\net8.0\System.ClientModel.dll
-C:\GRADOSUPERIOR 2año\ZRETO BACK 2EVA\BAACK-2EV\bin\Debug\net8.0\System.Configuration.ConfigurationManager.dll
-C:\GRADOSUPERIOR 2año\ZRETO BACK 2EVA\BAACK-2EV\bin\Debug\net8.0\System.Diagnostics.EventLog.dll
-C:\GRADOSUPERIOR 2año\ZRETO BACK 2EVA\BAACK-2EV\bin\Debug\net8.0\System.IdentityModel.Tokens.Jwt.dll
-C:\GRADOSUPERIOR 2año\ZRETO BACK 2EVA\BAACK-2EV\bin\Debug\net8.0\System.Memory.Data.dll
-C:\GRADOSUPERIOR 2año\ZRETO BACK 2EVA\BAACK-2EV\bin\Debug\net8.0\System.Security.Cryptography.Pkcs.dll
-C:\GRADOSUPERIOR 2año\ZRETO BACK 2EVA\BAACK-2EV\bin\Debug\net8.0\System.Security.Cryptography.ProtectedData.dll
-C:\GRADOSUPERIOR 2año\ZRETO BACK 2EVA\BAACK-2EV\bin\Debug\net8.0\cs\Microsoft.Data.SqlClient.resources.dll
-C:\GRADOSUPERIOR 2año\ZRETO BACK 2EVA\BAACK-2EV\bin\Debug\net8.0\de\Microsoft.Data.SqlClient.resources.dll
-C:\GRADOSUPERIOR 2año\ZRETO BACK 2EVA\BAACK-2EV\bin\Debug\net8.0\es\Microsoft.Data.SqlClient.resources.dll
-C:\GRADOSUPERIOR 2año\ZRETO BACK 2EVA\BAACK-2EV\bin\Debug\net8.0\fr\Microsoft.Data.SqlClient.resources.dll
-C:\GRADOSUPERIOR 2año\ZRETO BACK 2EVA\BAACK-2EV\bin\Debug\net8.0\it\Microsoft.Data.SqlClient.resources.dll
-C:\GRADOSUPERIOR 2año\ZRETO BACK 2EVA\BAACK-2EV\bin\Debug\net8.0\ja\Microsoft.Data.SqlClient.resources.dll
-C:\GRADOSUPERIOR 2año\ZRETO BACK 2EVA\BAACK-2EV\bin\Debug\net8.0\ko\Microsoft.Data.SqlClient.resources.dll
-C:\GRADOSUPERIOR 2año\ZRETO BACK 2EVA\BAACK-2EV\bin\Debug\net8.0\pl\Microsoft.Data.SqlClient.resources.dll
-C:\GRADOSUPERIOR 2año\ZRETO BACK 2EVA\BAACK-2EV\bin\Debug\net8.0\pt-BR\Microsoft.Data.SqlClient.resources.dll
-C:\GRADOSUPERIOR 2año\ZRETO BACK 2EVA\BAACK-2EV\bin\Debug\net8.0\ru\Microsoft.Data.SqlClient.resources.dll
-C:\GRADOSUPERIOR 2año\ZRETO BACK 2EVA\BAACK-2EV\bin\Debug\net8.0\tr\Microsoft.Data.SqlClient.resources.dll
-C:\GRADOSUPERIOR 2año\ZRETO BACK 2EVA\BAACK-2EV\bin\Debug\net8.0\zh-Hans\Microsoft.Data.SqlClient.resources.dll
-C:\GRADOSUPERIOR 2año\ZRETO BACK 2EVA\BAACK-2EV\bin\Debug\net8.0\zh-Hant\Microsoft.Data.SqlClient.resources.dll
-C:\GRADOSUPERIOR 2año\ZRETO BACK 2EVA\BAACK-2EV\bin\Debug\net8.0\runtimes\unix\lib\net8.0\Microsoft.Data.SqlClient.dll
-C:\GRADOSUPERIOR 2año\ZRETO BACK 2EVA\BAACK-2EV\bin\Debug\net8.0\runtimes\win\lib\net8.0\Microsoft.Data.SqlClient.dll
-C:\GRADOSUPERIOR 2año\ZRETO BACK 2EVA\BAACK-2EV\bin\Debug\net8.0\runtimes\win-arm64\native\Microsoft.Data.SqlClient.SNI.dll
-C:\GRADOSUPERIOR 2año\ZRETO BACK 2EVA\BAACK-2EV\bin\Debug\net8.0\runtimes\win-x64\native\Microsoft.Data.SqlClient.SNI.dll
-C:\GRADOSUPERIOR 2año\ZRETO BACK 2EVA\BAACK-2EV\bin\Debug\net8.0\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.dll
-C:\GRADOSUPERIOR 2año\ZRETO BACK 2EVA\BAACK-2EV\bin\Debug\net8.0\runtimes\win\lib\net8.0\System.Diagnostics.EventLog.dll
-C:\GRADOSUPERIOR 2año\ZRETO BACK 2EVA\BAACK-2EV\bin\Debug\net8.0\runtimes\win\lib\net8.0\System.Security.Cryptography.Pkcs.dll
-C:\GRADOSUPERIOR 2año\ZRETO BACK 2EVA\BAACK-2EV\obj\Debug\net8.0\reto2_api.csproj.AssemblyReference.cache
-C:\GRADOSUPERIOR 2año\ZRETO BACK 2EVA\BAACK-2EV\obj\Debug\net8.0\reto2_api.GeneratedMSBuildEditorConfig.editorconfig
-C:\GRADOSUPERIOR 2año\ZRETO BACK 2EVA\BAACK-2EV\obj\Debug\net8.0\reto2_api.AssemblyInfoInputs.cache
-C:\GRADOSUPERIOR 2año\ZRETO BACK 2EVA\BAACK-2EV\obj\Debug\net8.0\reto2_api.AssemblyInfo.cs
-C:\GRADOSUPERIOR 2año\ZRETO BACK 2EVA\BAACK-2EV\obj\Debug\net8.0\reto2_api.csproj.CoreCompileInputs.cache
-C:\GRADOSUPERIOR 2año\ZRETO BACK 2EVA\BAACK-2EV\obj\Debug\net8.0\reto2_api.MvcApplicationPartsAssemblyInfo.cs
-C:\GRADOSUPERIOR 2año\ZRETO BACK 2EVA\BAACK-2EV\obj\Debug\net8.0\reto2_api.MvcApplicationPartsAssemblyInfo.cache
-C:\GRADOSUPERIOR 2año\ZRETO BACK 2EVA\BAACK-2EV\obj\Debug\net8.0\reto2_api.sourcelink.json
-C:\GRADOSUPERIOR 2año\ZRETO BACK 2EVA\BAACK-2EV\obj\Debug\net8.0\staticwebassets.build.json
-C:\GRADOSUPERIOR 2año\ZRETO BACK 2EVA\BAACK-2EV\obj\Debug\net8.0\staticwebassets.development.json
-C:\GRADOSUPERIOR 2año\ZRETO BACK 2EVA\BAACK-2EV\obj\Debug\net8.0\staticwebassets\msbuild.reto2_api.Microsoft.AspNetCore.StaticWebAssets.props
-C:\GRADOSUPERIOR 2año\ZRETO BACK 2EVA\BAACK-2EV\obj\Debug\net8.0\staticwebassets\msbuild.build.reto2_api.props
-C:\GRADOSUPERIOR 2año\ZRETO BACK 2EVA\BAACK-2EV\obj\Debug\net8.0\staticwebassets\msbuild.buildMultiTargeting.reto2_api.props
-C:\GRADOSUPERIOR 2año\ZRETO BACK 2EVA\BAACK-2EV\obj\Debug\net8.0\staticwebassets\msbuild.buildTransitive.reto2_api.props
-C:\GRADOSUPERIOR 2año\ZRETO BACK 2EVA\BAACK-2EV\obj\Debug\net8.0\staticwebassets.pack.json
-C:\GRADOSUPERIOR 2año\ZRETO BACK 2EVA\BAACK-2EV\obj\Debug\net8.0\scopedcss\bundle\reto2_api.styles.css
-C:\GRADOSUPERIOR 2año\ZRETO BACK 2EVA\BAACK-2EV\obj\Debug\net8.0\reto2_api.csproj.Up2Date
-C:\GRADOSUPERIOR 2año\ZRETO BACK 2EVA\BAACK-2EV\obj\Debug\net8.0\reto2_api.dll
-C:\GRADOSUPERIOR 2año\ZRETO BACK 2EVA\BAACK-2EV\obj\Debug\net8.0\refint\reto2_api.dll
-C:\GRADOSUPERIOR 2año\ZRETO BACK 2EVA\BAACK-2EV\obj\Debug\net8.0\reto2_api.pdb
-C:\GRADOSUPERIOR 2año\ZRETO BACK 2EVA\BAACK-2EV\obj\Debug\net8.0\reto2_api.genruntimeconfig.cache
-C:\GRADOSUPERIOR 2año\ZRETO BACK 2EVA\BAACK-2EV\obj\Debug\net8.0\ref\reto2_api.dll
+E:\GRADO SUPERIOR (año2)\SEGUNDO TRIMESTRE\RETO FINAL\BAACK-2EV\bin\Debug\net8.0\appsettings.Development.json
+E:\GRADO SUPERIOR (año2)\SEGUNDO TRIMESTRE\RETO FINAL\BAACK-2EV\bin\Debug\net8.0\appsettings.json
+E:\GRADO SUPERIOR (año2)\SEGUNDO TRIMESTRE\RETO FINAL\BAACK-2EV\bin\Debug\net8.0\reto2_api.exe
+E:\GRADO SUPERIOR (año2)\SEGUNDO TRIMESTRE\RETO FINAL\BAACK-2EV\bin\Debug\net8.0\reto2_api.deps.json
+E:\GRADO SUPERIOR (año2)\SEGUNDO TRIMESTRE\RETO FINAL\BAACK-2EV\bin\Debug\net8.0\reto2_api.runtimeconfig.json
+E:\GRADO SUPERIOR (año2)\SEGUNDO TRIMESTRE\RETO FINAL\BAACK-2EV\bin\Debug\net8.0\reto2_api.dll
+E:\GRADO SUPERIOR (año2)\SEGUNDO TRIMESTRE\RETO FINAL\BAACK-2EV\bin\Debug\net8.0\reto2_api.pdb
+E:\GRADO SUPERIOR (año2)\SEGUNDO TRIMESTRE\RETO FINAL\BAACK-2EV\bin\Debug\net8.0\Azure.Core.dll
+E:\GRADO SUPERIOR (año2)\SEGUNDO TRIMESTRE\RETO FINAL\BAACK-2EV\bin\Debug\net8.0\Azure.Identity.dll
+E:\GRADO SUPERIOR (año2)\SEGUNDO TRIMESTRE\RETO FINAL\BAACK-2EV\bin\Debug\net8.0\Microsoft.Bcl.AsyncInterfaces.dll
+E:\GRADO SUPERIOR (año2)\SEGUNDO TRIMESTRE\RETO FINAL\BAACK-2EV\bin\Debug\net8.0\Microsoft.Bcl.Cryptography.dll
+E:\GRADO SUPERIOR (año2)\SEGUNDO TRIMESTRE\RETO FINAL\BAACK-2EV\bin\Debug\net8.0\Microsoft.Data.SqlClient.dll
+E:\GRADO SUPERIOR (año2)\SEGUNDO TRIMESTRE\RETO FINAL\BAACK-2EV\bin\Debug\net8.0\Microsoft.Extensions.Caching.Memory.dll
+E:\GRADO SUPERIOR (año2)\SEGUNDO TRIMESTRE\RETO FINAL\BAACK-2EV\bin\Debug\net8.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+E:\GRADO SUPERIOR (año2)\SEGUNDO TRIMESTRE\RETO FINAL\BAACK-2EV\bin\Debug\net8.0\Microsoft.Extensions.Logging.Abstractions.dll
+E:\GRADO SUPERIOR (año2)\SEGUNDO TRIMESTRE\RETO FINAL\BAACK-2EV\bin\Debug\net8.0\Microsoft.Extensions.Options.dll
+E:\GRADO SUPERIOR (año2)\SEGUNDO TRIMESTRE\RETO FINAL\BAACK-2EV\bin\Debug\net8.0\Microsoft.Identity.Client.dll
+E:\GRADO SUPERIOR (año2)\SEGUNDO TRIMESTRE\RETO FINAL\BAACK-2EV\bin\Debug\net8.0\Microsoft.Identity.Client.Extensions.Msal.dll
+E:\GRADO SUPERIOR (año2)\SEGUNDO TRIMESTRE\RETO FINAL\BAACK-2EV\bin\Debug\net8.0\Microsoft.IdentityModel.Abstractions.dll
+E:\GRADO SUPERIOR (año2)\SEGUNDO TRIMESTRE\RETO FINAL\BAACK-2EV\bin\Debug\net8.0\Microsoft.IdentityModel.JsonWebTokens.dll
+E:\GRADO SUPERIOR (año2)\SEGUNDO TRIMESTRE\RETO FINAL\BAACK-2EV\bin\Debug\net8.0\Microsoft.IdentityModel.Logging.dll
+E:\GRADO SUPERIOR (año2)\SEGUNDO TRIMESTRE\RETO FINAL\BAACK-2EV\bin\Debug\net8.0\Microsoft.IdentityModel.Protocols.dll
+E:\GRADO SUPERIOR (año2)\SEGUNDO TRIMESTRE\RETO FINAL\BAACK-2EV\bin\Debug\net8.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+E:\GRADO SUPERIOR (año2)\SEGUNDO TRIMESTRE\RETO FINAL\BAACK-2EV\bin\Debug\net8.0\Microsoft.IdentityModel.Tokens.dll
+E:\GRADO SUPERIOR (año2)\SEGUNDO TRIMESTRE\RETO FINAL\BAACK-2EV\bin\Debug\net8.0\Microsoft.OpenApi.dll
+E:\GRADO SUPERIOR (año2)\SEGUNDO TRIMESTRE\RETO FINAL\BAACK-2EV\bin\Debug\net8.0\Microsoft.SqlServer.Server.dll
+E:\GRADO SUPERIOR (año2)\SEGUNDO TRIMESTRE\RETO FINAL\BAACK-2EV\bin\Debug\net8.0\Swashbuckle.AspNetCore.Swagger.dll
+E:\GRADO SUPERIOR (año2)\SEGUNDO TRIMESTRE\RETO FINAL\BAACK-2EV\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+E:\GRADO SUPERIOR (año2)\SEGUNDO TRIMESTRE\RETO FINAL\BAACK-2EV\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+E:\GRADO SUPERIOR (año2)\SEGUNDO TRIMESTRE\RETO FINAL\BAACK-2EV\bin\Debug\net8.0\System.ClientModel.dll
+E:\GRADO SUPERIOR (año2)\SEGUNDO TRIMESTRE\RETO FINAL\BAACK-2EV\bin\Debug\net8.0\System.Configuration.ConfigurationManager.dll
+E:\GRADO SUPERIOR (año2)\SEGUNDO TRIMESTRE\RETO FINAL\BAACK-2EV\bin\Debug\net8.0\System.Diagnostics.EventLog.dll
+E:\GRADO SUPERIOR (año2)\SEGUNDO TRIMESTRE\RETO FINAL\BAACK-2EV\bin\Debug\net8.0\System.IdentityModel.Tokens.Jwt.dll
+E:\GRADO SUPERIOR (año2)\SEGUNDO TRIMESTRE\RETO FINAL\BAACK-2EV\bin\Debug\net8.0\System.Memory.Data.dll
+E:\GRADO SUPERIOR (año2)\SEGUNDO TRIMESTRE\RETO FINAL\BAACK-2EV\bin\Debug\net8.0\System.Security.Cryptography.Pkcs.dll
+E:\GRADO SUPERIOR (año2)\SEGUNDO TRIMESTRE\RETO FINAL\BAACK-2EV\bin\Debug\net8.0\System.Security.Cryptography.ProtectedData.dll
+E:\GRADO SUPERIOR (año2)\SEGUNDO TRIMESTRE\RETO FINAL\BAACK-2EV\bin\Debug\net8.0\cs\Microsoft.Data.SqlClient.resources.dll
+E:\GRADO SUPERIOR (año2)\SEGUNDO TRIMESTRE\RETO FINAL\BAACK-2EV\bin\Debug\net8.0\de\Microsoft.Data.SqlClient.resources.dll
+E:\GRADO SUPERIOR (año2)\SEGUNDO TRIMESTRE\RETO FINAL\BAACK-2EV\bin\Debug\net8.0\es\Microsoft.Data.SqlClient.resources.dll
+E:\GRADO SUPERIOR (año2)\SEGUNDO TRIMESTRE\RETO FINAL\BAACK-2EV\bin\Debug\net8.0\fr\Microsoft.Data.SqlClient.resources.dll
+E:\GRADO SUPERIOR (año2)\SEGUNDO TRIMESTRE\RETO FINAL\BAACK-2EV\bin\Debug\net8.0\it\Microsoft.Data.SqlClient.resources.dll
+E:\GRADO SUPERIOR (año2)\SEGUNDO TRIMESTRE\RETO FINAL\BAACK-2EV\bin\Debug\net8.0\ja\Microsoft.Data.SqlClient.resources.dll
+E:\GRADO SUPERIOR (año2)\SEGUNDO TRIMESTRE\RETO FINAL\BAACK-2EV\bin\Debug\net8.0\ko\Microsoft.Data.SqlClient.resources.dll
+E:\GRADO SUPERIOR (año2)\SEGUNDO TRIMESTRE\RETO FINAL\BAACK-2EV\bin\Debug\net8.0\pl\Microsoft.Data.SqlClient.resources.dll
+E:\GRADO SUPERIOR (año2)\SEGUNDO TRIMESTRE\RETO FINAL\BAACK-2EV\bin\Debug\net8.0\pt-BR\Microsoft.Data.SqlClient.resources.dll
+E:\GRADO SUPERIOR (año2)\SEGUNDO TRIMESTRE\RETO FINAL\BAACK-2EV\bin\Debug\net8.0\ru\Microsoft.Data.SqlClient.resources.dll
+E:\GRADO SUPERIOR (año2)\SEGUNDO TRIMESTRE\RETO FINAL\BAACK-2EV\bin\Debug\net8.0\tr\Microsoft.Data.SqlClient.resources.dll
+E:\GRADO SUPERIOR (año2)\SEGUNDO TRIMESTRE\RETO FINAL\BAACK-2EV\bin\Debug\net8.0\zh-Hans\Microsoft.Data.SqlClient.resources.dll
+E:\GRADO SUPERIOR (año2)\SEGUNDO TRIMESTRE\RETO FINAL\BAACK-2EV\bin\Debug\net8.0\zh-Hant\Microsoft.Data.SqlClient.resources.dll
+E:\GRADO SUPERIOR (año2)\SEGUNDO TRIMESTRE\RETO FINAL\BAACK-2EV\bin\Debug\net8.0\runtimes\unix\lib\net8.0\Microsoft.Data.SqlClient.dll
+E:\GRADO SUPERIOR (año2)\SEGUNDO TRIMESTRE\RETO FINAL\BAACK-2EV\bin\Debug\net8.0\runtimes\win\lib\net8.0\Microsoft.Data.SqlClient.dll
+E:\GRADO SUPERIOR (año2)\SEGUNDO TRIMESTRE\RETO FINAL\BAACK-2EV\bin\Debug\net8.0\runtimes\win-arm64\native\Microsoft.Data.SqlClient.SNI.dll
+E:\GRADO SUPERIOR (año2)\SEGUNDO TRIMESTRE\RETO FINAL\BAACK-2EV\bin\Debug\net8.0\runtimes\win-x64\native\Microsoft.Data.SqlClient.SNI.dll
+E:\GRADO SUPERIOR (año2)\SEGUNDO TRIMESTRE\RETO FINAL\BAACK-2EV\bin\Debug\net8.0\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.dll
+E:\GRADO SUPERIOR (año2)\SEGUNDO TRIMESTRE\RETO FINAL\BAACK-2EV\bin\Debug\net8.0\runtimes\win\lib\net8.0\System.Diagnostics.EventLog.dll
+E:\GRADO SUPERIOR (año2)\SEGUNDO TRIMESTRE\RETO FINAL\BAACK-2EV\bin\Debug\net8.0\runtimes\win\lib\net8.0\System.Security.Cryptography.Pkcs.dll
+E:\GRADO SUPERIOR (año2)\SEGUNDO TRIMESTRE\RETO FINAL\BAACK-2EV\obj\Debug\net8.0\reto2_api.csproj.AssemblyReference.cache
+E:\GRADO SUPERIOR (año2)\SEGUNDO TRIMESTRE\RETO FINAL\BAACK-2EV\obj\Debug\net8.0\reto2_api.GeneratedMSBuildEditorConfig.editorconfig
+E:\GRADO SUPERIOR (año2)\SEGUNDO TRIMESTRE\RETO FINAL\BAACK-2EV\obj\Debug\net8.0\reto2_api.AssemblyInfoInputs.cache
+E:\GRADO SUPERIOR (año2)\SEGUNDO TRIMESTRE\RETO FINAL\BAACK-2EV\obj\Debug\net8.0\reto2_api.AssemblyInfo.cs
+E:\GRADO SUPERIOR (año2)\SEGUNDO TRIMESTRE\RETO FINAL\BAACK-2EV\obj\Debug\net8.0\reto2_api.csproj.CoreCompileInputs.cache
+E:\GRADO SUPERIOR (año2)\SEGUNDO TRIMESTRE\RETO FINAL\BAACK-2EV\obj\Debug\net8.0\reto2_api.MvcApplicationPartsAssemblyInfo.cs
+E:\GRADO SUPERIOR (año2)\SEGUNDO TRIMESTRE\RETO FINAL\BAACK-2EV\obj\Debug\net8.0\reto2_api.MvcApplicationPartsAssemblyInfo.cache
+E:\GRADO SUPERIOR (año2)\SEGUNDO TRIMESTRE\RETO FINAL\BAACK-2EV\obj\Debug\net8.0\reto2_api.sourcelink.json
+E:\GRADO SUPERIOR (año2)\SEGUNDO TRIMESTRE\RETO FINAL\BAACK-2EV\obj\Debug\net8.0\staticwebassets.build.json
+E:\GRADO SUPERIOR (año2)\SEGUNDO TRIMESTRE\RETO FINAL\BAACK-2EV\obj\Debug\net8.0\staticwebassets.development.json
+E:\GRADO SUPERIOR (año2)\SEGUNDO TRIMESTRE\RETO FINAL\BAACK-2EV\obj\Debug\net8.0\staticwebassets\msbuild.reto2_api.Microsoft.AspNetCore.StaticWebAssets.props
+E:\GRADO SUPERIOR (año2)\SEGUNDO TRIMESTRE\RETO FINAL\BAACK-2EV\obj\Debug\net8.0\staticwebassets\msbuild.build.reto2_api.props
+E:\GRADO SUPERIOR (año2)\SEGUNDO TRIMESTRE\RETO FINAL\BAACK-2EV\obj\Debug\net8.0\staticwebassets\msbuild.buildMultiTargeting.reto2_api.props
+E:\GRADO SUPERIOR (año2)\SEGUNDO TRIMESTRE\RETO FINAL\BAACK-2EV\obj\Debug\net8.0\staticwebassets\msbuild.buildTransitive.reto2_api.props
+E:\GRADO SUPERIOR (año2)\SEGUNDO TRIMESTRE\RETO FINAL\BAACK-2EV\obj\Debug\net8.0\staticwebassets.pack.json
+E:\GRADO SUPERIOR (año2)\SEGUNDO TRIMESTRE\RETO FINAL\BAACK-2EV\obj\Debug\net8.0\scopedcss\bundle\reto2_api.styles.css
+E:\GRADO SUPERIOR (año2)\SEGUNDO TRIMESTRE\RETO FINAL\BAACK-2EV\obj\Debug\net8.0\reto2_api.csproj.Up2Date
+E:\GRADO SUPERIOR (año2)\SEGUNDO TRIMESTRE\RETO FINAL\BAACK-2EV\obj\Debug\net8.0\reto2_api.dll
+E:\GRADO SUPERIOR (año2)\SEGUNDO TRIMESTRE\RETO FINAL\BAACK-2EV\obj\Debug\net8.0\refint\reto2_api.dll
+E:\GRADO SUPERIOR (año2)\SEGUNDO TRIMESTRE\RETO FINAL\BAACK-2EV\obj\Debug\net8.0\reto2_api.pdb
+E:\GRADO SUPERIOR (año2)\SEGUNDO TRIMESTRE\RETO FINAL\BAACK-2EV\obj\Debug\net8.0\reto2_api.genruntimeconfig.cache
+E:\GRADO SUPERIOR (año2)\SEGUNDO TRIMESTRE\RETO FINAL\BAACK-2EV\obj\Debug\net8.0\ref\reto2_api.dll
+E:\GRADO SUPERIOR (año2)\SEGUNDO TRIMESTRE\RETO FINAL\BAACK-2EV\bin\Debug\net8.0\Google.Protobuf.dll
+E:\GRADO SUPERIOR (año2)\SEGUNDO TRIMESTRE\RETO FINAL\BAACK-2EV\bin\Debug\net8.0\MySql.Data.dll
+E:\GRADO SUPERIOR (año2)\SEGUNDO TRIMESTRE\RETO FINAL\BAACK-2EV\bin\Debug\net8.0\System.Security.Permissions.dll
+E:\GRADO SUPERIOR (año2)\SEGUNDO TRIMESTRE\RETO FINAL\BAACK-2EV\bin\Debug\net8.0\K4os.Compression.LZ4.dll
+E:\GRADO SUPERIOR (año2)\SEGUNDO TRIMESTRE\RETO FINAL\BAACK-2EV\bin\Debug\net8.0\K4os.Compression.LZ4.Streams.dll
+E:\GRADO SUPERIOR (año2)\SEGUNDO TRIMESTRE\RETO FINAL\BAACK-2EV\bin\Debug\net8.0\K4os.Hash.xxHash.dll
+E:\GRADO SUPERIOR (año2)\SEGUNDO TRIMESTRE\RETO FINAL\BAACK-2EV\bin\Debug\net8.0\Microsoft.Win32.SystemEvents.dll
+E:\GRADO SUPERIOR (año2)\SEGUNDO TRIMESTRE\RETO FINAL\BAACK-2EV\bin\Debug\net8.0\BouncyCastle.Crypto.dll
+E:\GRADO SUPERIOR (año2)\SEGUNDO TRIMESTRE\RETO FINAL\BAACK-2EV\bin\Debug\net8.0\System.Drawing.Common.dll
+E:\GRADO SUPERIOR (año2)\SEGUNDO TRIMESTRE\RETO FINAL\BAACK-2EV\bin\Debug\net8.0\System.Windows.Extensions.dll
+E:\GRADO SUPERIOR (año2)\SEGUNDO TRIMESTRE\RETO FINAL\BAACK-2EV\bin\Debug\net8.0\ZstdSharp.dll
+E:\GRADO SUPERIOR (año2)\SEGUNDO TRIMESTRE\RETO FINAL\BAACK-2EV\bin\Debug\net8.0\runtimes\win\lib\netcoreapp3.0\Microsoft.Win32.SystemEvents.dll
+E:\GRADO SUPERIOR (año2)\SEGUNDO TRIMESTRE\RETO FINAL\BAACK-2EV\bin\Debug\net8.0\runtimes\win-x64\native\comerr64.dll
+E:\GRADO SUPERIOR (año2)\SEGUNDO TRIMESTRE\RETO FINAL\BAACK-2EV\bin\Debug\net8.0\runtimes\win-x64\native\gssapi64.dll
+E:\GRADO SUPERIOR (año2)\SEGUNDO TRIMESTRE\RETO FINAL\BAACK-2EV\bin\Debug\net8.0\runtimes\win-x64\native\k5sprt64.dll
+E:\GRADO SUPERIOR (año2)\SEGUNDO TRIMESTRE\RETO FINAL\BAACK-2EV\bin\Debug\net8.0\runtimes\win-x64\native\krb5_64.dll
+E:\GRADO SUPERIOR (año2)\SEGUNDO TRIMESTRE\RETO FINAL\BAACK-2EV\bin\Debug\net8.0\runtimes\win-x64\native\krbcc64.dll
+E:\GRADO SUPERIOR (año2)\SEGUNDO TRIMESTRE\RETO FINAL\BAACK-2EV\bin\Debug\net8.0\runtimes\unix\lib\netcoreapp3.0\System.Drawing.Common.dll
+E:\GRADO SUPERIOR (año2)\SEGUNDO TRIMESTRE\RETO FINAL\BAACK-2EV\bin\Debug\net8.0\runtimes\win\lib\netcoreapp3.0\System.Drawing.Common.dll
+E:\GRADO SUPERIOR (año2)\SEGUNDO TRIMESTRE\RETO FINAL\BAACK-2EV\bin\Debug\net8.0\runtimes\win\lib\netcoreapp3.0\System.Windows.Extensions.dll
+D:\FRAN\Reto-Back-v2\bin\Debug\net8.0\appsettings.Development.json
+D:\FRAN\Reto-Back-v2\bin\Debug\net8.0\appsettings.json
+D:\FRAN\Reto-Back-v2\bin\Debug\net8.0\reto2_api.exe
+D:\FRAN\Reto-Back-v2\bin\Debug\net8.0\reto2_api.deps.json
+D:\FRAN\Reto-Back-v2\bin\Debug\net8.0\reto2_api.runtimeconfig.json
+D:\FRAN\Reto-Back-v2\bin\Debug\net8.0\reto2_api.dll
+D:\FRAN\Reto-Back-v2\bin\Debug\net8.0\reto2_api.pdb
+D:\FRAN\Reto-Back-v2\bin\Debug\net8.0\Azure.Core.dll
+D:\FRAN\Reto-Back-v2\bin\Debug\net8.0\Azure.Identity.dll
+D:\FRAN\Reto-Back-v2\bin\Debug\net8.0\Google.Protobuf.dll
+D:\FRAN\Reto-Back-v2\bin\Debug\net8.0\K4os.Compression.LZ4.dll
+D:\FRAN\Reto-Back-v2\bin\Debug\net8.0\K4os.Compression.LZ4.Streams.dll
+D:\FRAN\Reto-Back-v2\bin\Debug\net8.0\K4os.Hash.xxHash.dll
+D:\FRAN\Reto-Back-v2\bin\Debug\net8.0\Microsoft.Bcl.AsyncInterfaces.dll
+D:\FRAN\Reto-Back-v2\bin\Debug\net8.0\Microsoft.Bcl.Cryptography.dll
+D:\FRAN\Reto-Back-v2\bin\Debug\net8.0\Microsoft.Data.SqlClient.dll
+D:\FRAN\Reto-Back-v2\bin\Debug\net8.0\Microsoft.Extensions.Caching.Memory.dll
+D:\FRAN\Reto-Back-v2\bin\Debug\net8.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+D:\FRAN\Reto-Back-v2\bin\Debug\net8.0\Microsoft.Extensions.Logging.Abstractions.dll
+D:\FRAN\Reto-Back-v2\bin\Debug\net8.0\Microsoft.Extensions.Options.dll
+D:\FRAN\Reto-Back-v2\bin\Debug\net8.0\Microsoft.Identity.Client.dll
+D:\FRAN\Reto-Back-v2\bin\Debug\net8.0\Microsoft.Identity.Client.Extensions.Msal.dll
+D:\FRAN\Reto-Back-v2\bin\Debug\net8.0\Microsoft.IdentityModel.Abstractions.dll
+D:\FRAN\Reto-Back-v2\bin\Debug\net8.0\Microsoft.IdentityModel.JsonWebTokens.dll
+D:\FRAN\Reto-Back-v2\bin\Debug\net8.0\Microsoft.IdentityModel.Logging.dll
+D:\FRAN\Reto-Back-v2\bin\Debug\net8.0\Microsoft.IdentityModel.Protocols.dll
+D:\FRAN\Reto-Back-v2\bin\Debug\net8.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+D:\FRAN\Reto-Back-v2\bin\Debug\net8.0\Microsoft.IdentityModel.Tokens.dll
+D:\FRAN\Reto-Back-v2\bin\Debug\net8.0\Microsoft.OpenApi.dll
+D:\FRAN\Reto-Back-v2\bin\Debug\net8.0\Microsoft.SqlServer.Server.dll
+D:\FRAN\Reto-Back-v2\bin\Debug\net8.0\Microsoft.Win32.SystemEvents.dll
+D:\FRAN\Reto-Back-v2\bin\Debug\net8.0\MySql.Data.dll
+D:\FRAN\Reto-Back-v2\bin\Debug\net8.0\BouncyCastle.Crypto.dll
+D:\FRAN\Reto-Back-v2\bin\Debug\net8.0\Swashbuckle.AspNetCore.Swagger.dll
+D:\FRAN\Reto-Back-v2\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+D:\FRAN\Reto-Back-v2\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+D:\FRAN\Reto-Back-v2\bin\Debug\net8.0\System.ClientModel.dll
+D:\FRAN\Reto-Back-v2\bin\Debug\net8.0\System.Configuration.ConfigurationManager.dll
+D:\FRAN\Reto-Back-v2\bin\Debug\net8.0\System.Diagnostics.EventLog.dll
+D:\FRAN\Reto-Back-v2\bin\Debug\net8.0\System.Drawing.Common.dll
+D:\FRAN\Reto-Back-v2\bin\Debug\net8.0\System.IdentityModel.Tokens.Jwt.dll
+D:\FRAN\Reto-Back-v2\bin\Debug\net8.0\System.Memory.Data.dll
+D:\FRAN\Reto-Back-v2\bin\Debug\net8.0\System.Security.Cryptography.Pkcs.dll
+D:\FRAN\Reto-Back-v2\bin\Debug\net8.0\System.Security.Cryptography.ProtectedData.dll
+D:\FRAN\Reto-Back-v2\bin\Debug\net8.0\System.Security.Permissions.dll
+D:\FRAN\Reto-Back-v2\bin\Debug\net8.0\System.Windows.Extensions.dll
+D:\FRAN\Reto-Back-v2\bin\Debug\net8.0\ZstdSharp.dll
+D:\FRAN\Reto-Back-v2\bin\Debug\net8.0\cs\Microsoft.Data.SqlClient.resources.dll
+D:\FRAN\Reto-Back-v2\bin\Debug\net8.0\de\Microsoft.Data.SqlClient.resources.dll
+D:\FRAN\Reto-Back-v2\bin\Debug\net8.0\es\Microsoft.Data.SqlClient.resources.dll
+D:\FRAN\Reto-Back-v2\bin\Debug\net8.0\fr\Microsoft.Data.SqlClient.resources.dll
+D:\FRAN\Reto-Back-v2\bin\Debug\net8.0\it\Microsoft.Data.SqlClient.resources.dll
+D:\FRAN\Reto-Back-v2\bin\Debug\net8.0\ja\Microsoft.Data.SqlClient.resources.dll
+D:\FRAN\Reto-Back-v2\bin\Debug\net8.0\ko\Microsoft.Data.SqlClient.resources.dll
+D:\FRAN\Reto-Back-v2\bin\Debug\net8.0\pl\Microsoft.Data.SqlClient.resources.dll
+D:\FRAN\Reto-Back-v2\bin\Debug\net8.0\pt-BR\Microsoft.Data.SqlClient.resources.dll
+D:\FRAN\Reto-Back-v2\bin\Debug\net8.0\ru\Microsoft.Data.SqlClient.resources.dll
+D:\FRAN\Reto-Back-v2\bin\Debug\net8.0\tr\Microsoft.Data.SqlClient.resources.dll
+D:\FRAN\Reto-Back-v2\bin\Debug\net8.0\zh-Hans\Microsoft.Data.SqlClient.resources.dll
+D:\FRAN\Reto-Back-v2\bin\Debug\net8.0\zh-Hant\Microsoft.Data.SqlClient.resources.dll
+D:\FRAN\Reto-Back-v2\bin\Debug\net8.0\runtimes\unix\lib\net8.0\Microsoft.Data.SqlClient.dll
+D:\FRAN\Reto-Back-v2\bin\Debug\net8.0\runtimes\win\lib\net8.0\Microsoft.Data.SqlClient.dll
+D:\FRAN\Reto-Back-v2\bin\Debug\net8.0\runtimes\win-arm64\native\Microsoft.Data.SqlClient.SNI.dll
+D:\FRAN\Reto-Back-v2\bin\Debug\net8.0\runtimes\win-x64\native\Microsoft.Data.SqlClient.SNI.dll
+D:\FRAN\Reto-Back-v2\bin\Debug\net8.0\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.dll
+D:\FRAN\Reto-Back-v2\bin\Debug\net8.0\runtimes\win\lib\netcoreapp3.0\Microsoft.Win32.SystemEvents.dll
+D:\FRAN\Reto-Back-v2\bin\Debug\net8.0\runtimes\win-x64\native\comerr64.dll
+D:\FRAN\Reto-Back-v2\bin\Debug\net8.0\runtimes\win-x64\native\gssapi64.dll
+D:\FRAN\Reto-Back-v2\bin\Debug\net8.0\runtimes\win-x64\native\k5sprt64.dll
+D:\FRAN\Reto-Back-v2\bin\Debug\net8.0\runtimes\win-x64\native\krb5_64.dll
+D:\FRAN\Reto-Back-v2\bin\Debug\net8.0\runtimes\win-x64\native\krbcc64.dll
+D:\FRAN\Reto-Back-v2\bin\Debug\net8.0\runtimes\win\lib\net8.0\System.Diagnostics.EventLog.dll
+D:\FRAN\Reto-Back-v2\bin\Debug\net8.0\runtimes\unix\lib\netcoreapp3.0\System.Drawing.Common.dll
+D:\FRAN\Reto-Back-v2\bin\Debug\net8.0\runtimes\win\lib\netcoreapp3.0\System.Drawing.Common.dll
+D:\FRAN\Reto-Back-v2\bin\Debug\net8.0\runtimes\win\lib\net8.0\System.Security.Cryptography.Pkcs.dll
+D:\FRAN\Reto-Back-v2\bin\Debug\net8.0\runtimes\win\lib\netcoreapp3.0\System.Windows.Extensions.dll
+D:\FRAN\Reto-Back-v2\obj\Debug\net8.0\reto2_api.csproj.AssemblyReference.cache
+D:\FRAN\Reto-Back-v2\obj\Debug\net8.0\reto2_api.GeneratedMSBuildEditorConfig.editorconfig
+D:\FRAN\Reto-Back-v2\obj\Debug\net8.0\reto2_api.AssemblyInfoInputs.cache
+D:\FRAN\Reto-Back-v2\obj\Debug\net8.0\reto2_api.AssemblyInfo.cs
+D:\FRAN\Reto-Back-v2\obj\Debug\net8.0\reto2_api.csproj.CoreCompileInputs.cache
+D:\FRAN\Reto-Back-v2\obj\Debug\net8.0\reto2_api.MvcApplicationPartsAssemblyInfo.cs
+D:\FRAN\Reto-Back-v2\obj\Debug\net8.0\reto2_api.MvcApplicationPartsAssemblyInfo.cache
+D:\FRAN\Reto-Back-v2\obj\Debug\net8.0\reto2_api.sourcelink.json
+D:\FRAN\Reto-Back-v2\obj\Debug\net8.0\staticwebassets.build.json
+D:\FRAN\Reto-Back-v2\obj\Debug\net8.0\staticwebassets.development.json
+D:\FRAN\Reto-Back-v2\obj\Debug\net8.0\staticwebassets\msbuild.reto2_api.Microsoft.AspNetCore.StaticWebAssets.props
+D:\FRAN\Reto-Back-v2\obj\Debug\net8.0\staticwebassets\msbuild.build.reto2_api.props
+D:\FRAN\Reto-Back-v2\obj\Debug\net8.0\staticwebassets\msbuild.buildMultiTargeting.reto2_api.props
+D:\FRAN\Reto-Back-v2\obj\Debug\net8.0\staticwebassets\msbuild.buildTransitive.reto2_api.props
+D:\FRAN\Reto-Back-v2\obj\Debug\net8.0\staticwebassets.pack.json
+D:\FRAN\Reto-Back-v2\obj\Debug\net8.0\scopedcss\bundle\reto2_api.styles.css
+D:\FRAN\Reto-Back-v2\obj\Debug\net8.0\reto2_api.csproj.Up2Date
+D:\FRAN\Reto-Back-v2\obj\Debug\net8.0\reto2_api.dll
+D:\FRAN\Reto-Back-v2\obj\Debug\net8.0\refint\reto2_api.dll
+D:\FRAN\Reto-Back-v2\obj\Debug\net8.0\reto2_api.pdb
+D:\FRAN\Reto-Back-v2\obj\Debug\net8.0\reto2_api.genruntimeconfig.cache
+D:\FRAN\Reto-Back-v2\obj\Debug\net8.0\ref\reto2_api.dll
+C:\Users\S2-PC00\Downloads\frpmt\BAACK-2EV\bin\Debug\net8.0\appsettings.Development.json
+C:\Users\S2-PC00\Downloads\frpmt\BAACK-2EV\bin\Debug\net8.0\appsettings.json
+C:\Users\S2-PC00\Downloads\frpmt\BAACK-2EV\bin\Debug\net8.0\reto2_api.exe
+C:\Users\S2-PC00\Downloads\frpmt\BAACK-2EV\bin\Debug\net8.0\reto2_api.deps.json
+C:\Users\S2-PC00\Downloads\frpmt\BAACK-2EV\bin\Debug\net8.0\reto2_api.runtimeconfig.json
+C:\Users\S2-PC00\Downloads\frpmt\BAACK-2EV\bin\Debug\net8.0\reto2_api.dll
+C:\Users\S2-PC00\Downloads\frpmt\BAACK-2EV\bin\Debug\net8.0\reto2_api.pdb
+C:\Users\S2-PC00\Downloads\frpmt\BAACK-2EV\bin\Debug\net8.0\Azure.Core.dll
+C:\Users\S2-PC00\Downloads\frpmt\BAACK-2EV\bin\Debug\net8.0\Azure.Identity.dll
+C:\Users\S2-PC00\Downloads\frpmt\BAACK-2EV\bin\Debug\net8.0\Google.Protobuf.dll
+C:\Users\S2-PC00\Downloads\frpmt\BAACK-2EV\bin\Debug\net8.0\K4os.Compression.LZ4.dll
+C:\Users\S2-PC00\Downloads\frpmt\BAACK-2EV\bin\Debug\net8.0\K4os.Compression.LZ4.Streams.dll
+C:\Users\S2-PC00\Downloads\frpmt\BAACK-2EV\bin\Debug\net8.0\K4os.Hash.xxHash.dll
+C:\Users\S2-PC00\Downloads\frpmt\BAACK-2EV\bin\Debug\net8.0\Microsoft.Bcl.AsyncInterfaces.dll
+C:\Users\S2-PC00\Downloads\frpmt\BAACK-2EV\bin\Debug\net8.0\Microsoft.Bcl.Cryptography.dll
+C:\Users\S2-PC00\Downloads\frpmt\BAACK-2EV\bin\Debug\net8.0\Microsoft.Data.SqlClient.dll
+C:\Users\S2-PC00\Downloads\frpmt\BAACK-2EV\bin\Debug\net8.0\Microsoft.Extensions.Caching.Memory.dll
+C:\Users\S2-PC00\Downloads\frpmt\BAACK-2EV\bin\Debug\net8.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\Users\S2-PC00\Downloads\frpmt\BAACK-2EV\bin\Debug\net8.0\Microsoft.Extensions.Logging.Abstractions.dll
+C:\Users\S2-PC00\Downloads\frpmt\BAACK-2EV\bin\Debug\net8.0\Microsoft.Extensions.Options.dll
+C:\Users\S2-PC00\Downloads\frpmt\BAACK-2EV\bin\Debug\net8.0\Microsoft.Identity.Client.dll
+C:\Users\S2-PC00\Downloads\frpmt\BAACK-2EV\bin\Debug\net8.0\Microsoft.Identity.Client.Extensions.Msal.dll
+C:\Users\S2-PC00\Downloads\frpmt\BAACK-2EV\bin\Debug\net8.0\Microsoft.IdentityModel.Abstractions.dll
+C:\Users\S2-PC00\Downloads\frpmt\BAACK-2EV\bin\Debug\net8.0\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\Users\S2-PC00\Downloads\frpmt\BAACK-2EV\bin\Debug\net8.0\Microsoft.IdentityModel.Logging.dll
+C:\Users\S2-PC00\Downloads\frpmt\BAACK-2EV\bin\Debug\net8.0\Microsoft.IdentityModel.Protocols.dll
+C:\Users\S2-PC00\Downloads\frpmt\BAACK-2EV\bin\Debug\net8.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+C:\Users\S2-PC00\Downloads\frpmt\BAACK-2EV\bin\Debug\net8.0\Microsoft.IdentityModel.Tokens.dll
+C:\Users\S2-PC00\Downloads\frpmt\BAACK-2EV\bin\Debug\net8.0\Microsoft.OpenApi.dll
+C:\Users\S2-PC00\Downloads\frpmt\BAACK-2EV\bin\Debug\net8.0\Microsoft.SqlServer.Server.dll
+C:\Users\S2-PC00\Downloads\frpmt\BAACK-2EV\bin\Debug\net8.0\Microsoft.Win32.SystemEvents.dll
+C:\Users\S2-PC00\Downloads\frpmt\BAACK-2EV\bin\Debug\net8.0\MySql.Data.dll
+C:\Users\S2-PC00\Downloads\frpmt\BAACK-2EV\bin\Debug\net8.0\BouncyCastle.Crypto.dll
+C:\Users\S2-PC00\Downloads\frpmt\BAACK-2EV\bin\Debug\net8.0\Swashbuckle.AspNetCore.Swagger.dll
+C:\Users\S2-PC00\Downloads\frpmt\BAACK-2EV\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+C:\Users\S2-PC00\Downloads\frpmt\BAACK-2EV\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+C:\Users\S2-PC00\Downloads\frpmt\BAACK-2EV\bin\Debug\net8.0\System.ClientModel.dll
+C:\Users\S2-PC00\Downloads\frpmt\BAACK-2EV\bin\Debug\net8.0\System.Configuration.ConfigurationManager.dll
+C:\Users\S2-PC00\Downloads\frpmt\BAACK-2EV\bin\Debug\net8.0\System.Diagnostics.EventLog.dll
+C:\Users\S2-PC00\Downloads\frpmt\BAACK-2EV\bin\Debug\net8.0\System.Drawing.Common.dll
+C:\Users\S2-PC00\Downloads\frpmt\BAACK-2EV\bin\Debug\net8.0\System.IdentityModel.Tokens.Jwt.dll
+C:\Users\S2-PC00\Downloads\frpmt\BAACK-2EV\bin\Debug\net8.0\System.Memory.Data.dll
+C:\Users\S2-PC00\Downloads\frpmt\BAACK-2EV\bin\Debug\net8.0\System.Security.Cryptography.Pkcs.dll
+C:\Users\S2-PC00\Downloads\frpmt\BAACK-2EV\bin\Debug\net8.0\System.Security.Cryptography.ProtectedData.dll
+C:\Users\S2-PC00\Downloads\frpmt\BAACK-2EV\bin\Debug\net8.0\System.Security.Permissions.dll
+C:\Users\S2-PC00\Downloads\frpmt\BAACK-2EV\bin\Debug\net8.0\System.Windows.Extensions.dll
+C:\Users\S2-PC00\Downloads\frpmt\BAACK-2EV\bin\Debug\net8.0\ZstdSharp.dll
+C:\Users\S2-PC00\Downloads\frpmt\BAACK-2EV\bin\Debug\net8.0\cs\Microsoft.Data.SqlClient.resources.dll
+C:\Users\S2-PC00\Downloads\frpmt\BAACK-2EV\bin\Debug\net8.0\de\Microsoft.Data.SqlClient.resources.dll
+C:\Users\S2-PC00\Downloads\frpmt\BAACK-2EV\bin\Debug\net8.0\es\Microsoft.Data.SqlClient.resources.dll
+C:\Users\S2-PC00\Downloads\frpmt\BAACK-2EV\bin\Debug\net8.0\fr\Microsoft.Data.SqlClient.resources.dll
+C:\Users\S2-PC00\Downloads\frpmt\BAACK-2EV\bin\Debug\net8.0\it\Microsoft.Data.SqlClient.resources.dll
+C:\Users\S2-PC00\Downloads\frpmt\BAACK-2EV\bin\Debug\net8.0\ja\Microsoft.Data.SqlClient.resources.dll
+C:\Users\S2-PC00\Downloads\frpmt\BAACK-2EV\bin\Debug\net8.0\ko\Microsoft.Data.SqlClient.resources.dll
+C:\Users\S2-PC00\Downloads\frpmt\BAACK-2EV\bin\Debug\net8.0\pl\Microsoft.Data.SqlClient.resources.dll
+C:\Users\S2-PC00\Downloads\frpmt\BAACK-2EV\bin\Debug\net8.0\pt-BR\Microsoft.Data.SqlClient.resources.dll
+C:\Users\S2-PC00\Downloads\frpmt\BAACK-2EV\bin\Debug\net8.0\ru\Microsoft.Data.SqlClient.resources.dll
+C:\Users\S2-PC00\Downloads\frpmt\BAACK-2EV\bin\Debug\net8.0\tr\Microsoft.Data.SqlClient.resources.dll
+C:\Users\S2-PC00\Downloads\frpmt\BAACK-2EV\bin\Debug\net8.0\zh-Hans\Microsoft.Data.SqlClient.resources.dll
+C:\Users\S2-PC00\Downloads\frpmt\BAACK-2EV\bin\Debug\net8.0\zh-Hant\Microsoft.Data.SqlClient.resources.dll
+C:\Users\S2-PC00\Downloads\frpmt\BAACK-2EV\bin\Debug\net8.0\runtimes\unix\lib\net8.0\Microsoft.Data.SqlClient.dll
+C:\Users\S2-PC00\Downloads\frpmt\BAACK-2EV\bin\Debug\net8.0\runtimes\win\lib\net8.0\Microsoft.Data.SqlClient.dll
+C:\Users\S2-PC00\Downloads\frpmt\BAACK-2EV\bin\Debug\net8.0\runtimes\win-arm64\native\Microsoft.Data.SqlClient.SNI.dll
+C:\Users\S2-PC00\Downloads\frpmt\BAACK-2EV\bin\Debug\net8.0\runtimes\win-x64\native\Microsoft.Data.SqlClient.SNI.dll
+C:\Users\S2-PC00\Downloads\frpmt\BAACK-2EV\bin\Debug\net8.0\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.dll
+C:\Users\S2-PC00\Downloads\frpmt\BAACK-2EV\bin\Debug\net8.0\runtimes\win\lib\netcoreapp3.0\Microsoft.Win32.SystemEvents.dll
+C:\Users\S2-PC00\Downloads\frpmt\BAACK-2EV\bin\Debug\net8.0\runtimes\win-x64\native\comerr64.dll
+C:\Users\S2-PC00\Downloads\frpmt\BAACK-2EV\bin\Debug\net8.0\runtimes\win-x64\native\gssapi64.dll
+C:\Users\S2-PC00\Downloads\frpmt\BAACK-2EV\bin\Debug\net8.0\runtimes\win-x64\native\k5sprt64.dll
+C:\Users\S2-PC00\Downloads\frpmt\BAACK-2EV\bin\Debug\net8.0\runtimes\win-x64\native\krb5_64.dll
+C:\Users\S2-PC00\Downloads\frpmt\BAACK-2EV\bin\Debug\net8.0\runtimes\win-x64\native\krbcc64.dll
+C:\Users\S2-PC00\Downloads\frpmt\BAACK-2EV\bin\Debug\net8.0\runtimes\win\lib\net8.0\System.Diagnostics.EventLog.dll
+C:\Users\S2-PC00\Downloads\frpmt\BAACK-2EV\bin\Debug\net8.0\runtimes\unix\lib\netcoreapp3.0\System.Drawing.Common.dll
+C:\Users\S2-PC00\Downloads\frpmt\BAACK-2EV\bin\Debug\net8.0\runtimes\win\lib\netcoreapp3.0\System.Drawing.Common.dll
+C:\Users\S2-PC00\Downloads\frpmt\BAACK-2EV\bin\Debug\net8.0\runtimes\win\lib\net8.0\System.Security.Cryptography.Pkcs.dll
+C:\Users\S2-PC00\Downloads\frpmt\BAACK-2EV\bin\Debug\net8.0\runtimes\win\lib\netcoreapp3.0\System.Windows.Extensions.dll
+C:\Users\S2-PC00\Downloads\frpmt\BAACK-2EV\obj\Debug\net8.0\reto2_api.csproj.AssemblyReference.cache
+C:\Users\S2-PC00\Downloads\frpmt\BAACK-2EV\obj\Debug\net8.0\reto2_api.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\S2-PC00\Downloads\frpmt\BAACK-2EV\obj\Debug\net8.0\reto2_api.AssemblyInfoInputs.cache
+C:\Users\S2-PC00\Downloads\frpmt\BAACK-2EV\obj\Debug\net8.0\reto2_api.AssemblyInfo.cs
+C:\Users\S2-PC00\Downloads\frpmt\BAACK-2EV\obj\Debug\net8.0\reto2_api.csproj.CoreCompileInputs.cache
+C:\Users\S2-PC00\Downloads\frpmt\BAACK-2EV\obj\Debug\net8.0\reto2_api.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\S2-PC00\Downloads\frpmt\BAACK-2EV\obj\Debug\net8.0\reto2_api.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\S2-PC00\Downloads\frpmt\BAACK-2EV\obj\Debug\net8.0\reto2_api.sourcelink.json
+C:\Users\S2-PC00\Downloads\frpmt\BAACK-2EV\obj\Debug\net8.0\staticwebassets.build.json
+C:\Users\S2-PC00\Downloads\frpmt\BAACK-2EV\obj\Debug\net8.0\staticwebassets.development.json
+C:\Users\S2-PC00\Downloads\frpmt\BAACK-2EV\obj\Debug\net8.0\staticwebassets\msbuild.reto2_api.Microsoft.AspNetCore.StaticWebAssets.props
+C:\Users\S2-PC00\Downloads\frpmt\BAACK-2EV\obj\Debug\net8.0\staticwebassets\msbuild.build.reto2_api.props
+C:\Users\S2-PC00\Downloads\frpmt\BAACK-2EV\obj\Debug\net8.0\staticwebassets\msbuild.buildMultiTargeting.reto2_api.props
+C:\Users\S2-PC00\Downloads\frpmt\BAACK-2EV\obj\Debug\net8.0\staticwebassets\msbuild.buildTransitive.reto2_api.props
+C:\Users\S2-PC00\Downloads\frpmt\BAACK-2EV\obj\Debug\net8.0\staticwebassets.pack.json
+C:\Users\S2-PC00\Downloads\frpmt\BAACK-2EV\obj\Debug\net8.0\scopedcss\bundle\reto2_api.styles.css
+C:\Users\S2-PC00\Downloads\frpmt\BAACK-2EV\obj\Debug\net8.0\reto2_api.csproj.Up2Date
+C:\Users\S2-PC00\Downloads\frpmt\BAACK-2EV\obj\Debug\net8.0\reto2_api.dll
+C:\Users\S2-PC00\Downloads\frpmt\BAACK-2EV\obj\Debug\net8.0\refint\reto2_api.dll
+C:\Users\S2-PC00\Downloads\frpmt\BAACK-2EV\obj\Debug\net8.0\reto2_api.pdb
+C:\Users\S2-PC00\Downloads\frpmt\BAACK-2EV\obj\Debug\net8.0\reto2_api.genruntimeconfig.cache
+C:\Users\S2-PC00\Downloads\frpmt\BAACK-2EV\obj\Debug\net8.0\ref\reto2_api.dll
+D:\Diego Rodriguez\BAACK\BAACK-2EV\bin\Debug\net8.0\appsettings.Development.json
+D:\Diego Rodriguez\BAACK\BAACK-2EV\bin\Debug\net8.0\appsettings.json
+D:\Diego Rodriguez\BAACK\BAACK-2EV\bin\Debug\net8.0\reto2_api.exe
+D:\Diego Rodriguez\BAACK\BAACK-2EV\bin\Debug\net8.0\reto2_api.deps.json
+D:\Diego Rodriguez\BAACK\BAACK-2EV\bin\Debug\net8.0\reto2_api.runtimeconfig.json
+D:\Diego Rodriguez\BAACK\BAACK-2EV\bin\Debug\net8.0\reto2_api.dll
+D:\Diego Rodriguez\BAACK\BAACK-2EV\bin\Debug\net8.0\reto2_api.pdb
+D:\Diego Rodriguez\BAACK\BAACK-2EV\bin\Debug\net8.0\Azure.Core.dll
+D:\Diego Rodriguez\BAACK\BAACK-2EV\bin\Debug\net8.0\Azure.Identity.dll
+D:\Diego Rodriguez\BAACK\BAACK-2EV\bin\Debug\net8.0\Google.Protobuf.dll
+D:\Diego Rodriguez\BAACK\BAACK-2EV\bin\Debug\net8.0\K4os.Compression.LZ4.dll
+D:\Diego Rodriguez\BAACK\BAACK-2EV\bin\Debug\net8.0\K4os.Compression.LZ4.Streams.dll
+D:\Diego Rodriguez\BAACK\BAACK-2EV\bin\Debug\net8.0\K4os.Hash.xxHash.dll
+D:\Diego Rodriguez\BAACK\BAACK-2EV\bin\Debug\net8.0\Microsoft.Bcl.AsyncInterfaces.dll
+D:\Diego Rodriguez\BAACK\BAACK-2EV\bin\Debug\net8.0\Microsoft.Bcl.Cryptography.dll
+D:\Diego Rodriguez\BAACK\BAACK-2EV\bin\Debug\net8.0\Microsoft.Data.SqlClient.dll
+D:\Diego Rodriguez\BAACK\BAACK-2EV\bin\Debug\net8.0\Microsoft.Extensions.Caching.Memory.dll
+D:\Diego Rodriguez\BAACK\BAACK-2EV\bin\Debug\net8.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+D:\Diego Rodriguez\BAACK\BAACK-2EV\bin\Debug\net8.0\Microsoft.Extensions.Logging.Abstractions.dll
+D:\Diego Rodriguez\BAACK\BAACK-2EV\bin\Debug\net8.0\Microsoft.Extensions.Options.dll
+D:\Diego Rodriguez\BAACK\BAACK-2EV\bin\Debug\net8.0\Microsoft.Identity.Client.dll
+D:\Diego Rodriguez\BAACK\BAACK-2EV\bin\Debug\net8.0\Microsoft.Identity.Client.Extensions.Msal.dll
+D:\Diego Rodriguez\BAACK\BAACK-2EV\bin\Debug\net8.0\Microsoft.IdentityModel.Abstractions.dll
+D:\Diego Rodriguez\BAACK\BAACK-2EV\bin\Debug\net8.0\Microsoft.IdentityModel.JsonWebTokens.dll
+D:\Diego Rodriguez\BAACK\BAACK-2EV\bin\Debug\net8.0\Microsoft.IdentityModel.Logging.dll
+D:\Diego Rodriguez\BAACK\BAACK-2EV\bin\Debug\net8.0\Microsoft.IdentityModel.Protocols.dll
+D:\Diego Rodriguez\BAACK\BAACK-2EV\bin\Debug\net8.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+D:\Diego Rodriguez\BAACK\BAACK-2EV\bin\Debug\net8.0\Microsoft.IdentityModel.Tokens.dll
+D:\Diego Rodriguez\BAACK\BAACK-2EV\bin\Debug\net8.0\Microsoft.OpenApi.dll
+D:\Diego Rodriguez\BAACK\BAACK-2EV\bin\Debug\net8.0\Microsoft.SqlServer.Server.dll
+D:\Diego Rodriguez\BAACK\BAACK-2EV\bin\Debug\net8.0\Microsoft.Win32.SystemEvents.dll
+D:\Diego Rodriguez\BAACK\BAACK-2EV\bin\Debug\net8.0\MySql.Data.dll
+D:\Diego Rodriguez\BAACK\BAACK-2EV\bin\Debug\net8.0\BouncyCastle.Crypto.dll
+D:\Diego Rodriguez\BAACK\BAACK-2EV\bin\Debug\net8.0\Swashbuckle.AspNetCore.Swagger.dll
+D:\Diego Rodriguez\BAACK\BAACK-2EV\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+D:\Diego Rodriguez\BAACK\BAACK-2EV\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+D:\Diego Rodriguez\BAACK\BAACK-2EV\bin\Debug\net8.0\System.ClientModel.dll
+D:\Diego Rodriguez\BAACK\BAACK-2EV\bin\Debug\net8.0\System.Configuration.ConfigurationManager.dll
+D:\Diego Rodriguez\BAACK\BAACK-2EV\bin\Debug\net8.0\System.Diagnostics.EventLog.dll
+D:\Diego Rodriguez\BAACK\BAACK-2EV\bin\Debug\net8.0\System.Drawing.Common.dll
+D:\Diego Rodriguez\BAACK\BAACK-2EV\bin\Debug\net8.0\System.IdentityModel.Tokens.Jwt.dll
+D:\Diego Rodriguez\BAACK\BAACK-2EV\bin\Debug\net8.0\System.Memory.Data.dll
+D:\Diego Rodriguez\BAACK\BAACK-2EV\bin\Debug\net8.0\System.Security.Cryptography.Pkcs.dll
+D:\Diego Rodriguez\BAACK\BAACK-2EV\bin\Debug\net8.0\System.Security.Cryptography.ProtectedData.dll
+D:\Diego Rodriguez\BAACK\BAACK-2EV\bin\Debug\net8.0\System.Security.Permissions.dll
+D:\Diego Rodriguez\BAACK\BAACK-2EV\bin\Debug\net8.0\System.Windows.Extensions.dll
+D:\Diego Rodriguez\BAACK\BAACK-2EV\bin\Debug\net8.0\ZstdSharp.dll
+D:\Diego Rodriguez\BAACK\BAACK-2EV\bin\Debug\net8.0\cs\Microsoft.Data.SqlClient.resources.dll
+D:\Diego Rodriguez\BAACK\BAACK-2EV\bin\Debug\net8.0\de\Microsoft.Data.SqlClient.resources.dll
+D:\Diego Rodriguez\BAACK\BAACK-2EV\bin\Debug\net8.0\es\Microsoft.Data.SqlClient.resources.dll
+D:\Diego Rodriguez\BAACK\BAACK-2EV\bin\Debug\net8.0\fr\Microsoft.Data.SqlClient.resources.dll
+D:\Diego Rodriguez\BAACK\BAACK-2EV\bin\Debug\net8.0\it\Microsoft.Data.SqlClient.resources.dll
+D:\Diego Rodriguez\BAACK\BAACK-2EV\bin\Debug\net8.0\ja\Microsoft.Data.SqlClient.resources.dll
+D:\Diego Rodriguez\BAACK\BAACK-2EV\bin\Debug\net8.0\ko\Microsoft.Data.SqlClient.resources.dll
+D:\Diego Rodriguez\BAACK\BAACK-2EV\bin\Debug\net8.0\pl\Microsoft.Data.SqlClient.resources.dll
+D:\Diego Rodriguez\BAACK\BAACK-2EV\bin\Debug\net8.0\pt-BR\Microsoft.Data.SqlClient.resources.dll
+D:\Diego Rodriguez\BAACK\BAACK-2EV\bin\Debug\net8.0\ru\Microsoft.Data.SqlClient.resources.dll
+D:\Diego Rodriguez\BAACK\BAACK-2EV\bin\Debug\net8.0\tr\Microsoft.Data.SqlClient.resources.dll
+D:\Diego Rodriguez\BAACK\BAACK-2EV\bin\Debug\net8.0\zh-Hans\Microsoft.Data.SqlClient.resources.dll
+D:\Diego Rodriguez\BAACK\BAACK-2EV\bin\Debug\net8.0\zh-Hant\Microsoft.Data.SqlClient.resources.dll
+D:\Diego Rodriguez\BAACK\BAACK-2EV\bin\Debug\net8.0\runtimes\unix\lib\net8.0\Microsoft.Data.SqlClient.dll
+D:\Diego Rodriguez\BAACK\BAACK-2EV\bin\Debug\net8.0\runtimes\win\lib\net8.0\Microsoft.Data.SqlClient.dll
+D:\Diego Rodriguez\BAACK\BAACK-2EV\bin\Debug\net8.0\runtimes\win-arm64\native\Microsoft.Data.SqlClient.SNI.dll
+D:\Diego Rodriguez\BAACK\BAACK-2EV\bin\Debug\net8.0\runtimes\win-x64\native\Microsoft.Data.SqlClient.SNI.dll
+D:\Diego Rodriguez\BAACK\BAACK-2EV\bin\Debug\net8.0\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.dll
+D:\Diego Rodriguez\BAACK\BAACK-2EV\bin\Debug\net8.0\runtimes\win\lib\netcoreapp3.0\Microsoft.Win32.SystemEvents.dll
+D:\Diego Rodriguez\BAACK\BAACK-2EV\bin\Debug\net8.0\runtimes\win-x64\native\comerr64.dll
+D:\Diego Rodriguez\BAACK\BAACK-2EV\bin\Debug\net8.0\runtimes\win-x64\native\gssapi64.dll
+D:\Diego Rodriguez\BAACK\BAACK-2EV\bin\Debug\net8.0\runtimes\win-x64\native\k5sprt64.dll
+D:\Diego Rodriguez\BAACK\BAACK-2EV\bin\Debug\net8.0\runtimes\win-x64\native\krb5_64.dll
+D:\Diego Rodriguez\BAACK\BAACK-2EV\bin\Debug\net8.0\runtimes\win-x64\native\krbcc64.dll
+D:\Diego Rodriguez\BAACK\BAACK-2EV\bin\Debug\net8.0\runtimes\win\lib\net8.0\System.Diagnostics.EventLog.dll
+D:\Diego Rodriguez\BAACK\BAACK-2EV\bin\Debug\net8.0\runtimes\unix\lib\netcoreapp3.0\System.Drawing.Common.dll
+D:\Diego Rodriguez\BAACK\BAACK-2EV\bin\Debug\net8.0\runtimes\win\lib\netcoreapp3.0\System.Drawing.Common.dll
+D:\Diego Rodriguez\BAACK\BAACK-2EV\bin\Debug\net8.0\runtimes\win\lib\net8.0\System.Security.Cryptography.Pkcs.dll
+D:\Diego Rodriguez\BAACK\BAACK-2EV\bin\Debug\net8.0\runtimes\win\lib\netcoreapp3.0\System.Windows.Extensions.dll
+D:\Diego Rodriguez\BAACK\BAACK-2EV\obj\Debug\net8.0\reto2_api.csproj.AssemblyReference.cache
+D:\Diego Rodriguez\BAACK\BAACK-2EV\obj\Debug\net8.0\reto2_api.GeneratedMSBuildEditorConfig.editorconfig
+D:\Diego Rodriguez\BAACK\BAACK-2EV\obj\Debug\net8.0\reto2_api.AssemblyInfoInputs.cache
+D:\Diego Rodriguez\BAACK\BAACK-2EV\obj\Debug\net8.0\reto2_api.AssemblyInfo.cs
+D:\Diego Rodriguez\BAACK\BAACK-2EV\obj\Debug\net8.0\reto2_api.csproj.CoreCompileInputs.cache
+D:\Diego Rodriguez\BAACK\BAACK-2EV\obj\Debug\net8.0\reto2_api.MvcApplicationPartsAssemblyInfo.cs
+D:\Diego Rodriguez\BAACK\BAACK-2EV\obj\Debug\net8.0\reto2_api.MvcApplicationPartsAssemblyInfo.cache
+D:\Diego Rodriguez\BAACK\BAACK-2EV\obj\Debug\net8.0\reto2_api.sourcelink.json
+D:\Diego Rodriguez\BAACK\BAACK-2EV\obj\Debug\net8.0\staticwebassets.build.json
+D:\Diego Rodriguez\BAACK\BAACK-2EV\obj\Debug\net8.0\staticwebassets.development.json
+D:\Diego Rodriguez\BAACK\BAACK-2EV\obj\Debug\net8.0\staticwebassets\msbuild.reto2_api.Microsoft.AspNetCore.StaticWebAssets.props
+D:\Diego Rodriguez\BAACK\BAACK-2EV\obj\Debug\net8.0\staticwebassets\msbuild.build.reto2_api.props
+D:\Diego Rodriguez\BAACK\BAACK-2EV\obj\Debug\net8.0\staticwebassets\msbuild.buildMultiTargeting.reto2_api.props
+D:\Diego Rodriguez\BAACK\BAACK-2EV\obj\Debug\net8.0\staticwebassets\msbuild.buildTransitive.reto2_api.props
+D:\Diego Rodriguez\BAACK\BAACK-2EV\obj\Debug\net8.0\staticwebassets.pack.json
+D:\Diego Rodriguez\BAACK\BAACK-2EV\obj\Debug\net8.0\scopedcss\bundle\reto2_api.styles.css
+D:\Diego Rodriguez\BAACK\BAACK-2EV\obj\Debug\net8.0\reto2_api.csproj.Up2Date
+D:\Diego Rodriguez\BAACK\BAACK-2EV\obj\Debug\net8.0\reto2_api.dll
+D:\Diego Rodriguez\BAACK\BAACK-2EV\obj\Debug\net8.0\refint\reto2_api.dll
+D:\Diego Rodriguez\BAACK\BAACK-2EV\obj\Debug\net8.0\reto2_api.pdb
+D:\Diego Rodriguez\BAACK\BAACK-2EV\obj\Debug\net8.0\reto2_api.genruntimeconfig.cache
+D:\Diego Rodriguez\BAACK\BAACK-2EV\obj\Debug\net8.0\ref\reto2_api.dll

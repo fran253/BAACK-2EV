@@ -73,13 +73,5 @@ namespace RestauranteAPI.Controllers
            await _rolService.DeleteAsync(id);
            return NoContent();
        }
-
-       // Inicializar datos de prueba
-       [HttpPost("inicializar")]
-       public async Task<IActionResult> InicializarDatos()
-       {
-           await _rolService.InicializarDatosAsync();
-           return Ok("datos inicializados correctamente.");
-       }
    }
 }

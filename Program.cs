@@ -3,7 +3,7 @@ using reto2_api.Repositories;
 using reto2_api.Service;
 
 var builder = WebApplication.CreateBuilder(args);
-var connectionString = builder.Configuration.GetConnectionString("reto2_api");
+var connectionString = builder.Configuration.GetConnectionString("AcademIQbbdd");
 
 //REPOSITORY
 builder.Services.AddScoped<ICursoRepository, CursoRepository>(provider =>
@@ -42,8 +42,7 @@ new ResultadoRepository(connectionString));
 builder.Services.AddScoped<IUsuarioCursoRepository, UsuarioCursoRepository>(provider =>
 new UsuarioCursoRepository(connectionString));
 
-builder.Services.AddScoped<IArchivoUsuarioRepository, ArchivoUsuarioRepository>(provider =>
-new ArchivoUsuarioRepository(connectionString));
+
 
 
 
@@ -61,7 +60,6 @@ builder.Services.AddScoped<IPreguntaService,PreguntaService>();
 builder.Services.AddScoped<IOpcionService,OpcionService>();
 builder.Services.AddScoped<IResultadoService,ResultadoService>();
 builder.Services.AddScoped<IUsuarioCursoService,UsuarioCursoService>();
-builder.Services.AddScoped<IArchivoUsuarioService,ArchivoUsuarioService>();
 
 
 // Add services to the container.
@@ -71,7 +69,14 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowVueApp",
+        builder => builder
+            .WithOrigins("http://localhost:5174")
+            .AllowAnyMethod()
+            .AllowAnyHeader());
+});
 
 var app = builder.Build();
 
@@ -83,12 +88,9 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
+app.UseCors("AllowVueApp");
 app.UseAuthorization();
 
 app.MapControllers();
 
-
-
-//PlatoPrincipalController.InicializarDatos();
 app.Run();
