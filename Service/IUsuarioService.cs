@@ -10,5 +10,7 @@ namespace reto2_api.Service
         Task AddAsync(Usuario usuario);
         Task UpdateAsync(Usuario usuario);
         Task DeleteAsync(int id);
+        Task<Usuario?> LoginAsync(string gmail, string contraseña);
+
     }
 }
