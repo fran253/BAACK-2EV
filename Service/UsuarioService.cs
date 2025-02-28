@@ -45,6 +45,11 @@ namespace reto2_api.Service
             await _usuarioRepository.DeleteAsync(id);
         }
 
+        public async Task<Usuario?> LoginAsync(string gmail, string contraseña)
+        {
+            return await _usuarioRepository.LoginByGmailAsync(gmail, contraseña);
+        }
+
 
     }
 }

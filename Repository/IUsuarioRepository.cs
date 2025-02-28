@@ -9,5 +9,7 @@ namespace reto2_api.Repositories
         Task AddAsync(Usuario usuario);
         Task UpdateAsync(Usuario usuario);
         Task<bool> DeleteAsync(int idUsuario);
+        Task<Usuario?> LoginByGmailAsync(string gmail, string contraseña);
+
     }
 }

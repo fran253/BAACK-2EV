@@ -16,6 +16,7 @@ namespace reto2_api.Controllers
            _usuarioService = usuarioService;
        }
 
+       // GET: api/Usuario
        [HttpGet]
        public async Task<ActionResult<List<Usuario>>> GetUsuarios()
        {
@@ -23,6 +24,7 @@ namespace reto2_api.Controllers
            return Ok(usuarios);
        }
 
+       // GET: api/Usuario/5
        [HttpGet("{id}")]
        public async Task<ActionResult<Usuario>> GetUsuario(int id)
        {
@@ -34,7 +36,7 @@ namespace reto2_api.Controllers
            return Ok(usuario);
        }
 
-       // Crear un nuevo usuario
+       // POST: api/Usuario
        [HttpPost]
        public async Task<ActionResult<Usuario>> CreateUsuario(Usuario usuario)
        {
@@ -42,7 +44,7 @@ namespace reto2_api.Controllers
            return CreatedAtAction(nameof(GetUsuario), new { id = usuario.IdUsuario }, usuario);
        }
 
-       // Actualizar un usuario
+       // PUT: api/Usuario/5
        [HttpPut("{id}")]
        public async Task<IActionResult> UpdateUsuario(int id, Usuario updatedUsuario)
        {
@@ -52,19 +54,18 @@ namespace reto2_api.Controllers
                return NotFound();
            }
 
-           // Actualizar el usuario existente
            existingUsuario.Nombre = updatedUsuario.Nombre;
            existingUsuario.Apellido = updatedUsuario.Apellido;
            existingUsuario.Gmail = updatedUsuario.Gmail;
            existingUsuario.Telefono = updatedUsuario.Telefono;
            existingUsuario.Contraseña = updatedUsuario.Contraseña;
-           existingUsuario.Rol.IdRol = updatedUsuario.Rol.IdRol;
+           existingUsuario.IdRol = updatedUsuario.IdRol;
 
            await _usuarioService.UpdateAsync(existingUsuario);
            return NoContent();
        }
 
-       // Eliminar un usuario
+       // DELETE: api/Usuario/5
        [HttpDelete("{id}")]
        public async Task<IActionResult> DeleteUsuario(int id)
        {
@@ -77,6 +78,34 @@ namespace reto2_api.Controllers
            return NoContent();
        }
 
+       // POST: api/Usuario/login
+       [HttpPost("login")]
+       public async Task<ActionResult<Usuario>> Login([FromBody] LoginDto loginDto)
+       {
+           var usuario = await _usuarioService.LoginAsync(loginDto.Email, loginDto.Password);
+           
+           if (usuario == null)
+           {
+               return Unauthorized(new { message = "Credenciales inválidas" });
+           }
+           
+           return Ok(usuario);
+       }
 
+       // POST: api/Usuario/verificar-email
+       [HttpGet("verificar-email")]
+       public async Task<ActionResult<bool>> VerificarEmail([FromQuery] string email)
+       {
+           var usuarios = await _usuarioService.GetAllUsuariosAsync();
+           var existe = usuarios.Any(u => u.Gmail == email);
+           return Ok(existe);
+       }
+   }
+
+   // DTO para login
+   public class LoginDto
+   {
+       public string Email { get; set; }
+       public string Password { get; set; }
    }
 }

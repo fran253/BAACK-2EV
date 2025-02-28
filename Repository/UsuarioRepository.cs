@@ -144,5 +144,40 @@ namespace reto2_api.Repositories
             }
         }
 
+// Método para login por Gmail
+public async Task<Usuario> LoginByGmailAsync(string gmail, string contraseña)
+{
+    using (var connection = new MySqlConnection(_connectionString))
+    {
+        await connection.OpenAsync();
+
+        string query = "SELECT idUsuario, nombre, apellidos, gmail, telefono, contraseña, idRol FROM Usuario WHERE gmail = @Gmail AND contraseña = @Contraseña";
+        using (var command = new MySqlCommand(query, connection))
+        {
+            command.Parameters.AddWithValue("@Gmail", gmail);
+            command.Parameters.AddWithValue("@Contraseña", contraseña);
+
+            using (var reader = await command.ExecuteReaderAsync())
+            {
+                if (await reader.ReadAsync())
+                {
+                    return new Usuario
+                    {
+                        IdUsuario = reader.GetInt32(0),
+                        Nombre = reader.GetString(1),
+                        Apellido = reader.GetString(2),
+                        Gmail = reader.GetString(3),
+                        Telefono = reader.GetString(4),
+                        Contraseña = reader.GetString(5),
+                        IdRol = reader.GetInt32(6)
+                    };
+                }
+            }
+        }
+    }
+    return null;
+}
+        
+
     }
 }

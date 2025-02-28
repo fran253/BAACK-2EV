@@ -65,17 +65,18 @@ builder.Services.AddScoped<IUsuarioCursoService,UsuarioCursoService>();
 // Add services to the container.
 
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowVueApp",
-        builder => builder
-            .WithOrigins("http://localhost:5174")
-            .AllowAnyMethod()
-            .AllowAnyHeader());
+    options.AddPolicy("AllowSpecificOrigin",
+        builder => builder.WithOrigins("http://localhost:5167")
+                          .AllowAnyMethod()
+                          .AllowAnyHeader());
+
 });
 
 var app = builder.Build();
@@ -88,7 +89,10 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-app.UseCors("AllowVueApp");
+app.UseCors("AllowSpecificOrigin");
+
+
+
 app.UseAuthorization();
 
 app.MapControllers();
