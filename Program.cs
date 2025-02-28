@@ -76,6 +76,7 @@ builder.Services.AddCors(options =>
         builder => builder.WithOrigins("http://localhost:5167")
                           .AllowAnyMethod()
                           .AllowAnyHeader());
+
 });
 
 var app = builder.Build();
@@ -91,11 +92,9 @@ app.UseHttpsRedirection();
 app.UseCors("AllowSpecificOrigin");
 
 
+
 app.UseAuthorization();
 
 app.MapControllers();
 
-
-
-//PlatoPrincipalController.InicializarDatos();
 app.Run();
