@@ -43,5 +43,10 @@ namespace reto2_api.Service
             }
             await _comentarioRepository.DeleteAsync(id);
         }
+
+        public async Task<List<Comentario>> GetByArchivoIdAsync(int idArchivo)
+        {
+            return await _comentarioRepository.GetByArchivoIdAsync(idArchivo);
+        }
     }
 }

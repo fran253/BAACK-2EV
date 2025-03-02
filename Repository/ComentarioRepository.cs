@@ -135,5 +135,41 @@ public async Task<List<Comentario>> GetAllAsync()
                 }
             }
         }
+
+        public async Task<List<Comentario>> GetByArchivoIdAsync(int idArchivo)
+        {
+            var comentarios = new List<Comentario>();
+
+            using (var connection = new MySqlConnection(_connectionString))
+            {
+                await connection.OpenAsync();
+
+                string query = "SELECT idComentario, contenido, fechaCreacion, idUsuario, idArchivo FROM Comentario WHERE idArchivo = @IdArchivo ORDER BY fechaCreacion DESC";
+                
+                using (var command = new MySqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@IdArchivo", idArchivo);
+
+                    using (var reader = await command.ExecuteReaderAsync())
+                    {
+                        while (await reader.ReadAsync())
+                        {
+                            var comentario = new Comentario
+                            {
+                                IdComentario = reader.GetInt32(0),
+                                Contenido = reader.GetString(1),
+                                FechaCreacion = reader.IsDBNull(2) ? DateTime.UtcNow : reader.GetDateTime(2),
+                                IdUsuario = reader.GetInt32(3),
+                                IdArchivo = reader.GetInt32(4)
+                            };
+
+                            comentarios.Add(comentario);
+                        }
+                    }
+                }
+            }
+            return comentarios;
+        }
+
     }
 }

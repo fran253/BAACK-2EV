@@ -8,5 +8,6 @@ namespace reto2_api.Service
         Task AddAsync(Comentario comentario);
         Task UpdateAsync(Comentario comentario);
         Task DeleteAsync(int id);
+        Task<List<Comentario>> GetByArchivoIdAsync(int idArchivo);
     }
 }
