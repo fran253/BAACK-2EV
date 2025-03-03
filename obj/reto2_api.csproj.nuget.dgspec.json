@@ -1,25 +1,31 @@
 {
   "format": 1,
   "restore": {
-    "C:\\01.RETO-BACK\\reto2_api.csproj": {}
+    "D:\\FRAN\\RETO 2\\BACK\\reto2_api.csproj": {}
   },
   "projects": {
-    "C:\\01.RETO-BACK\\reto2_api.csproj": {
+    "D:\\FRAN\\RETO 2\\BACK\\reto2_api.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\01.RETO-BACK\\reto2_api.csproj",
+        "projectUniqueName": "D:\\FRAN\\RETO 2\\BACK\\reto2_api.csproj",
         "projectName": "reto2_api",
-        "projectPath": "C:\\01.RETO-BACK\\reto2_api.csproj",
-        "packagesPath": "C:\\Users\\franr\\.nuget\\packages\\",
-        "outputPath": "C:\\01.RETO-BACK\\obj\\",
+        "projectPath": "D:\\FRAN\\RETO 2\\BACK\\reto2_api.csproj",
+        "packagesPath": "C:\\Users\\S2-PC00\\.nuget\\packages\\",
+        "outputPath": "D:\\FRAN\\RETO 2\\BACK\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\franr\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\S2-PC00\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -75,7 +81,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.403/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.302/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

@@ -99,5 +99,54 @@ namespace reto2_api.Controllers
 
             return Ok(archivos);
         }
+        // ✅ Nuevo método para subir archivos físicos
+    [HttpPost("upload")]
+    public async Task<IActionResult> UploadArchivo(
+        IFormFile archivo, 
+        [FromForm] string titulo, 
+        [FromForm] string tipo, 
+        [FromForm] int idUsuario, 
+        [FromForm] int idTemario)
+    {
+        if (archivo == null || archivo.Length == 0)
+        {
+            return BadRequest("No se ha subido ningún archivo.");
+        }
+
+        // Ruta donde se guardará el archivo
+        var uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "archivos");
+        if (!Directory.Exists(uploadsFolder))
+        {
+            Directory.CreateDirectory(uploadsFolder);
+        }
+
+        var fileName = $"{Guid.NewGuid()}_{archivo.FileName}";
+        var filePath = Path.Combine(uploadsFolder, fileName);
+
+        // Guardar archivo en el servidor
+        using (var stream = new FileStream(filePath, FileMode.Create))
+        {
+            await archivo.CopyToAsync(stream);
+        }
+
+        // URL accesible para el archivo
+        var fileUrl = $"/archivos/{fileName}";
+
+        // Guardar en la base de datos
+        var nuevoArchivo = new Archivo
+        {
+            Titulo = titulo,
+            Url = fileUrl,
+            Tipo = tipo,
+            FechaCreacion = DateTime.UtcNow,
+            IdUsuario = idUsuario,
+            IdTemario = idTemario
+        };
+
+        await _serviceArchivo.AddAsync(nuevoArchivo);
+
+        return Ok(new { mensaje = "Archivo subido correctamente", archivoUrl = fileUrl });
+    }
+
    }
 }
