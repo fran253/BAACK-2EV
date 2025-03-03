@@ -1,8 +1,12 @@
 {
   "Files": [
     {
-      "Id": "D:\\FRAN\\RETO 2\\BACK\\wwwroot\\archivos\\ea7d9ed5-d661-41a2-98d7-81de70081da4_images.jpg",
+      "Id": "C:\\Users\\S2-PC00\\Downloads\\BAACK-2EV\\wwwroot\\archivos\\ea7d9ed5-d661-41a2-98d7-81de70081da4_images.jpg",
       "PackagePath": "staticwebassets\\archivos\\ea7d9ed5-d661-41a2-98d7-81de70081da4_images.jpg"
+    },
+    {
+      "Id": "C:\\Users\\S2-PC00\\Downloads\\BAACK-2EV\\wwwroot\\archivos\\f1bfdf90-9d64-4b09-89ea-8b3a1636f7db_images.jpg",
+      "PackagePath": "staticwebassets\\archivos\\f1bfdf90-9d64-4b09-89ea-8b3a1636f7db_images.jpg"
     },
     {
       "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.build.reto2_api.props",

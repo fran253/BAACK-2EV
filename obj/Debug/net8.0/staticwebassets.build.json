@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "tay2np+WFiTdCyOtvnhIcOP3yEsmj8axr/AR23FIiYo=",
+  "Hash": "Cgm0EFqlors4RUO1T0wqnQAWDX9f/XM/k0IXR65dfQk=",
   "Source": "reto2_api",
   "BasePath": "_content/reto2_api",
   "Mode": "Default",
@@ -10,17 +10,17 @@
     {
       "Name": "reto2_api\\wwwroot",
       "Source": "reto2_api",
-      "ContentRoot": "D:\\FRAN\\RETO 2\\BACK\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\S2-PC00\\Downloads\\BAACK-2EV\\wwwroot\\",
       "BasePath": "_content/reto2_api",
       "Pattern": "**"
     }
   ],
   "Assets": [
     {
-      "Identity": "D:\\FRAN\\RETO 2\\BACK\\wwwroot\\archivos\\ea7d9ed5-d661-41a2-98d7-81de70081da4_images.jpg",
+      "Identity": "C:\\Users\\S2-PC00\\Downloads\\BAACK-2EV\\wwwroot\\archivos\\ea7d9ed5-d661-41a2-98d7-81de70081da4_images.jpg",
       "SourceId": "reto2_api",
       "SourceType": "Discovered",
-      "ContentRoot": "D:\\FRAN\\RETO 2\\BACK\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\S2-PC00\\Downloads\\BAACK-2EV\\wwwroot\\",
       "BasePath": "_content/reto2_api",
       "RelativePath": "archivos/ea7d9ed5-d661-41a2-98d7-81de70081da4_images.jpg",
       "AssetKind": "All",
@@ -34,6 +34,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\archivos\\ea7d9ed5-d661-41a2-98d7-81de70081da4_images.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\S2-PC00\\Downloads\\BAACK-2EV\\wwwroot\\archivos\\f1bfdf90-9d64-4b09-89ea-8b3a1636f7db_images.jpg",
+      "SourceId": "reto2_api",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\S2-PC00\\Downloads\\BAACK-2EV\\wwwroot\\",
+      "BasePath": "_content/reto2_api",
+      "RelativePath": "archivos/f1bfdf90-9d64-4b09-89ea-8b3a1636f7db_images.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\archivos\\f1bfdf90-9d64-4b09-89ea-8b3a1636f7db_images.jpg"
     }
   ]
 }
