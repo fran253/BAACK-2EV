@@ -1,11 +1,35 @@
 {
   "Files": [
     {
-      "Id": "C:\\Users\\S2-PC00\\Downloads\\BAACK-2EV\\wwwroot\\archivos\\ea7d9ed5-d661-41a2-98d7-81de70081da4_images.jpg",
+      "Id": "C:\\001.RetoBack\\wwwroot\\archivos\\2421ba1c-862e-46d4-acaa-998840cb5eaa.pdf",
+      "PackagePath": "staticwebassets\\archivos\\2421ba1c-862e-46d4-acaa-998840cb5eaa.pdf"
+    },
+    {
+      "Id": "C:\\001.RetoBack\\wwwroot\\archivos\\281cf326-f083-4601-814b-b04060d4f6a9.PNG",
+      "PackagePath": "staticwebassets\\archivos\\281cf326-f083-4601-814b-b04060d4f6a9.PNG"
+    },
+    {
+      "Id": "C:\\001.RetoBack\\wwwroot\\archivos\\696cd814-b96e-4c8f-b722-30025785db70.png",
+      "PackagePath": "staticwebassets\\archivos\\696cd814-b96e-4c8f-b722-30025785db70.png"
+    },
+    {
+      "Id": "C:\\001.RetoBack\\wwwroot\\archivos\\929e9b11-49c0-4bd4-9225-a4406c92bdfa.PNG",
+      "PackagePath": "staticwebassets\\archivos\\929e9b11-49c0-4bd4-9225-a4406c92bdfa.PNG"
+    },
+    {
+      "Id": "C:\\001.RetoBack\\wwwroot\\archivos\\946a3810-d7bc-4d2f-9ff7-cb77da380c33.txt",
+      "PackagePath": "staticwebassets\\archivos\\946a3810-d7bc-4d2f-9ff7-cb77da380c33.txt"
+    },
+    {
+      "Id": "C:\\001.RetoBack\\wwwroot\\archivos\\998c83b1-0f10-4f74-af43-3dcf3a325a63_fnaf1.PNG",
+      "PackagePath": "staticwebassets\\archivos\\998c83b1-0f10-4f74-af43-3dcf3a325a63_fnaf1.PNG"
+    },
+    {
+      "Id": "C:\\001.RetoBack\\wwwroot\\archivos\\ea7d9ed5-d661-41a2-98d7-81de70081da4_images.jpg",
       "PackagePath": "staticwebassets\\archivos\\ea7d9ed5-d661-41a2-98d7-81de70081da4_images.jpg"
     },
     {
-      "Id": "C:\\Users\\S2-PC00\\Downloads\\BAACK-2EV\\wwwroot\\archivos\\f1bfdf90-9d64-4b09-89ea-8b3a1636f7db_images.jpg",
+      "Id": "C:\\001.RetoBack\\wwwroot\\archivos\\f1bfdf90-9d64-4b09-89ea-8b3a1636f7db_images.jpg",
       "PackagePath": "staticwebassets\\archivos\\f1bfdf90-9d64-4b09-89ea-8b3a1636f7db_images.jpg"
     },
     {
