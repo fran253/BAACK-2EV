@@ -177,5 +177,42 @@ namespace reto2_api.Repositories
 
             return archivos;
         }
+
+        public async Task<List<Archivo>> GetByUsuarioIdAsync(int idUsuario)
+        {
+            var archivos = new List<Archivo>();
+
+            using (var connection = new MySqlConnection(_connectionString))
+            {
+                await connection.OpenAsync();
+
+                string query = "SELECT idArchivo, titulo, url, tipo, fechaCreacion, idUsuario, idTemario FROM Archivo WHERE idUsuario = @idUsuario";
+                using (var command = new MySqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@idUsuario", idUsuario);
+
+                    using (var reader = await command.ExecuteReaderAsync())
+                    {
+                        while (await reader.ReadAsync())
+                        {
+                            archivos.Add(new Archivo
+                            {
+                                IdArchivo = reader.GetInt32(0),
+                                Titulo = reader.GetString(1),
+                                Url = reader.GetString(2),
+                                Tipo = reader.GetString(3),
+                                FechaCreacion = reader.GetDateTime(4),
+                                IdUsuario = reader.GetInt32(5),
+                                IdTemario = reader.GetInt32(6)
+                            });
+                        }
+                    }
+                }
+            }
+
+            return archivos;
+        }
+
+        
     }
 }

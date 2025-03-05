@@ -99,25 +99,27 @@ public async Task<List<Comentario>> GetAllAsync()
             }
         }
 
-        public async Task UpdateAsync(Comentario comentario)
+        // Fixed UpdateAsync method for ComentarioRepository.cs
+    public async Task UpdateAsync(Comentario comentario)
+    {
+        using (var connection = new MySqlConnection(_connectionString))
         {
-            using (var connection = new MySqlConnection(_connectionString))
+            await connection.OpenAsync();
+
+            string query = "UPDATE Comentario SET contenido = @Contenido, fechaCreacion = @FechaCreacion, idUsuario = @IdUsuario, idArchivo = @IdArchivo WHERE idComentario = @IdComentario";
+            using (var command = new MySqlCommand(query, connection))
             {
-                await connection.OpenAsync();
+                // Fix: Correct parameter should be IdComentario, not IdArchivo
+                command.Parameters.AddWithValue("@IdComentario", comentario.IdComentario);
+                command.Parameters.AddWithValue("@Contenido", comentario.Contenido);
+                command.Parameters.AddWithValue("@FechaCreacion", comentario.FechaCreacion);
+                command.Parameters.AddWithValue("@IdUsuario", comentario.IdUsuario);
+                command.Parameters.AddWithValue("@IdArchivo", comentario.IdArchivo);
 
-                string query = "UPDATE Comentario SET contenido = @Contenido, fechaCreacion = @FechaCreacion, idUsuario = @IdUsuario, idArchivo = @IdArchivo WHERE idComentario = @IdComentario";
-                using (var command = new MySqlCommand(query, connection))
-                {
-                    command.Parameters.AddWithValue("@IdComentario", comentario.IdArchivo);
-                    command.Parameters.AddWithValue("@Contenido", comentario.Contenido);
-                    command.Parameters.AddWithValue("@FechaCreacion", comentario.FechaCreacion);
-                    command.Parameters.AddWithValue("@IdUsuario", comentario.IdUsuario);
-                    command.Parameters.AddWithValue("@IdArchivo", comentario.IdArchivo);
-
-                    await command.ExecuteNonQueryAsync();
-                }
+                await command.ExecuteNonQueryAsync();
             }
         }
+    }
 
         public async Task<bool> DeleteAsync(int id)
         {
@@ -135,5 +137,41 @@ public async Task<List<Comentario>> GetAllAsync()
                 }
             }
         }
+
+        public async Task<List<Comentario>> GetByArchivoIdAsync(int idArchivo)
+        {
+            var comentarios = new List<Comentario>();
+
+            using (var connection = new MySqlConnection(_connectionString))
+            {
+                await connection.OpenAsync();
+
+                string query = "SELECT idComentario, contenido, fechaCreacion, idUsuario, idArchivo FROM Comentario WHERE idArchivo = @IdArchivo ORDER BY fechaCreacion DESC";
+                
+                using (var command = new MySqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@IdArchivo", idArchivo);
+
+                    using (var reader = await command.ExecuteReaderAsync())
+                    {
+                        while (await reader.ReadAsync())
+                        {
+                            var comentario = new Comentario
+                            {
+                                IdComentario = reader.GetInt32(0),
+                                Contenido = reader.GetString(1),
+                                FechaCreacion = reader.IsDBNull(2) ? DateTime.UtcNow : reader.GetDateTime(2),
+                                IdUsuario = reader.GetInt32(3),
+                                IdArchivo = reader.GetInt32(4)
+                            };
+
+                            comentarios.Add(comentario);
+                        }
+                    }
+                }
+            }
+            return comentarios;
+        }
+
     }
 }

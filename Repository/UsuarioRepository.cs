@@ -98,7 +98,7 @@ namespace reto2_api.Repositories
                     command.Parameters.AddWithValue("@Gmail", usuario.Gmail);
                     command.Parameters.AddWithValue("@Telefono", usuario.Telefono);
                     command.Parameters.AddWithValue("@Contraseña", usuario.Contraseña);
-                    command.Parameters.AddWithValue("@IdRol", usuario.Rol.IdRol);
+                    command.Parameters.AddWithValue("@IdRol", usuario.IdRol);
 
                     await command.ExecuteNonQueryAsync();
                 }
@@ -120,7 +120,7 @@ namespace reto2_api.Repositories
                     command.Parameters.AddWithValue("@Gmail", usuario.Gmail);
                     command.Parameters.AddWithValue("@Telefono", usuario.Telefono);
                     command.Parameters.AddWithValue("@Contraseña", usuario.Contraseña);
-                    command.Parameters.AddWithValue("@IdRol", usuario.Rol.IdRol);
+                    command.Parameters.AddWithValue("@IdRol", usuario.IdRol);
 
                     await command.ExecuteNonQueryAsync();
                 }

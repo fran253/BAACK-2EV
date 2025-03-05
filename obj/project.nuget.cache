@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "aOECLB82XEw=",
+  "dgSpecHash": "dlmhH7DyLxg=",
   "success": true,
-  "projectFilePath": "C:\\1.RETO-Back2ev\\reto2_api.csproj",
+  "projectFilePath": "C:\\001.RetoBack\\reto2_api.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\franr\\.nuget\\packages\\azure.core\\1.38.0\\azure.core.1.38.0.nupkg.sha512",
     "C:\\Users\\franr\\.nuget\\packages\\azure.identity\\1.11.4\\azure.identity.1.11.4.nupkg.sha512",
@@ -76,7 +76,7 @@
       "code": "NU1603",
       "level": "Warning",
       "warningLevel": 1,
-      "message": "reto2_api depende de MySql.Data (>= 8.0.38), pero no se encontró MySql.Data 8.0.38. Se resolvió una mejor coincidencia aproximada de MySql.Data 8.1.0.",
+      "message": "reto2_api depends on MySql.Data (>= 8.0.38) but MySql.Data 8.0.38 was not found. An approximate best match of MySql.Data 8.1.0 was resolved.",
       "libraryId": "MySql.Data",
       "targetGraphs": [
         "net8.0"

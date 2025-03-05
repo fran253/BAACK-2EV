@@ -86,7 +86,7 @@ namespace reto2_api.Repositories
                 {
                     command.Parameters.AddWithValue("@Titulo", temario.Titulo);
                     command.Parameters.AddWithValue("@Descripcion", temario.Descripcion);
-                    command.Parameters.AddWithValue("@AsignaturaId", temario.IdAsignatura);
+                    command.Parameters.AddWithValue("@IdAsignatura", temario.IdAsignatura);
 
                     await command.ExecuteNonQueryAsync();
                 }

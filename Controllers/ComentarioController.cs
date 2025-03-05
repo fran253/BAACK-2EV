@@ -106,5 +106,19 @@ namespace reto2_api.Controllers
            await _serviceComentario.DeleteAsync(id);
            return NoContent();
        }
+
+       [HttpGet("archivo/{idArchivo}")]
+        public async Task<ActionResult<List<Comentario>>> GetComentariosByArchivo(int idArchivo)
+        {
+            try
+            {
+                var comentarios = await _serviceComentario.GetByArchivoIdAsync(idArchivo);
+                return Ok(comentarios);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Error interno del servidor: {ex.Message}");
+            }
+        }
    }
 }

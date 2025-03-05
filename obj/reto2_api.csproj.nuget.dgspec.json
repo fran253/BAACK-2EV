@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\1.RETO-Back2ev\\reto2_api.csproj": {}
+    "C:\\001.RetoBack\\reto2_api.csproj": {}
   },
   "projects": {
-    "C:\\1.RETO-Back2ev\\reto2_api.csproj": {
+    "C:\\001.RetoBack\\reto2_api.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\1.RETO-Back2ev\\reto2_api.csproj",
+        "projectUniqueName": "C:\\001.RetoBack\\reto2_api.csproj",
         "projectName": "reto2_api",
-        "projectPath": "C:\\1.RETO-Back2ev\\reto2_api.csproj",
+        "projectPath": "C:\\001.RetoBack\\reto2_api.csproj",
         "packagesPath": "C:\\Users\\franr\\.nuget\\packages\\",
-        "outputPath": "C:\\1.RETO-Back2ev\\obj\\",
+        "outputPath": "C:\\001.RetoBack\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\franr\\AppData\\Roaming\\NuGet\\NuGet.Config"
