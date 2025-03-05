@@ -52,5 +52,14 @@ namespace reto2_api.Service
 
             return await _archivoRepository.GetByTemarioIdAsync(idTemario);
         }
+
+        ///METODO ARCHIVOS DE UN USUARIO
+        public async Task<List<Archivo>> GetByUsuarioIdAsync(int idUsuario)
+        {
+            if (idUsuario <= 0)
+                throw new ArgumentException("el id del usuario debe ser un número positivo.", nameof(idUsuario));
+
+            return await _archivoRepository.GetByUsuarioIdAsync(idUsuario);
+        }
     }
 }

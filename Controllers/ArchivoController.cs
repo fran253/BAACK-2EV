@@ -66,7 +66,7 @@ namespace reto2_api.Controllers
                 existingArchivo.IdTemario = updatedArchivo.IdTemario;
 
                 await _serviceArchivo.UpdateAsync(existingArchivo);
-                return NoContent(); // Código 204, actualización exitosa sin contenido
+                return NoContent(); 
             }
             catch (Exception ex)
             {
@@ -106,7 +106,31 @@ namespace reto2_api.Controllers
                 
                 if (!System.IO.File.Exists(filePath))
                 {
-                    archivo.Url = null; // Evita URLs inválidas
+                    archivo.Url = null; 
+                }
+            }
+
+            return Ok(archivos);
+        }
+
+        ///METODO ARCHIVOS DE UN USUARIO
+        [HttpGet("usuario/{idUsuario}")]
+        public async Task<ActionResult<List<Archivo>>> GetByUsuarioId(int idUsuario)
+        {
+            var archivos = await _serviceArchivo.GetByUsuarioIdAsync(idUsuario);
+            
+            if (archivos == null || archivos.Count == 0)
+                return NotFound("No se encontraron archivos para este usuario.");
+
+            // Asegurar que los archivos existen antes de enviarlos al frontend
+            string archivosFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot");
+            foreach (var archivo in archivos)
+            {
+                string filePath = Path.Combine(archivosFolder, archivo.Url.TrimStart('/'));
+                
+                if (!System.IO.File.Exists(filePath))
+                {
+                    archivo.Url = null; 
                 }
             }
 
