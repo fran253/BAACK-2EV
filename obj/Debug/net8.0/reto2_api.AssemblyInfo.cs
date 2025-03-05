@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("reto2_api")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+1cb3f8fcbb0d6fe299c454d83dc5011c79556837")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+45d0c4765c79c84b19a3af831a78df5cdc08bd72")]
 [assembly: System.Reflection.AssemblyProductAttribute("reto2_api")]
 [assembly: System.Reflection.AssemblyTitleAttribute("reto2_api")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

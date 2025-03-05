@@ -99,25 +99,27 @@ public async Task<List<Comentario>> GetAllAsync()
             }
         }
 
-        public async Task UpdateAsync(Comentario comentario)
+        // Fixed UpdateAsync method for ComentarioRepository.cs
+    public async Task UpdateAsync(Comentario comentario)
+    {
+        using (var connection = new MySqlConnection(_connectionString))
         {
-            using (var connection = new MySqlConnection(_connectionString))
+            await connection.OpenAsync();
+
+            string query = "UPDATE Comentario SET contenido = @Contenido, fechaCreacion = @FechaCreacion, idUsuario = @IdUsuario, idArchivo = @IdArchivo WHERE idComentario = @IdComentario";
+            using (var command = new MySqlCommand(query, connection))
             {
-                await connection.OpenAsync();
+                // Fix: Correct parameter should be IdComentario, not IdArchivo
+                command.Parameters.AddWithValue("@IdComentario", comentario.IdComentario);
+                command.Parameters.AddWithValue("@Contenido", comentario.Contenido);
+                command.Parameters.AddWithValue("@FechaCreacion", comentario.FechaCreacion);
+                command.Parameters.AddWithValue("@IdUsuario", comentario.IdUsuario);
+                command.Parameters.AddWithValue("@IdArchivo", comentario.IdArchivo);
 
-                string query = "UPDATE Comentario SET contenido = @Contenido, fechaCreacion = @FechaCreacion, idUsuario = @IdUsuario, idArchivo = @IdArchivo WHERE idComentario = @IdComentario";
-                using (var command = new MySqlCommand(query, connection))
-                {
-                    command.Parameters.AddWithValue("@IdComentario", comentario.IdArchivo);
-                    command.Parameters.AddWithValue("@Contenido", comentario.Contenido);
-                    command.Parameters.AddWithValue("@FechaCreacion", comentario.FechaCreacion);
-                    command.Parameters.AddWithValue("@IdUsuario", comentario.IdUsuario);
-                    command.Parameters.AddWithValue("@IdArchivo", comentario.IdArchivo);
-
-                    await command.ExecuteNonQueryAsync();
-                }
+                await command.ExecuteNonQueryAsync();
             }
         }
+    }
 
         public async Task<bool> DeleteAsync(int id)
         {
