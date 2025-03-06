@@ -1,0 +1,41 @@
+version: '3.4'
+
+networks:
+  backend:
+    driver: bridge
+
+volumes:
+  mysql-data:
+    driver: local
+
+services:
+  bbdd:
+    container_name: mysqlContainer
+    image: mysql:8.0  
+    restart: always
+    ports:
+      - "3306:3306"  
+    networks:
+      - backend
+    volumes:
+      - mysql-data:/var/lib/mysql 
+    environment:
+      MYSQL_ROOT_PASSWORD: "FMfcgzQZTCqZPnrwkWsNZDNDsqtphSfr"
+      MYSQL_DATABASE: "Reto2ev"
+      MYSQL_USER: "root"
+      MYSQL_PASSWORD: "FMfcgzQZTCqZPnrwkWsNZDNDsqtphSfr"
+
+  api:
+    container_name: apiContainer
+    image: reto2_api:1.0  
+    build:
+      context: .
+      dockerfile: Dockerfile  
+    ports:
+      - "4444:80" 
+    networks:
+      - backend
+    depends_on:
+      - bbdd 
+    environment:
+      ConnectionStrings__DefaultConnection: "Server=mysqlContainer;Database=VideojuegosDB;User=fran;Password=G#tL9wX3r!sPzD7b;AllowPublicKeyRetrieval=True;SslMode=none"

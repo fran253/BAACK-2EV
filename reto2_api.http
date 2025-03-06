@@ -1,0 +1,6 @@
+@reto2_api_HostAddress = http://localhost:5167
+
+GET {{reto2_api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
