@@ -10,7 +10,7 @@ volumes:
 
 services:
   bbdd:
-    container_name: mysqlContainer
+    container_name: mysqlContainera
     image: mysql:8.0  
     restart: always
     ports:
@@ -32,7 +32,7 @@ services:
       context: .
       dockerfile: Dockerfile  
     ports:
-      - "4444:80" 
+      - "3333:80" 
     networks:
       - backend
     depends_on:
