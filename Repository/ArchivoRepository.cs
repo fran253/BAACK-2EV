@@ -48,6 +48,53 @@ namespace reto2_api.Repositories
             return archivos;
         }
 
+        //METODO MOSTRAR USUARIO QUE HA SUBIDO EL ARCHIVO
+        public async Task<List<Archivo>> GetNombreUsuarioAsync()
+        {
+            var archivos = new List<Archivo>();
+
+            using (var connection = new MySqlConnection(_connectionString))
+            {
+                await connection.OpenAsync();
+
+                string query = @"
+                    SELECT 
+                        a.idArchivo, a.titulo, a.url, a.tipo, a.fechaCreacion, 
+                        u.idUsuario, u.nombre, u.gmail
+                    FROM Archivo a
+                    INNER JOIN Usuario u ON a.idUsuario = u.idUsuario";
+
+                using (var command = new MySqlCommand(query, connection))
+                {
+                    using (var reader = await command.ExecuteReaderAsync())
+                    {
+                        while (await reader.ReadAsync())
+                        {
+                            var archivo = new Archivo
+                            {
+                                IdArchivo = reader.GetInt32(0),
+                                Titulo = reader.GetString(1),
+                                Url = reader.GetString(2),
+                                Tipo = reader.GetString(3),
+                                FechaCreacion = reader.GetDateTime(4),
+                                IdUsuario = reader.GetInt32(5),
+                                Usuario = new Usuario
+                                {
+                                    IdUsuario = reader.GetInt32(5),
+                                    Nombre = reader.GetString(6),
+                                    Gmail = reader.GetString(7)
+                                }
+                            };
+
+                            archivos.Add(archivo);
+                        }
+                    }
+                }
+            }
+            return archivos;
+        }
+
+
         public async Task<Archivo> GetByIdAsync(int id)
         {
             Archivo archivo = null;

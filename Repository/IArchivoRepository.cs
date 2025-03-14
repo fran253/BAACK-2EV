@@ -3,6 +3,7 @@ namespace reto2_api.Repositories
     public interface IArchivoRepository
     {
         Task<List<Archivo>> GetAllAsync();
+        Task<List<Archivo>> GetNombreUsuarioAsync();
         Task<Archivo?> GetByIdAsync(int id);
         Task<List<Archivo>> GetByTipoAsync(string tipo); //Solo tipo
         Task<List<Archivo>> GetByTipoAndTemarioAsync(string tipo, int idTemario); //Tipo y temario

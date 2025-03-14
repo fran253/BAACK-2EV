@@ -4,6 +4,7 @@ namespace reto2_api.Service
     public interface IArchivoService
     {
         Task<List<Archivo>> GetAllAsync();
+        Task<List<Archivo>> GetNombreUsuarioAsync();
         Task<Archivo?> GetByIdAsync(int id);
         Task<List<Archivo>> GetByTipoAsync(string tipo);
         Task<List<Archivo>> GetByTipoAndTemarioAsync(string tipo, int idTemario);

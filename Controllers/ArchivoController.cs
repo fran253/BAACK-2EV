@@ -24,6 +24,13 @@ namespace reto2_api.Controllers
             return Ok(archivos);
         }
 
+        [HttpGet("NombreUsuario")]
+        public async Task<ActionResult<List<Archivo>>> GetNombreUsuario()
+        {
+            var archivos = await _serviceArchivo.GetNombreUsuarioAsync();
+            return Ok(archivos);
+        }
+
         [HttpGet("{id}")]
         public async Task<ActionResult<Archivo>> GetArchivo(int id)
         {

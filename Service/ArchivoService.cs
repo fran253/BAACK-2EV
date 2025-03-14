@@ -19,6 +19,11 @@ namespace reto2_api.Service
             return await _archivoRepository.GetAllAsync();
         }
 
+        public async Task<List<Archivo>> GetNombreUsuarioAsync()
+        {
+            return await _archivoRepository.GetNombreUsuarioAsync();
+        }
+
         //METODO PARA EL FILTRADO POR TIPO DE ARCHIVO
         public async Task<Archivo?> GetByIdAsync(int id)
         {
