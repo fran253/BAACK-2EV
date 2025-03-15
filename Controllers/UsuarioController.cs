@@ -24,6 +24,15 @@ namespace reto2_api.Controllers
            return Ok(usuarios);
        }
 
+        [HttpGet("clasificacion")]
+        public async Task<IActionResult> ClasificacionUsuarios()
+        {
+            var usuariosTop = await _usuarioService.ClasificacionUsuarios();
+            return Ok(usuariosTop);
+        }
+
+
+
        // GET: api/Usuario/5
        [HttpGet("{id}")]
        public async Task<ActionResult<Usuario>> GetUsuario(int id)

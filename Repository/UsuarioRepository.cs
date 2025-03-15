@@ -49,6 +49,52 @@ namespace reto2_api.Repositories
             return usuarios;
         }
 
+        public async Task<List<dynamic>> ClasificacionUsuarios()
+        {
+            var usuariosTop = new List<dynamic>();
+
+            using (var connection = new MySqlConnection(_connectionString))
+            {
+                await connection.OpenAsync();
+
+                string query = @"
+                    SELECT u.idUsuario, u.nombre, u.apellidos, u.gmail, u.telefono, u.contraseña, u.idRol, 
+                        COUNT(a.idArchivo) AS total_archivos
+                    FROM Usuario u
+                    JOIN Archivo a ON u.idUsuario = a.idUsuario
+                    GROUP BY u.idUsuario, u.nombre, u.apellidos, u.gmail, u.telefono, u.contraseña, u.idRol
+                    ORDER BY total_archivos DESC
+                    LIMIT 5";
+
+                using (var command = new MySqlCommand(query, connection))
+                {
+                    using (var reader = await command.ExecuteReaderAsync())
+                    {
+                        while (await reader.ReadAsync())
+                        {
+                            var usuarioTop = new
+                            {
+                                IdUsuario = reader.GetInt32(0),
+                                Nombre = reader.GetString(1),
+                                Apellido = reader.GetString(2),
+                                Gmail = reader.GetString(3),
+                                Telefono = reader.GetString(4),
+                                Contraseña = reader.GetString(5),
+                                IdRol = reader.GetInt32(6),
+                                TotalArchivos = reader.GetInt32(7) // Se obtiene solo en la consulta, no en la entidad
+                            };
+
+                            usuariosTop.Add(usuarioTop);
+                        }
+                    }
+                }
+            }
+
+            return usuariosTop;
+        }
+
+
+
 
         public async Task<Usuario> GetByIdAsync(int id)
         {
