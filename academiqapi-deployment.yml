@@ -1,0 +1,45 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: academiqapi
+  annotations:
+    service.beta.kubernetes.io/aws-load-balancer-backend-protocol: http
+    service.beta.kubernetes.io/aws-load-balancer-ssl-cert: arn:aws:acm:us-east-1:725628648316:certificate/5d0262dd-124c-43e0-90c1-c0bb7303587d
+    # Only run TLS on the port named "https" below.
+    service.beta.kubernetes.io/aws-load-balancer-ssl-ports: "https"
+spec:
+  selector:
+    app: academiq-api
+  ports:
+  - name: http
+    port: 8080
+    targetPort: 8080
+  - name: https
+    port: 443
+    targetPort: 8080
+  type: LoadBalancer
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: academiq-api-deploy
+  labels:
+    app: academiq-api
+spec:
+  selector:
+    matchLabels:
+      app: academiq-api
+      tier: backend
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: academiq-api
+        tier: backend
+    spec:
+      containers:
+      - name: academiq-api
+        image: diegosv1/back:latest
+        ports:
+        - containerPort: 8080
