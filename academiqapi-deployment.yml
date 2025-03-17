@@ -4,7 +4,7 @@ metadata:
   name: academiqapi
   annotations:
     service.beta.kubernetes.io/aws-load-balancer-backend-protocol: http
-    service.beta.kubernetes.io/aws-load-balancer-ssl-cert: arn:aws:acm:us-east-1:725628648316:certificate/5d0262dd-124c-43e0-90c1-c0bb7303587d
+    service.beta.kubernetes.io/aws-load-balancer-ssl-cert: arn:aws:acm:us-east-1:499779885172:certificate/5de42f1e-6b08-4c68-8036-7c2f84c9617f
     # Only run TLS on the port named "https" below.
     service.beta.kubernetes.io/aws-load-balancer-ssl-ports: "https"
 spec:
