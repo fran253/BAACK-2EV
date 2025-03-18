@@ -1,6 +1,10 @@
 using Microsoft.AspNetCore.Mvc;
 using reto2_api.Repositories;
 using reto2_api.Service;
+<<<<<<< HEAD
+=======
+using Microsoft.AspNetCore.Http.Features;
+>>>>>>> 97ef478 (Subir archivos grandes)
 
 namespace reto2_api.Controllers
 {
@@ -106,9 +110,12 @@ namespace reto2_api.Controllers
             }
         }
 
+<<<<<<< HEAD
 
         ///Cambio necesario///
   
+=======
+>>>>>>> 97ef478 (Subir archivos grandes)
        [HttpDelete("{id}")]
        public async Task<IActionResult> DeleteArchivo(int id)
        {
@@ -169,8 +176,15 @@ namespace reto2_api.Controllers
             return Ok(archivos);
         }
 
+<<<<<<< HEAD
         // Nuevo método para subir archivos físicos
         [HttpPost("upload")]
+=======
+        // Método mejorado para subir archivos físicos
+      [HttpPost("upload")]
+        [RequestSizeLimit(500 * 1024 * 1024)] // Aumentado a 500 MB
+        [RequestFormLimits(MultipartBodyLengthLimit = 500 * 1024 * 1024)] // Aumentado a 500 MB
+>>>>>>> 97ef478 (Subir archivos grandes)
         public async Task<IActionResult> UploadArchivo(
             IFormFile archivo, 
             [FromForm] string titulo, 
@@ -178,6 +192,7 @@ namespace reto2_api.Controllers
             [FromForm] int idUsuario, 
             [FromForm] int idTemario)
         {
+<<<<<<< HEAD
             if (archivo == null || archivo.Length == 0)
             {
                 return BadRequest("No se ha subido ningún archivo.");
@@ -228,5 +243,63 @@ namespace reto2_api.Controllers
         }
 
 
+=======
+            try
+            {
+                if (archivo == null || archivo.Length == 0)
+                {
+                    return BadRequest("No se ha subido ningún archivo.");
+                }
+
+                // Ruta donde se guardará el archivo en wwwroot/archivos/
+                var uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "archivos");
+
+                // Crear la carpeta si no existe
+                if (!Directory.Exists(uploadsFolder))
+                {
+                    Directory.CreateDirectory(uploadsFolder);
+                }
+
+                // Guardar el archivo con su extensión real
+                var extension = Path.GetExtension(archivo.FileName);
+                if (string.IsNullOrEmpty(extension))
+                {
+                    return BadRequest("El archivo no tiene una extensión válida.");
+                }
+
+                var fileName = $"{Guid.NewGuid()}{extension}"; 
+                var filePath = Path.Combine(uploadsFolder, fileName);
+
+                // Guardar el archivo en el servidor usando un buffer más grande
+                const int bufferSize = 8192 * 1024; // Aumentado a 8MB buffer
+                using (var stream = new FileStream(filePath, FileMode.Create, FileAccess.Write, FileShare.None, bufferSize, true))
+                {
+                    await archivo.CopyToAsync(stream);
+                }
+
+                // Crear URL accesible
+                var fileUrl = $"/archivos/{fileName}";
+
+                // Guardar en la base de datos
+                var nuevoArchivo = new Archivo
+                {
+                    Titulo = titulo,
+                    Url = fileUrl,
+                    Tipo = tipo,
+                    FechaCreacion = DateTime.UtcNow,
+                    IdUsuario = idUsuario,
+                    IdTemario = idTemario
+                };
+
+                await _serviceArchivo.AddAsync(nuevoArchivo);
+
+                return Ok(new { mensaje = "Archivo subido correctamente", archivoUrl = fileUrl });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Error interno del servidor al subir archivo: {ex.Message}");
+            }
+        }
+>>>>>>> 97ef478 (Subir archivos grandes)
     }
 }
