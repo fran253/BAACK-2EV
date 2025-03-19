@@ -1,6 +1,7 @@
 using reto2_api.Controllers;
 using reto2_api.Repositories;
 using reto2_api.Service;
+using Microsoft.AspNetCore.HttpOverrides;
 
 var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("AcademIQbbdd");
@@ -42,11 +43,6 @@ new ResultadoRepository(connectionString));
 builder.Services.AddScoped<IUsuarioCursoRepository, UsuarioCursoRepository>(provider =>
 new UsuarioCursoRepository(connectionString));
 
-
-
-
-
-
 //SERVICE
 builder.Services.AddScoped<ICursoService, CursoService>();
 builder.Services.AddScoped<IAsignaturaService, AsignaturaService>();
@@ -61,37 +57,43 @@ builder.Services.AddScoped<IOpcionService,OpcionService>();
 builder.Services.AddScoped<IResultadoService,ResultadoService>();
 builder.Services.AddScoped<IUsuarioCursoService,UsuarioCursoService>();
 
-
 // Add services to the container.
-
 builder.Services.AddControllers();
-
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+// Configurar forwarded headers
+builder.Services.Configure<ForwardedHeadersOptions>(options =>
+{
+    options.ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto;
+});
 
+// Configurar CORS correctamente sin el trailing slash
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowSpecificOrigin",
-        builder => builder.WithOrigins("http://localhost:5167")
+        builder => builder.WithOrigins("https://academiq.retocsv.es")
                           .AllowAnyMethod()
                           .AllowAnyHeader());
-
 });
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+app.UseSwagger();
+app.UseSwaggerUI(c => 
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+    c.SwaggerEndpoint("/swagger/v1/swagger.json", "AcademIQ API v1");
+    c.RoutePrefix = "swagger";
+});
 
-app.UseHttpsRedirection();
+// Usar forwarded headers antes de cualquier middleware que dependa de la información de esquema/host
+app.UseForwardedHeaders();
+
+// Comentamos la redirección HTTPS ya que el LoadBalancer se encarga de esto
+// app.UseHttpsRedirection();
+
+// Aplicar CORS
 app.UseCors("AllowSpecificOrigin");
-
-
 
 app.UseAuthorization();
 
