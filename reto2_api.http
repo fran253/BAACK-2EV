@@ -1,4 +1,4 @@
-@reto2_api_HostAddress = http://localhost:5167
+@reto2_api_HostAddress = https://academiqapi.retocsv.es
 
 GET {{reto2_api_HostAddress}}/weatherforecast/
 Accept: application/json
