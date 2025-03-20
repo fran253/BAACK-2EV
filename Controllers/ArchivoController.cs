@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using reto2_api.Repositories;
 using reto2_api.Service;
+using Microsoft.AspNetCore.Http.Features;
 
 namespace reto2_api.Controllers
 {
@@ -23,15 +24,41 @@ namespace reto2_api.Controllers
             var archivos = await _serviceArchivo.GetAllAsync();
             return Ok(archivos);
         }
+
+
         [HttpGet("{id}")]
         public async Task<ActionResult<Archivo>> GetArchivo(int id)
         {
             var archivo = await _serviceArchivo.GetByIdAsync(id);
             if (archivo == null)
             {
-                return NotFound();
+                return NotFound();  
             }
             return Ok(archivo);
+        }
+
+        //METODO PARA EL FILTRADO POR TIPO DE ARCHIVO
+        [HttpGet("tipo/{tipo}/temario/{idTemario}")]
+        public async Task<ActionResult<List<Archivo>>> GetByTipoAndTemarioAsync(string tipo, int idTemario)
+        {
+            var archivos = await _serviceArchivo.GetByTipoAndTemarioAsync(tipo, idTemario);
+            
+            if (archivos == null || archivos.Count == 0)
+                return NotFound($"No se encontraron archivos de tipo '{tipo}' para el temario con ID {idTemario}.");
+
+            // Asegurar que los archivos existen antes de enviarlos al frontend
+            string archivosFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot");
+            foreach (var archivo in archivos)
+            {
+                string filePath = Path.Combine(archivosFolder, archivo.Url.TrimStart('/'));
+                
+                if (!System.IO.File.Exists(filePath))
+                {
+                    archivo.Url = null; 
+                }
+            }
+
+            return Ok(archivos);
         }
 
         [HttpPost]
@@ -66,7 +93,7 @@ namespace reto2_api.Controllers
                 existingArchivo.IdTemario = updatedArchivo.IdTemario;
 
                 await _serviceArchivo.UpdateAsync(existingArchivo);
-                return NoContent(); // Código 204, actualización exitosa sin contenido
+                return NoContent(); 
             }
             catch (Exception ex)
             {
@@ -74,9 +101,6 @@ namespace reto2_api.Controllers
             }
         }
 
-
-        ///Cambio necesario///
-  
        [HttpDelete("{id}")]
        public async Task<IActionResult> DeleteArchivo(int id)
        {
@@ -94,59 +118,115 @@ namespace reto2_api.Controllers
         public async Task<ActionResult<List<Archivo>>> GetByTemarioId(int idTemario)
         {
             var archivos = await _serviceArchivo.GetByTemarioIdAsync(idTemario);
+            
             if (archivos == null || archivos.Count == 0)
-                return NotFound("no se encontraron archivos para este temario.");
+                return NotFound("No se encontraron archivos para este temario.");
+
+            // Asegurar que los archivos existen antes de enviarlos al frontend
+            string archivosFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot");
+            foreach (var archivo in archivos)
+            {
+                string filePath = Path.Combine(archivosFolder, archivo.Url.TrimStart('/'));
+                
+                if (!System.IO.File.Exists(filePath))
+                {
+                    archivo.Url = null; 
+                }
+            }
 
             return Ok(archivos);
         }
-        // ✅ Nuevo método para subir archivos físicos
-    [HttpPost("upload")]
-    public async Task<IActionResult> UploadArchivo(
-        IFormFile archivo, 
-        [FromForm] string titulo, 
-        [FromForm] string tipo, 
-        [FromForm] int idUsuario, 
-        [FromForm] int idTemario)
-    {
-        if (archivo == null || archivo.Length == 0)
+
+        ///METODO ARCHIVOS DE UN USUARIO
+        [HttpGet("usuario/{idUsuario}")]
+        public async Task<ActionResult<List<Archivo>>> GetByUsuarioId(int idUsuario)
         {
-            return BadRequest("No se ha subido ningún archivo.");
+            var archivos = await _serviceArchivo.GetByUsuarioIdAsync(idUsuario);
+            
+            if (archivos == null || archivos.Count == 0)
+                return NotFound("No se encontraron archivos para este usuario.");
+
+            // Asegurar que los archivos existen antes de enviarlos al frontend
+            string archivosFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot");
+            foreach (var archivo in archivos)
+            {
+                string filePath = Path.Combine(archivosFolder, archivo.Url.TrimStart('/'));
+                
+                if (!System.IO.File.Exists(filePath))
+                {
+                    archivo.Url = null; 
+                }
+            }
+
+            return Ok(archivos);
         }
 
-        // Ruta donde se guardará el archivo
-        var uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "archivos");
-        if (!Directory.Exists(uploadsFolder))
+        // Método mejorado para subir archivos físicos
+      [HttpPost("upload")]
+        [RequestSizeLimit(500 * 1024 * 1024)] // Aumentado a 500 MB
+        [RequestFormLimits(MultipartBodyLengthLimit = 500 * 1024 * 1024)] // Aumentado a 500 MB
+        public async Task<IActionResult> UploadArchivo(
+            IFormFile archivo, 
+            [FromForm] string titulo, 
+            [FromForm] string tipo, 
+            [FromForm] int idUsuario, 
+            [FromForm] int idTemario)
         {
-            Directory.CreateDirectory(uploadsFolder);
+            try
+            {
+                if (archivo == null || archivo.Length == 0)
+                {
+                    return BadRequest("No se ha subido ningún archivo.");
+                }
+
+                // Ruta donde se guardará el archivo en wwwroot/archivos/
+                var uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "archivos");
+
+                // Crear la carpeta si no existe
+                if (!Directory.Exists(uploadsFolder))
+                {
+                    Directory.CreateDirectory(uploadsFolder);
+                }
+
+                // Guardar el archivo con su extensión real
+                var extension = Path.GetExtension(archivo.FileName);
+                if (string.IsNullOrEmpty(extension))
+                {
+                    return BadRequest("El archivo no tiene una extensión válida.");
+                }
+
+                var fileName = $"{Guid.NewGuid()}{extension}"; 
+                var filePath = Path.Combine(uploadsFolder, fileName);
+
+                // Guardar el archivo en el servidor usando un buffer más grande
+                const int bufferSize = 8192 * 1024; // Aumentado a 8MB buffer
+                using (var stream = new FileStream(filePath, FileMode.Create, FileAccess.Write, FileShare.None, bufferSize, true))
+                {
+                    await archivo.CopyToAsync(stream);
+                }
+
+                // Crear URL accesible
+                var fileUrl = $"/archivos/{fileName}";
+
+                // Guardar en la base de datos
+                var nuevoArchivo = new Archivo
+                {
+                    Titulo = titulo,
+                    Url = fileUrl,
+                    Tipo = tipo,
+                    FechaCreacion = DateTime.UtcNow,
+                    IdUsuario = idUsuario,
+                    IdTemario = idTemario
+                };
+
+                await _serviceArchivo.AddAsync(nuevoArchivo);
+
+                return Ok(new { mensaje = "Archivo subido correctamente", archivoUrl = fileUrl });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Error interno del servidor al subir archivo: {ex.Message}");
+            }
         }
-
-        var fileName = $"{Guid.NewGuid()}_{archivo.FileName}";
-        var filePath = Path.Combine(uploadsFolder, fileName);
-
-        // Guardar archivo en el servidor
-        using (var stream = new FileStream(filePath, FileMode.Create))
-        {
-            await archivo.CopyToAsync(stream);
-        }
-
-        // URL accesible para el archivo
-        var fileUrl = $"/archivos/{fileName}";
-
-        // Guardar en la base de datos
-        var nuevoArchivo = new Archivo
-        {
-            Titulo = titulo,
-            Url = fileUrl,
-            Tipo = tipo,
-            FechaCreacion = DateTime.UtcNow,
-            IdUsuario = idUsuario,
-            IdTemario = idTemario
-        };
-
-        await _serviceArchivo.AddAsync(nuevoArchivo);
-
-        return Ok(new { mensaje = "Archivo subido correctamente", archivoUrl = fileUrl });
     }
-
-   }
 }

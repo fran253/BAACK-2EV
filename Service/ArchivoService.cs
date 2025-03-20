@@ -19,9 +19,31 @@ namespace reto2_api.Service
             return await _archivoRepository.GetAllAsync();
         }
 
+        //METODO PARA EL FILTRADO POR TIPO DE ARCHIVO
         public async Task<Archivo?> GetByIdAsync(int id)
         {
             return await _archivoRepository.GetByIdAsync(id);
+        }
+
+        //Filtrar tipo
+        public async Task<List<Archivo>> GetByTipoAsync(string tipo)
+        {
+            if (tipo == null)
+                throw new ArgumentException("El tipo no puede ser nulo.", nameof(tipo));
+
+            return await _archivoRepository.GetByTipoAsync(tipo);
+        }
+
+        //filtrar tipo y temario
+        public async Task<List<Archivo>> GetByTipoAndTemarioAsync(string tipo, int idTemario)
+        {
+            if (tipo == null)
+                throw new ArgumentException("El tipo no puede ser nulo.", nameof(tipo));
+            
+            if (idTemario <= 0)
+                throw new ArgumentException("El id del temario debe ser un número positivo.", nameof(idTemario));
+
+            return await _archivoRepository.GetByTipoAndTemarioAsync(tipo, idTemario);
         }
 
         public async Task AddAsync(Archivo archivo)
@@ -51,6 +73,15 @@ namespace reto2_api.Service
                 throw new ArgumentException("el id del temario debe ser un número positivo.", nameof(idTemario));
 
             return await _archivoRepository.GetByTemarioIdAsync(idTemario);
+        }
+
+        ///METODO ARCHIVOS DE UN USUARIO
+        public async Task<List<Archivo>> GetByUsuarioIdAsync(int idUsuario)
+        {
+            if (idUsuario <= 0)
+                throw new ArgumentException("el id del usuario debe ser un número positivo.", nameof(idUsuario));
+
+            return await _archivoRepository.GetByUsuarioIdAsync(idUsuario);
         }
     }
 }

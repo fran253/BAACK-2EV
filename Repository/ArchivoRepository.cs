@@ -48,6 +48,7 @@ namespace reto2_api.Repositories
             return archivos;
         }
 
+
         public async Task<Archivo> GetByIdAsync(int id)
         {
             Archivo archivo = null;
@@ -80,6 +81,80 @@ namespace reto2_api.Repositories
                 }
             }
             return archivo;
+        }
+
+
+        // Método filtrar por tipo (Todos los temarios)
+        public async Task<List<Archivo>> GetByTipoAsync(string tipo)
+        {
+            var archivos = new List<Archivo>();
+
+            using (var connection = new MySqlConnection(_connectionString))
+            {
+                await connection.OpenAsync();
+
+                string query = "SELECT idArchivo, titulo, url, tipo, fechaCreacion, idUsuario, idTemario FROM Archivo WHERE tipo = @Tipo";
+                using (var command = new MySqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@Tipo", tipo);
+
+                    using (var reader = await command.ExecuteReaderAsync())
+                    {
+                        while (await reader.ReadAsync())
+                        {
+                            archivos.Add(new Archivo
+                            {
+                                IdArchivo = reader.GetInt32(0),
+                                Titulo = reader.GetString(1),
+                                Url = reader.GetString(2),
+                                Tipo = reader.GetString(3),
+                                FechaCreacion = reader.GetDateTime(4),
+                                IdUsuario = reader.GetInt32(5),
+                                IdTemario = reader.GetInt32(6)
+                            });
+                        }
+                    }
+                }
+            }
+
+            return archivos;
+        }
+
+        // Método filtrar por tipo (Temario especifico)
+        public async Task<List<Archivo>> GetByTipoAndTemarioAsync(string tipo, int idTemario)
+        {
+            var archivos = new List<Archivo>();
+
+            using (var connection = new MySqlConnection(_connectionString))
+            {
+                await connection.OpenAsync();
+
+                string query = "SELECT idArchivo, titulo, url, tipo, fechaCreacion, idUsuario, idTemario FROM Archivo WHERE tipo = @Tipo AND idTemario = @IdTemario";
+                using (var command = new MySqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@Tipo", tipo);
+                    command.Parameters.AddWithValue("@IdTemario", idTemario);
+
+                    using (var reader = await command.ExecuteReaderAsync())
+                    {
+                        while (await reader.ReadAsync())
+                        {
+                            archivos.Add(new Archivo
+                            {
+                                IdArchivo = reader.GetInt32(0),
+                                Titulo = reader.GetString(1),
+                                Url = reader.GetString(2),
+                                Tipo = reader.GetString(3),
+                                FechaCreacion = reader.GetDateTime(4),
+                                IdUsuario = reader.GetInt32(5),
+                                IdTemario = reader.GetInt32(6)
+                            });
+                        }
+                    }
+                }
+            }
+
+            return archivos;
         }
 
         public async Task AddAsync(Archivo archivo)
@@ -155,6 +230,41 @@ namespace reto2_api.Repositories
                 using (var command = new MySqlCommand(query, connection))
                 {
                     command.Parameters.AddWithValue("@IdTemario", idTemario);
+
+                    using (var reader = await command.ExecuteReaderAsync())
+                    {
+                        while (await reader.ReadAsync())
+                        {
+                            archivos.Add(new Archivo
+                            {
+                                IdArchivo = reader.GetInt32(0),
+                                Titulo = reader.GetString(1),
+                                Url = reader.GetString(2),
+                                Tipo = reader.GetString(3),
+                                FechaCreacion = reader.GetDateTime(4),
+                                IdUsuario = reader.GetInt32(5),
+                                IdTemario = reader.GetInt32(6)
+                            });
+                        }
+                    }
+                }
+            }
+
+            return archivos;
+        }
+
+        public async Task<List<Archivo>> GetByUsuarioIdAsync(int idUsuario)
+        {
+            var archivos = new List<Archivo>();
+
+            using (var connection = new MySqlConnection(_connectionString))
+            {
+                await connection.OpenAsync();
+
+                string query = "SELECT idArchivo, titulo, url, tipo, fechaCreacion, idUsuario, idTemario FROM Archivo WHERE idUsuario = @idUsuario";
+                using (var command = new MySqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@idUsuario", idUsuario);
 
                     using (var reader = await command.ExecuteReaderAsync())
                     {
