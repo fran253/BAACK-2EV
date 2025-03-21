@@ -96,15 +96,16 @@ builder.Services.Configure<FormOptions>(options =>
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowSpecificOrigin",
-        builder => builder.WithOrigins("https://academiq.retocsv.es")
+        builder => builder.WithOrigins("https://academiq.retocsv.es", "http://localhost:3000")
                           .AllowAnyMethod()
                           .AllowAnyHeader());
 });
 
 var app = builder.Build();
 
+// Habilitar Swagger
 app.UseSwagger();
-app.UseSwaggerUI(c => 
+app.UseSwaggerUI(c =>
 {
     c.SwaggerEndpoint("/swagger/v1/swagger.json", "AcademIQ API v1");
     c.RoutePrefix = "swagger";
@@ -113,24 +114,27 @@ app.UseSwaggerUI(c =>
 // Usar forwarded headers antes de cualquier middleware que dependa de la información de esquema/host
 app.UseForwardedHeaders();
 
-// Comentamos la redirección HTTPS ya que el LoadBalancer se encarga de esto
-// app.UseHttpsRedirection();
+// Redirección de HTTP a HTTPS en desarrollo
+if (app.Environment.IsDevelopment())
+{
+    app.UseHttpsRedirection();  // Redirige solicitudes HTTP a HTTPS
+}
 
 // Aplicar CORS
 app.UseCors("AllowSpecificOrigin");
 
+// Configuración de autorización
 app.UseAuthorization();
 
 // Configuración para servir archivos estáticos
 app.UseStaticFiles();
 
-// Configuración específica para la carpeta de archivos
+// Configuración para servir archivos en una carpeta específica
 app.UseStaticFiles(new StaticFileOptions
 {
-    FileProvider = new PhysicalFileProvider(
-        Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "archivos")),
+    FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "archivos")),
     RequestPath = "/archivos",
-    ServeUnknownFileTypes = true, 
+    ServeUnknownFileTypes = true,
     DefaultContentType = "application/octet-stream",
     OnPrepareResponse = ctx =>
     {
@@ -141,6 +145,7 @@ app.UseStaticFiles(new StaticFileOptions
     }
 });
 
+// Mapear los controladores
 app.MapControllers();
 
 app.Run();
