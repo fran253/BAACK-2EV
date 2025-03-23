@@ -40,6 +40,6 @@ spec:
     spec:
       containers:
       - name: academiq-api
-        image: diegosv1/back6:latest
+        image: diegosv1/back7:latest
         ports:
         - containerPort: 8080
