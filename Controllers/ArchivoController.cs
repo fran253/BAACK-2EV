@@ -2,6 +2,10 @@ using Microsoft.AspNetCore.Mvc;
 using reto2_api.Repositories;
 using reto2_api.Service;
 using Microsoft.AspNetCore.Http.Features;
+using Amazon.S3;
+using Amazon.S3.Transfer;
+using Amazon;
+
 
 namespace reto2_api.Controllers
 {
@@ -12,10 +16,12 @@ namespace reto2_api.Controllers
     private static List<Archivo> archivos = new List<Archivo>();
 
     private readonly IArchivoService _serviceArchivo;
+    private readonly IConfiguration _configuration;
 
-    public ArchivoController(IArchivoService service)
+    public ArchivoController(IArchivoService service, IConfiguration configuration)
         {
             _serviceArchivo = service;
+            _configuration = configuration;
         }
     
         [HttpGet]
@@ -128,18 +134,6 @@ namespace reto2_api.Controllers
             if (archivos == null || archivos.Count == 0)
                 return NotFound("No se encontraron archivos para este temario.");
 
-            // Asegurar que los archivos existen antes de enviarlos al frontend
-            string archivosFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot");
-            foreach (var archivo in archivos)
-            {
-                string filePath = Path.Combine(archivosFolder, archivo.Url.TrimStart('/'));
-                
-                if (!System.IO.File.Exists(filePath))
-                {
-                    archivo.Url = null; 
-                }
-            }
-
             return Ok(archivos);
         }
 
@@ -169,50 +163,44 @@ namespace reto2_api.Controllers
 
         // Método mejorado para subir archivos físicos
       [HttpPost("upload")]
-        [RequestSizeLimit(500 * 1024 * 1024)] // Aumentado a 500 MB
-        [RequestFormLimits(MultipartBodyLengthLimit = 500 * 1024 * 1024)] // Aumentado a 500 MB
+        [RequestSizeLimit(500 * 1024 * 1024)] // 500MB
+        [RequestFormLimits(MultipartBodyLengthLimit = 500 * 1024 * 1024)]
         public async Task<IActionResult> UploadArchivo(
-            IFormFile archivo, 
-            [FromForm] string titulo, 
-            [FromForm] string tipo, 
-            [FromForm] int idUsuario, 
+            IFormFile archivo,
+            [FromForm] string titulo,
+            [FromForm] string tipo,
+            [FromForm] int idUsuario,
             [FromForm] int idTemario)
         {
             try
             {
                 if (archivo == null || archivo.Length == 0)
-                {
                     return BadRequest("No se ha subido ningún archivo.");
-                }
 
-                // Ruta donde se guardará el archivo en wwwroot/archivos/
-                var uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "archivos");
+                // Config AWS
+                var awsAccessKey = _configuration["AWS:AccessKey"];
+                var awsSecretKey = _configuration["AWS:SecretKey"];
+                var bucketName = _configuration["AWS:BucketName"];
+                var region = Amazon.RegionEndpoint.GetBySystemName(_configuration["AWS:Region"]);
 
-                // Crear la carpeta si no existe
-                if (!Directory.Exists(uploadsFolder))
+                var s3Client = new AmazonS3Client(awsAccessKey, awsSecretKey, region);
+
+                // Crear nombre único para el archivo
+                var fileName = $"{Guid.NewGuid()}{Path.GetExtension(archivo.FileName)}";
+
+                var uploadRequest = new TransferUtilityUploadRequest
                 {
-                    Directory.CreateDirectory(uploadsFolder);
-                }
+                    InputStream = archivo.OpenReadStream(),
+                    Key = fileName,
+                    BucketName = bucketName,
+                    ContentType = archivo.ContentType,
+                };
 
-                // Guardar el archivo con su extensión real
-                var extension = Path.GetExtension(archivo.FileName);
-                if (string.IsNullOrEmpty(extension))
-                {
-                    return BadRequest("El archivo no tiene una extensión válida.");
-                }
+                using var fileTransferUtility = new TransferUtility(s3Client);
+                await fileTransferUtility.UploadAsync(uploadRequest);
 
-                var fileName = $"{Guid.NewGuid()}{extension}"; 
-                var filePath = Path.Combine(uploadsFolder, fileName);
-
-                // Guardar el archivo en el servidor usando un buffer más grande
-                const int bufferSize = 8192 * 1024; // Aumentado a 8MB buffer
-                using (var stream = new FileStream(filePath, FileMode.Create, FileAccess.Write, FileShare.None, bufferSize, true))
-                {
-                    await archivo.CopyToAsync(stream);
-                }
-
-                // Crear URL accesible
-                var fileUrl = $"/archivos/{fileName}";
+                // Crear URL pública
+                var fileUrl = $"https://{bucketName}.s3.{region.SystemName}.amazonaws.com/{fileName}";
 
                 // Guardar en la base de datos
                 var nuevoArchivo = new Archivo
@@ -231,7 +219,7 @@ namespace reto2_api.Controllers
             }
             catch (Exception ex)
             {
-                return StatusCode(500, $"Error interno del servidor al subir archivo: {ex.Message}");
+                return StatusCode(500, $"Error interno al subir archivo: {ex.Message}");
             }
         }
     }

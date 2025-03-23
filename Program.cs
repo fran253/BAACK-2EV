@@ -109,25 +109,8 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseCors("AllowSpecificOrigin");
 
-// Configuración general para archivos estáticos
-app.UseStaticFiles();
 
-// Configuración específica para la carpeta de archivos
-app.UseStaticFiles(new StaticFileOptions
-{
-    FileProvider = new PhysicalFileProvider(
-        Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "archivos")),
-    RequestPath = "/archivos",
-    ServeUnknownFileTypes = true, 
-    DefaultContentType = "application/octet-stream",
-    OnPrepareResponse = ctx =>
-    {
-        // No establecer caché para los archivos
-        ctx.Context.Response.Headers.Append("Cache-Control", "no-cache, no-store");
-        ctx.Context.Response.Headers.Append("Pragma", "no-cache");
-        ctx.Context.Response.Headers.Append("Expires", "-1");
-    }
-});
+
 
 app.UseAuthorization();
 app.MapControllers();
