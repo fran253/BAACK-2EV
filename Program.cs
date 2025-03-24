@@ -5,9 +5,16 @@ using reto2_api.Repositories;
 using reto2_api.Service;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.AspNetCore.Http.Features;
+using Microsoft.Extensions.Diagnostics.HealthChecks;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
+using Microsoft.Extensions.Logging;
 
 var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("AcademIQbbdd");
+
+// Configurar una cadena de conexión con límites muy altos
+var connectionStringWithHighLimits = connectionString + 
+    ";Max Pool Size=1000;Min Pool Size=10;Connection Lifetime=0;Connection Timeout=120;Default Command Timeout=120;";
 
 // Configurar límites de tamaño para subida de archivos grandes
 builder.Services.Configure<IISServerOptions>(options =>
@@ -29,42 +36,53 @@ builder.Services.Configure<FormOptions>(options =>
     options.MultipartHeadersLengthLimit = 8192;
 });
 
-// REPOSITORY
+// Añadir monitoreo de salud para la base de datos
+builder.Services.AddHealthChecks()
+    .AddMySql(connectionStringWithHighLimits, name: "database", failureStatus: HealthStatus.Degraded);
+
+// Registrar servicio de logs
+builder.Services.AddLogging(logging =>
+{
+    logging.AddConsole();
+    logging.AddDebug();
+});
+
+// REPOSITORY con conexión con límites altos
 builder.Services.AddScoped<ICursoRepository, CursoRepository>(provider =>
-    new CursoRepository(connectionString));
+    new CursoRepository(connectionStringWithHighLimits));
 
 builder.Services.AddScoped<IAsignaturaRepository, AsignaturaRepository>(provider =>
-    new AsignaturaRepository(connectionString));
+    new AsignaturaRepository(connectionStringWithHighLimits));
 
 builder.Services.AddScoped<ITemarioRepository, TemarioRepository>(provider =>
-    new TemarioRepository(connectionString));
+    new TemarioRepository(connectionStringWithHighLimits));
 
 builder.Services.AddScoped<IArchivoRepository, ArchivoRepository>(provider =>
-    new ArchivoRepository(connectionString));
+    new ArchivoRepository(connectionStringWithHighLimits));
 
 builder.Services.AddScoped<IComentarioRepository, ComentarioRepository>(provider =>
-    new ComentarioRepository(connectionString));
+    new ComentarioRepository(connectionStringWithHighLimits));
 
 builder.Services.AddScoped<ITestRepository, TestRepository>(provider =>
-    new TestRepository(connectionString));
+    new TestRepository(connectionStringWithHighLimits));
 
 builder.Services.AddScoped<IUsuarioRepository, UsuariosRepository>(provider =>
-    new UsuariosRepository(connectionString));
+    new UsuariosRepository(connectionStringWithHighLimits));
 
 builder.Services.AddScoped<IRolRepository, RolRepository>(provider =>
-    new RolRepository(connectionString));
+    new RolRepository(connectionStringWithHighLimits));
 
 builder.Services.AddScoped<IPreguntaRepository, PreguntaRepository>(provider =>
-    new PreguntaRepository(connectionString));
+    new PreguntaRepository(connectionStringWithHighLimits));
 
 builder.Services.AddScoped<IOpcionRepository, OpcionRepository>(provider =>
-    new OpcionRepository(connectionString));
+    new OpcionRepository(connectionStringWithHighLimits));
 
 builder.Services.AddScoped<IResultadoRepository, ResultadoRepository>(provider =>
-    new ResultadoRepository(connectionString));
+    new ResultadoRepository(connectionStringWithHighLimits));
 
 builder.Services.AddScoped<IUsuarioCursoRepository, UsuarioCursoRepository>(provider =>
-    new UsuarioCursoRepository(connectionString));
+    new UsuarioCursoRepository(connectionStringWithHighLimits));
 
 // SERVICE
 builder.Services.AddScoped<ICursoService, CursoService>();
@@ -106,11 +124,29 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+// Añadir endpoint de health check para monitorear la salud de la aplicación
+app.UseHealthChecks("/health", new HealthCheckOptions
+{
+    ResponseWriter = async (context, report) =>
+    {
+        context.Response.ContentType = "application/json";
+        var result = System.Text.Json.JsonSerializer.Serialize(
+            new
+            {
+                status = report.Status.ToString(),
+                checks = report.Entries.Select(e => new
+                {
+                    name = e.Key,
+                    status = e.Value.Status.ToString(),
+                    description = e.Value.Description
+                })
+            });
+        await context.Response.WriteAsync(result);
+    }
+});
+
 app.UseHttpsRedirection();
 app.UseCors("AllowSpecificOrigin");
-
-
-
 
 app.UseAuthorization();
 app.MapControllers();

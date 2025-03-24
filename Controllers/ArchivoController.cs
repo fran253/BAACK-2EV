@@ -142,24 +142,24 @@ namespace reto2_api.Controllers
         public async Task<ActionResult<List<Archivo>>> GetByUsuarioId(int idUsuario)
         {
             var archivos = await _serviceArchivo.GetByUsuarioIdAsync(idUsuario);
-            
+
             if (archivos == null || archivos.Count == 0)
                 return NotFound("No se encontraron archivos para este usuario.");
 
-            // Asegurar que los archivos existen antes de enviarlos al frontend
-            string archivosFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot");
             foreach (var archivo in archivos)
             {
-                string filePath = Path.Combine(archivosFolder, archivo.Url.TrimStart('/'));
-                
-                if (!System.IO.File.Exists(filePath))
+                if (!string.IsNullOrEmpty(archivo.Url))
                 {
-                    archivo.Url = null; 
+                    if (archivo.Url.StartsWith("/"))
+                    {
+                        archivo.Url = $"https://{_configuration["AWS:BucketName"]}.s3.{_configuration["AWS:Region"]}.amazonaws.com{archivo.Url}";
+                    }
                 }
             }
 
             return Ok(archivos);
         }
+
 
         // Método mejorado para subir archivos físicos
       [HttpPost("upload")]
