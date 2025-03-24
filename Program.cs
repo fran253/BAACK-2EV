@@ -96,7 +96,7 @@ builder.Services.Configure<FormOptions>(options =>
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowSpecificOrigin",
-        builder => builder.WithOrigins("https://academiq.retocsv.es", "http://localhost:3000")
+        builder => builder.WithOrigins("https://academiq.retocsv.es", "http://localhost:5173")
                           .AllowAnyMethod()
                           .AllowAnyHeader());
 });
