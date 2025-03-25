@@ -54,24 +54,28 @@ namespace reto2_api.Controllers
         public async Task<ActionResult<List<Archivo>>> GetByTipoAndTemarioAsync(string tipo, int idTemario)
         {
             var archivos = await _serviceArchivo.GetByTipoAndTemarioAsync(tipo, idTemario);
-            
+
             if (archivos == null || archivos.Count == 0)
                 return NotFound($"No se encontraron archivos de tipo '{tipo}' para el temario con ID {idTemario}.");
 
-            // Asegurar que los archivos existen antes de enviarlos al frontend
-            string archivosFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot");
+            // Aquí ya no necesitamos verificar si el archivo existe en el servidor local.
+            // Si la URL de S3 está guardada en la base de datos, simplemente la devolvemos tal cual.
             foreach (var archivo in archivos)
             {
-                string filePath = Path.Combine(archivosFolder, archivo.Url.TrimStart('/'));
-                
-                if (!System.IO.File.Exists(filePath))
+                // Si necesitas asegurar que la URL de S3 es correcta, puedes validarla, pero en este caso asumimos que ya está bien almacenada.
+                if (!string.IsNullOrEmpty(archivo.Url))
                 {
-                    archivo.Url = null; 
+                    // Si la URL es relativa, puedes transformarla en absoluta si es necesario
+                    if (archivo.Url.StartsWith("/"))
+                    {
+                        archivo.Url = $"https://{_configuration["AWS:BucketName"]}.s3.{_configuration["AWS:Region"]}.amazonaws.com{archivo.Url}";
+                    }
                 }
             }
 
             return Ok(archivos);
         }
+
 
         [HttpPost]
         public async Task<ActionResult<Archivo>> CreateArchivo(Archivo archivo)
@@ -144,7 +148,7 @@ namespace reto2_api.Controllers
             var archivos = await _serviceArchivo.GetByUsuarioIdAsync(idUsuario);
 
             if (archivos == null || archivos.Count == 0)
-                return NotFound("No se encontraron archivos para este usuario.");
+                return NotFound("No has subido archivos todavia.");
 
             foreach (var archivo in archivos)
             {
