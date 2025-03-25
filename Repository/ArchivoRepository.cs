@@ -1,6 +1,8 @@
 using MySql.Data.MySqlClient;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using MySql.Data.MySqlClient;
+using System.Data;
 
 namespace reto2_api.Repositories
 {
@@ -266,19 +268,20 @@ namespace reto2_api.Repositories
         ///METODO ARCHIVOS DE UN TEMA
         public async Task<List<Archivo>> GetByTemarioIdAsync(int idTemario)
         {
+             await using var connection = new MySqlConnection(_connectionString);
             var archivos = new List<Archivo>();
-
-            using (var connection = new MySqlConnection(_connectionString))
-            {
-                await connection.OpenAsync();
+            try{
+           
+            
+            await connection.OpenAsync();
 
                 string query = "SELECT idArchivo, titulo, url, tipo, fechaCreacion, idUsuario, idTemario FROM Archivo WHERE idTemario = @IdTemario";
-                using (var command = new MySqlCommand(query, connection))
-                {
+                await using var command = new MySqlCommand(query, connection);
+                
                     command.Parameters.AddWithValue("@IdTemario", idTemario);
 
-                    using (var reader = await command.ExecuteReaderAsync())
-                    {
+                    await using var reader = await command.ExecuteReaderAsync();
+                    
                         while (await reader.ReadAsync())
                         {
                             archivos.Add(new Archivo
@@ -292,13 +295,17 @@ namespace reto2_api.Repositories
                                 IdTemario = reader.GetInt32(6)
                             });
                         }
-                    }
+            }catch(Exception ex){
+                return null;
+                }
+             finally{  
+                if (connection.State != ConnectionState.Closed) {
+                    await connection.CloseAsync();
                 }
             }
-
+            
             return archivos;
         }
-
         public async Task<List<Archivo>> GetByUsuarioIdAsync(int idUsuario)
         {
             var archivos = new List<Archivo>();

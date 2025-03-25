@@ -1,13 +1,10 @@
 version: '3.4'
-
 networks:
   backend:
     driver: bridge
-
 volumes:
   mysql-data:
     driver: local
-
 services:
   bbdd:
     container_name: mysqlContainer
@@ -18,13 +15,10 @@ services:
     networks:
       - backend
     volumes:
-      - mysql-data:/var/lib/mysql 
+      - mysql-data:/var/lib/mysql
     environment:
       MYSQL_ROOT_PASSWORD: "FMfcgzQZTCqZPnrwkWsNZDNDsqtphSfr"
-      MYSQL_DATABASE: "Reto2ev"
-      MYSQL_USER: "root"
-      MYSQL_PASSWORD: "FMfcgzQZTCqZPnrwkWsNZDNDsqtphSfr"
-
+      MYSQL_DATABASE: "bbddAcademIQ"
   api:
     container_name: apiContainer
     image: reto2_api:1.0  
@@ -32,10 +26,10 @@ services:
       context: .
       dockerfile: Dockerfile  
     ports:
-      - "4444:80" 
+      - "5687:80"
     networks:
       - backend
     depends_on:
-      - bbdd 
+      - bbdd
     environment:
-      ConnectionStrings__DefaultConnection: "Server=mysqlContainer;Database=VideojuegosDB;User=fran;Password=G#tL9wX3r!sPzD7b;AllowPublicKeyRetrieval=True;SslMode=none"
+      bbddAcademIQ: "server=mysqlContainer;port=3306;Database=bbddAcademIQ;Uid=root;Pwd=FMfcgzQZTCqZPnrwkWsNZDNDsqtphSfr;"

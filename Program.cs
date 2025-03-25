@@ -10,11 +10,11 @@ using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Logging;
 
 var builder = WebApplication.CreateBuilder(args);
-var connectionString = builder.Configuration.GetConnectionString("AcademIQbbdd");
+var connectionString = builder.Configuration.GetConnectionString("bbddAcademIQ");
 
 // Configurar una cadena de conexión con límites muy altos
-var connectionStringWithHighLimits = connectionString + 
-    ";Max Pool Size=1000;Min Pool Size=10;Connection Lifetime=0;Connection Timeout=120;Default Command Timeout=120;";
+var connectionStringWithHighLimits = connectionString;// + 
+   // ";Max Pool Size=1000;Min Pool Size=10;Connection Lifetime=0;Connection Timeout=120;Default Command Timeout=120;";
 
 // Configurar límites de tamaño para subida de archivos grandes
 builder.Services.Configure<IISServerOptions>(options =>
@@ -36,16 +36,16 @@ builder.Services.Configure<FormOptions>(options =>
     options.MultipartHeadersLengthLimit = 8192;
 });
 
-// Añadir monitoreo de salud para la base de datos
-builder.Services.AddHealthChecks()
-    .AddMySql(connectionStringWithHighLimits, name: "database", failureStatus: HealthStatus.Degraded);
+// // Añadir monitoreo de salud para la base de datos
+// builder.Services.AddHealthChecks()
+//     .AddMySql(connectionStringWithHighLimits, name: "database", failureStatus: HealthStatus.Degraded);
 
-// Registrar servicio de logs
-builder.Services.AddLogging(logging =>
-{
-    logging.AddConsole();
-    logging.AddDebug();
-});
+// // Registrar servicio de logs
+// builder.Services.AddLogging(logging =>
+// {
+//     logging.AddConsole();
+//     logging.AddDebug();
+// });
 
 // REPOSITORY con conexión con límites altos
 builder.Services.AddScoped<ICursoRepository, CursoRepository>(provider =>
@@ -125,25 +125,25 @@ if (app.Environment.IsDevelopment())
 }
 
 // Añadir endpoint de health check para monitorear la salud de la aplicación
-app.UseHealthChecks("/health", new HealthCheckOptions
-{
-    ResponseWriter = async (context, report) =>
-    {
-        context.Response.ContentType = "application/json";
-        var result = System.Text.Json.JsonSerializer.Serialize(
-            new
-            {
-                status = report.Status.ToString(),
-                checks = report.Entries.Select(e => new
-                {
-                    name = e.Key,
-                    status = e.Value.Status.ToString(),
-                    description = e.Value.Description
-                })
-            });
-        await context.Response.WriteAsync(result);
-    }
-});
+// app.UseHealthChecks("/health", new HealthCheckOptions
+// {
+//     ResponseWriter = async (context, report) =>
+//     {
+//         context.Response.ContentType = "application/json";
+//         var result = System.Text.Json.JsonSerializer.Serialize(
+//             new
+//             {
+//                 status = report.Status.ToString(),
+//                 checks = report.Entries.Select(e => new
+//                 {
+//                     name = e.Key,
+//                     status = e.Value.Status.ToString(),
+//                     description = e.Value.Description
+//                 })
+//             });
+//         await context.Response.WriteAsync(result);
+//     }
+// });
 
 app.UseHttpsRedirection();
 app.UseCors("AllowSpecificOrigin");

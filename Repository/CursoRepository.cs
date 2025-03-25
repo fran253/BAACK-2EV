@@ -16,14 +16,16 @@ namespace reto2_api.Repositories
         {
             var cursos = new List<Curso>();
 
-            using (var connection = new MySqlConnection(_connectionString))
+            await  using (var connection = new MySqlConnection(_connectionString))
+
+            try {
             {
                 await connection.OpenAsync();
 
                 string query = "SELECT idCurso, nombre, descripcion, imagen, fechaCreacion FROM Curso";
-                using (var command = new MySqlCommand(query, connection))
+                await using (var command = new MySqlCommand(query, connection))
                 {
-                    using (var reader = await command.ExecuteReaderAsync())
+                    await using (var reader = await command.ExecuteReaderAsync())
                     {
                         while (await reader.ReadAsync())
                         {
@@ -39,6 +41,15 @@ namespace reto2_api.Repositories
                             cursos.Add(curso);
                         }
                     }
+                }
+            }
+            }catch(Exception ex){
+                return null;
+
+            }         
+            finally{  
+                if (connection.State != ConnectionState.Closed) {
+                    await connection.CloseAsync();
                 }
             }
             return cursos;

@@ -17,14 +17,14 @@ namespace reto2_api.Repositories
         {
             var temarios = new List<Temario>();
 
-            using (var connection = new MySqlConnection(_connectionString))
+            await using (var connection = new MySqlConnection(_connectionString))
             {
                 await connection.OpenAsync();
 
                 string query = "SELECT idTemario, titulo, descripcion, idAsignatura FROM Temario";
-                using (var command = new MySqlCommand(query, connection))
+                await using (var command = new MySqlCommand(query, connection))
                 {
-                    using (var reader = await command.ExecuteReaderAsync())
+                    await using (var reader = await command.ExecuteReaderAsync())
                     {
                         while (await reader.ReadAsync())
                         {
