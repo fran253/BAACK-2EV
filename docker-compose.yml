@@ -26,10 +26,10 @@ services:
       context: .
       dockerfile: Dockerfile  
     ports:
-      - "5687:80"
+      - "5687:8080"
     networks:
       - backend
     depends_on:
       - bbdd
-    environment:
-      bbddAcademIQ: "server=mysqlContainer;port=3306;Database=bbddAcademIQ;Uid=root;Pwd=FMfcgzQZTCqZPnrwkWsNZDNDsqtphSfr;"
+    #environment:
+      #ConnectionStrings__bbddAcademIQ: "server=mysqlContainer;port=3306;Database=bbddAcademIQ;Uid=root;Pwd=FMfcgzQZTCqZPnrwkWsNZDNDsqtphSfr;Pooling=true;"

@@ -10,7 +10,9 @@ using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Logging;
 
 var builder = WebApplication.CreateBuilder(args);
+
 var connectionString = builder.Configuration.GetConnectionString("bbddAcademIQ");
+var connectionStringEnvironmentVar = Environment.GetEnvironmentVariable("ConnectionStrings__bbddAcademIQ");
 
 // Configurar una cadena de conexión con límites muy altos
 var connectionStringWithHighLimits = connectionString;// + 
@@ -118,7 +120,7 @@ builder.Services.AddCors(options =>
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+//if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();

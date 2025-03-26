@@ -6,5 +6,5 @@ RUN dotnet publish "reto2_api.csproj" -c Release -o /app
 FROM mcr.microsoft.com/dotnet/aspnet:8.0
 WORKDIR /application
 COPY --from=buildApp /app ./
-EXPOSE 80
+EXPOSE 8080
 ENTRYPOINT ["dotnet", "reto2_api.dll"]
