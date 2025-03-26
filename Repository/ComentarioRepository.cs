@@ -99,7 +99,6 @@ public async Task<List<Comentario>> GetAllAsync()
             }
         }
 
-        // Fixed UpdateAsync method for ComentarioRepository.cs
     public async Task UpdateAsync(Comentario comentario)
     {
         using (var connection = new MySqlConnection(_connectionString))
@@ -109,7 +108,6 @@ public async Task<List<Comentario>> GetAllAsync()
             string query = "UPDATE Comentario SET contenido = @Contenido, fechaCreacion = @FechaCreacion, idUsuario = @IdUsuario, idArchivo = @IdArchivo WHERE idComentario = @IdComentario";
             using (var command = new MySqlCommand(query, connection))
             {
-                // Fix: Correct parameter should be IdComentario, not IdArchivo
                 command.Parameters.AddWithValue("@IdComentario", comentario.IdComentario);
                 command.Parameters.AddWithValue("@Contenido", comentario.Contenido);
                 command.Parameters.AddWithValue("@FechaCreacion", comentario.FechaCreacion);

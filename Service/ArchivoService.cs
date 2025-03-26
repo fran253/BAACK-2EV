@@ -19,9 +19,36 @@ namespace reto2_api.Service
             return await _archivoRepository.GetAllAsync();
         }
 
+        public async Task<List<Archivo>> GetNombreUsuarioAsync()
+        {
+            return await _archivoRepository.GetNombreUsuarioAsync();
+        }
+
+        //METODO PARA EL FILTRADO POR TIPO DE ARCHIVO
         public async Task<Archivo?> GetByIdAsync(int id)
         {
             return await _archivoRepository.GetByIdAsync(id);
+        }
+
+        //Filtrar tipo
+        public async Task<List<Archivo>> GetByTipoAsync(string tipo)
+        {
+            if (tipo == null)
+                throw new ArgumentException("El tipo no puede ser nulo.", nameof(tipo));
+
+            return await _archivoRepository.GetByTipoAsync(tipo);
+        }
+
+        //filtrar tipo y temario
+        public async Task<List<Archivo>> GetByTipoAndTemarioAsync(string tipo, int idTemario)
+        {
+            if (tipo == null)
+                throw new ArgumentException("El tipo no puede ser nulo.", nameof(tipo));
+            
+            if (idTemario <= 0)
+                throw new ArgumentException("El id del temario debe ser un número positivo.", nameof(idTemario));
+
+            return await _archivoRepository.GetByTipoAndTemarioAsync(tipo, idTemario);
         }
 
         public async Task AddAsync(Archivo archivo)

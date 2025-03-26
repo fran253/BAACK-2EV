@@ -17,14 +17,14 @@ namespace reto2_api.Repositories
         {
             var temarios = new List<Temario>();
 
-            using (var connection = new MySqlConnection(_connectionString))
+            await using (var connection = new MySqlConnection(_connectionString))
             {
                 await connection.OpenAsync();
 
                 string query = "SELECT idTemario, titulo, descripcion, idAsignatura FROM Temario";
-                using (var command = new MySqlCommand(query, connection))
+                await using (var command = new MySqlCommand(query, connection))
                 {
-                    using (var reader = await command.ExecuteReaderAsync())
+                    await using (var reader = await command.ExecuteReaderAsync())
                     {
                         while (await reader.ReadAsync())
                         {
@@ -138,7 +138,6 @@ namespace reto2_api.Repositories
             {
                 await connection.OpenAsync();
 
-                // 🔹 Se añadió `Descripcion` e `IdAsignatura` a la consulta
                 string query = "SELECT idTemario, titulo, descripcion, idAsignatura FROM Temario WHERE idAsignatura = @IdAsignatura";
 
                 using (var command = new MySqlCommand(query, connection))
@@ -153,8 +152,8 @@ namespace reto2_api.Repositories
                             {
                                 IdTemario = reader.GetInt32(0),
                                 Titulo = reader.GetString(1),
-                                Descripcion = reader.GetString(2),  // 🔹 Ahora se incluye la descripción correctamente
-                                IdAsignatura = reader.GetInt32(3)   // 🔹 Se asigna `IdAsignatura` al modelo
+                                Descripcion = reader.GetString(2), 
+                                IdAsignatura = reader.GetInt32(3)    
                             });
                         }
                     }

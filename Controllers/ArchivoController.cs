@@ -1,6 +1,11 @@
 using Microsoft.AspNetCore.Mvc;
 using reto2_api.Repositories;
 using reto2_api.Service;
+using Microsoft.AspNetCore.Http.Features;
+using Amazon.S3;
+using Amazon.S3.Transfer;
+using Amazon;
+
 
 namespace reto2_api.Controllers
 {
@@ -11,10 +16,12 @@ namespace reto2_api.Controllers
     private static List<Archivo> archivos = new List<Archivo>();
 
     private readonly IArchivoService _serviceArchivo;
+    private readonly IConfiguration _configuration;
 
-    public ArchivoController(IArchivoService service)
+    public ArchivoController(IArchivoService service, IConfiguration configuration)
         {
             _serviceArchivo = service;
+            _configuration = configuration;
         }
     
         [HttpGet]
@@ -23,16 +30,52 @@ namespace reto2_api.Controllers
             var archivos = await _serviceArchivo.GetAllAsync();
             return Ok(archivos);
         }
+
+        [HttpGet("NombreUsuario")]
+        public async Task<ActionResult<List<Archivo>>> GetNombreUsuario()
+        {
+            var archivos = await _serviceArchivo.GetNombreUsuarioAsync();
+            return Ok(archivos);
+        }
+
         [HttpGet("{id}")]
         public async Task<ActionResult<Archivo>> GetArchivo(int id)
         {
             var archivo = await _serviceArchivo.GetByIdAsync(id);
             if (archivo == null)
             {
-                return NotFound();
+                return NotFound();  
             }
             return Ok(archivo);
         }
+
+        //METODO PARA EL FILTRADO POR TIPO DE ARCHIVO
+        [HttpGet("tipo/{tipo}/temario/{idTemario}")]
+        public async Task<ActionResult<List<Archivo>>> GetByTipoAndTemarioAsync(string tipo, int idTemario)
+        {
+            var archivos = await _serviceArchivo.GetByTipoAndTemarioAsync(tipo, idTemario);
+
+            if (archivos == null || archivos.Count == 0)
+                return NotFound($"No se encontraron archivos de tipo '{tipo}' para el temario con ID {idTemario}.");
+
+            // Aquí ya no necesitamos verificar si el archivo existe en el servidor local.
+            // Si la URL de S3 está guardada en la base de datos, simplemente la devolvemos tal cual.
+            foreach (var archivo in archivos)
+            {
+                // Si necesitas asegurar que la URL de S3 es correcta, puedes validarla, pero en este caso asumimos que ya está bien almacenada.
+                if (!string.IsNullOrEmpty(archivo.Url))
+                {
+                    // Si la URL es relativa, puedes transformarla en absoluta si es necesario
+                    if (archivo.Url.StartsWith("/"))
+                    {
+                        archivo.Url = $"https://{_configuration["AWS:BucketName"]}.s3.{_configuration["AWS:Region"]}.amazonaws.com{archivo.Url}";
+                    }
+                }
+            }
+
+            return Ok(archivos);
+        }
+
 
         [HttpPost]
         public async Task<ActionResult<Archivo>> CreateArchivo(Archivo archivo)
@@ -74,9 +117,6 @@ namespace reto2_api.Controllers
             }
         }
 
-
-        ///Cambio necesario///
-  
        [HttpDelete("{id}")]
        public async Task<IActionResult> DeleteArchivo(int id)
        {
@@ -98,18 +138,6 @@ namespace reto2_api.Controllers
             if (archivos == null || archivos.Count == 0)
                 return NotFound("No se encontraron archivos para este temario.");
 
-            // Asegurar que los archivos existen antes de enviarlos al frontend
-            string archivosFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot");
-            foreach (var archivo in archivos)
-            {
-                string filePath = Path.Combine(archivosFolder, archivo.Url.TrimStart('/'));
-                
-                if (!System.IO.File.Exists(filePath))
-                {
-                    archivo.Url = null; 
-                }
-            }
-
             return Ok(archivos);
         }
 
@@ -118,83 +146,85 @@ namespace reto2_api.Controllers
         public async Task<ActionResult<List<Archivo>>> GetByUsuarioId(int idUsuario)
         {
             var archivos = await _serviceArchivo.GetByUsuarioIdAsync(idUsuario);
-            
-            if (archivos == null || archivos.Count == 0)
-                return NotFound("No se encontraron archivos para este usuario.");
 
-            // Asegurar que los archivos existen antes de enviarlos al frontend
-            string archivosFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot");
+            if (archivos == null || archivos.Count == 0)
+                return NotFound("No has subido archivos todavia.");
+
             foreach (var archivo in archivos)
             {
-                string filePath = Path.Combine(archivosFolder, archivo.Url.TrimStart('/'));
-                
-                if (!System.IO.File.Exists(filePath))
+                if (!string.IsNullOrEmpty(archivo.Url))
                 {
-                    archivo.Url = null; 
+                    if (archivo.Url.StartsWith("/"))
+                    {
+                        archivo.Url = $"https://{_configuration["AWS:BucketName"]}.s3.{_configuration["AWS:Region"]}.amazonaws.com{archivo.Url}";
+                    }
                 }
             }
 
             return Ok(archivos);
         }
 
-        // Nuevo método para subir archivos físicos
-        [HttpPost("upload")]
+
+        // Método mejorado para subir archivos físicos
+      [HttpPost("upload")]
+        [RequestSizeLimit(500 * 1024 * 1024)] // 500MB
+        [RequestFormLimits(MultipartBodyLengthLimit = 500 * 1024 * 1024)]
         public async Task<IActionResult> UploadArchivo(
-            IFormFile archivo, 
-            [FromForm] string titulo, 
-            [FromForm] string tipo, 
-            [FromForm] int idUsuario, 
+            IFormFile archivo,
+            [FromForm] string titulo,
+            [FromForm] string tipo,
+            [FromForm] int idUsuario,
             [FromForm] int idTemario)
         {
-            if (archivo == null || archivo.Length == 0)
+            try
             {
-                return BadRequest("No se ha subido ningún archivo.");
+                if (archivo == null || archivo.Length == 0)
+                    return BadRequest("No se ha subido ningún archivo.");
+
+                // Config AWS
+                var awsAccessKey = _configuration["AWS:AccessKey"];
+                var awsSecretKey = _configuration["AWS:SecretKey"];
+                var bucketName = _configuration["AWS:BucketName"];
+                var region = Amazon.RegionEndpoint.GetBySystemName(_configuration["AWS:Region"]);
+
+                var s3Client = new AmazonS3Client(awsAccessKey, awsSecretKey, region);
+
+                // Crear nombre único para el archivo
+                var fileName = $"{Guid.NewGuid()}{Path.GetExtension(archivo.FileName)}";
+
+                var uploadRequest = new TransferUtilityUploadRequest
+                {
+                    InputStream = archivo.OpenReadStream(),
+                    Key = fileName,
+                    BucketName = bucketName,
+                    ContentType = archivo.ContentType,
+                };
+
+                using var fileTransferUtility = new TransferUtility(s3Client);
+                await fileTransferUtility.UploadAsync(uploadRequest);
+
+                // Crear URL pública
+                var fileUrl = $"https://{bucketName}.s3.{region.SystemName}.amazonaws.com/{fileName}";
+
+                // Guardar en la base de datos
+                var nuevoArchivo = new Archivo
+                {
+                    Titulo = titulo,
+                    Url = fileUrl,
+                    Tipo = tipo,
+                    FechaCreacion = DateTime.UtcNow,
+                    IdUsuario = idUsuario,
+                    IdTemario = idTemario
+                };
+
+                await _serviceArchivo.AddAsync(nuevoArchivo);
+
+                return Ok(new { mensaje = "Archivo subido correctamente", archivoUrl = fileUrl });
             }
-
-            // Ruta donde se guardará el archivo en wwwroot/archivos/
-            var uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "archivos");
-
-            // Crear la carpeta si no existe
-            if (!Directory.Exists(uploadsFolder))
+            catch (Exception ex)
             {
-                Directory.CreateDirectory(uploadsFolder);
+                return StatusCode(500, $"Error interno al subir archivo: {ex.Message}");
             }
-
-            // Guardar el archivo con su extensión real
-            var extension = Path.GetExtension(archivo.FileName);
-            if (string.IsNullOrEmpty(extension))
-            {
-                return BadRequest("El archivo no tiene una extensión válida.");
-            }
-
-            var fileName = $"{Guid.NewGuid()}{extension}"; 
-            var filePath = Path.Combine(uploadsFolder, fileName);
-
-            // Guardar el archivo en el servidor
-            using (var stream = new FileStream(filePath, FileMode.Create))
-            {
-                await archivo.CopyToAsync(stream);
-            }
-
-            // Crear URL accesible
-            var fileUrl = $"/archivos/{fileName}";
-
-            // Guardar en la base de datos
-            var nuevoArchivo = new Archivo
-            {
-                Titulo = titulo,
-                Url = fileUrl, // URL corregida
-                Tipo = tipo,
-                FechaCreacion = DateTime.UtcNow,
-                IdUsuario = idUsuario,
-                IdTemario = idTemario
-            };
-
-            await _serviceArchivo.AddAsync(nuevoArchivo);
-
-            return Ok(new { mensaje = "Archivo subido correctamente", archivoUrl = fileUrl });
         }
-
-
     }
 }
