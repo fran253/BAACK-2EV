@@ -9,9 +9,11 @@ public class Usuario
     public string Gmail { get; set; }
     public string Telefono { get; set; }
     public string Contraseña { get; set; }
-    public Rol Rol { get; set; }
+    
+    public int IdRol {get; set;}
 
-    public Usuario(int idUsuario, string nombre, string apellido, string gmail, string telefono,string contraseña, Rol rol)
+
+    public Usuario(int idUsuario, string nombre, string apellido, string gmail, string telefono,string contraseña)
     {
         if (idUsuario <= 0)
             throw new Exception("el id de usuario debe ser un número positivo.");
@@ -28,8 +30,6 @@ public class Usuario
         if (string.IsNullOrWhiteSpace(telefono) || telefono.Length < 9)
             throw new Exception("el número de teléfono no es válido.");
 
-        if (rol != null && rol.IdRol <= 0)
-            throw new Exception("el id de rol debe ser un número positivo.");
 
         IdUsuario = idUsuario;
         Nombre = nombre;
@@ -37,12 +37,8 @@ public class Usuario
         Gmail = gmail;
         Telefono = telefono;
         Contraseña = contraseña;
-        Rol = rol;
+        IdRol = IdRol;
     }
 
     public Usuario() { }
-    public void MostrarDetalles()
-    {
-        Console.WriteLine($"usuario: {Nombre} {Apellido}, email: {Gmail}, teléfono: {Telefono},contraseña : {Contraseña}, rol: {Rol.IdRol}");
-    }
 }

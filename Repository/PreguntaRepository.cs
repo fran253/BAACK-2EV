@@ -1,4 +1,4 @@
-using Microsoft.Data.SqlClient;
+using MySql.Data.MySqlClient;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -17,12 +17,12 @@ namespace reto2_api.Repositories
         {
             var preguntas = new List<Pregunta>();
 
-            using (var connection = new SqlConnection(_connectionString))
+            using (var connection = new MySqlConnection(_connectionString))
             {
                 await connection.OpenAsync();
 
-                string query = "SELECT IdPregunta, Enunciado, IdTest FROM Pregunta";
-                using (var command = new SqlCommand(query, connection))
+                string query = "SELECT idPregunta, enunciado, idTest FROM Pregunta";
+                using (var command = new MySqlCommand(query, connection))
                 {
                     using (var reader = await command.ExecuteReaderAsync())
                     {
@@ -47,12 +47,12 @@ namespace reto2_api.Repositories
         {
             Pregunta pregunta = null;
 
-            using (var connection = new SqlConnection(_connectionString))
+            using (var connection = new MySqlConnection(_connectionString))
             {
                 await connection.OpenAsync();
 
-                string query = "SELECT IdPregunta, Enunciado, IdTest FROM Pregunta WHERE IdPregunta = @IdPregunta";
-                using (var command = new SqlCommand(query, connection))
+                string query = "SELECT idPregunta, enunciado, idTest FROM Pregunta WHERE idPregunta = @IdPregunta";
+                using (var command = new MySqlCommand(query, connection))
                 {
                     command.Parameters.AddWithValue("@IdPregunta", id);
 
@@ -75,12 +75,12 @@ namespace reto2_api.Repositories
 
         public async Task AddAsync(Pregunta pregunta)
         {
-            using (var connection = new SqlConnection(_connectionString))
+            using (var connection = new MySqlConnection(_connectionString))
             {
                 await connection.OpenAsync();
 
-                string query = "INSERT INTO Pregunta (Enunciado, IdTest) VALUES (@Enunciado, @IdTest)";
-                using (var command = new SqlCommand(query, connection))
+                string query = "INSERT INTO Pregunta (enunciado, idTest) VALUES (@Enunciado, @IdTest)";
+                using (var command = new MySqlCommand(query, connection))
                 {
                     command.Parameters.AddWithValue("@Enunciado", pregunta.Enunciado);
                     command.Parameters.AddWithValue("@IdTest", pregunta.Test.IdTest);
@@ -92,12 +92,12 @@ namespace reto2_api.Repositories
 
         public async Task UpdateAsync(Pregunta pregunta)
         {
-            using (var connection = new SqlConnection(_connectionString))
+            using (var connection = new MySqlConnection(_connectionString))
             {
                 await connection.OpenAsync();
 
-                string query = "UPDATE Pregunta SET Enunciado = @Enunciado, IdTest = @IdTest WHERE IdPregunta = @IdPregunta";
-                using (var command = new SqlCommand(query, connection))
+                string query = "UPDATE Pregunta SET enunciado = @Enunciado, idTest = @IdTest WHERE idPregunta = @IdPregunta";
+                using (var command = new MySqlCommand(query, connection))
                 {
                     command.Parameters.AddWithValue("@IdPregunta", pregunta.IdPregunta);
                     command.Parameters.AddWithValue("@Enunciado", pregunta.Enunciado);
@@ -110,12 +110,12 @@ namespace reto2_api.Repositories
 
         public async Task<bool> DeleteAsync(int id)
         {
-            using (var connection = new SqlConnection(_connectionString))
+            using (var connection = new MySqlConnection(_connectionString))
             {
                 await connection.OpenAsync();
 
-                string query = "DELETE FROM Pregunta WHERE IdPregunta = @IdPregunta";
-                using (var command = new SqlCommand(query, connection))
+                string query = "DELETE FROM Pregunta WHERE idPregunta = @IdPregunta";
+                using (var command = new MySqlCommand(query, connection))
                 {
                     command.Parameters.AddWithValue("@IdPregunta", id);
 
@@ -123,6 +123,37 @@ namespace reto2_api.Repositories
                     return rowsAffected > 0;
                 }
             }
+        }
+
+        ///METODO PREGUNTAS DE UN TEST
+        public async Task<List<Pregunta>> GetByTestIdAsync(int idTest)
+        {
+            var preguntas = new List<Pregunta>();
+
+            using (var connection = new MySqlConnection(_connectionString))
+            {
+                await connection.OpenAsync();
+
+                string query = "SELECT idPregunta, enunciado FROM Pregunta WHERE idTest = @IdTest";
+                using (var command = new MySqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@IdTest", idTest);
+
+                    using (var reader = await command.ExecuteReaderAsync())
+                    {
+                        while (await reader.ReadAsync())
+                        {
+                            preguntas.Add(new Pregunta
+                            {
+                                IdPregunta = reader.GetInt32(0),
+                                Enunciado = reader.GetString(1)
+                            });
+                        }
+                    }
+                }
+            }
+
+            return preguntas;
         }
     }
 }

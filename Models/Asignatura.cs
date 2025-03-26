@@ -1,4 +1,5 @@
 using System.Diagnostics;
+
 public class Asignatura 
 {
     public int IdAsignatura { get; set; }
@@ -8,7 +9,7 @@ public class Asignatura
     public DateTime FechaCreacion { get; set; }
 
     // Clave foránea
-    public int CursoId { get; set; }
+    public int IdCurso { get; set; }
     public Curso Curso { get; set; }
 
     // Constructor
@@ -19,12 +20,8 @@ public class Asignatura
         Imagen = imagen;
         Descripcion = descripcion;
         FechaCreacion = fechaCreacion;
-        CursoId = cursoId;
+        IdCurso = cursoId;
     }
     public Asignatura(){}
 
-    public void MostrarDetalles() 
-    {
-        Console.WriteLine($"Asignatura: {Nombre}, Descripción: {Descripcion}, Curso: {(Curso != null ? Curso.Nombre : "No asignado")}");
-    }
 }

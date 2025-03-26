@@ -3,8 +3,8 @@ docker run -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=yourStrong(!)Password" -p 14
 
 
 
+docker docker-compose up -d
 docker compose up -d
-
 
 //Para el reto 2
 
@@ -15,3 +15,7 @@ docker run --name reto2_api \
   -v reto2_data:/var/opt/mssql \
   -d mcr.microsoft.com/mssql/server:2019-CU21-ubuntu-20.04
 
+
+//////////////////////////////////PARA INICIAR SWAGGER
+dotnet build .\reto2_api.csproj
+dotnet run

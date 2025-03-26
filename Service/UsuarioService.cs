@@ -20,6 +20,11 @@ namespace reto2_api.Service
             return await _usuarioRepository.GetAllAsync();
         }
 
+        public async Task<List<dynamic>> ClasificacionUsuarios()
+        {
+            return await _usuarioRepository.ClasificacionUsuarios();
+        }
+
         public async Task<Usuario?> GetByIdAsync(int id)
         {
             return await _usuarioRepository.GetByIdAsync(id);
@@ -45,9 +50,11 @@ namespace reto2_api.Service
             await _usuarioRepository.DeleteAsync(id);
         }
 
-        public async Task InicializarDatosAsync()
+        public async Task<Usuario?> LoginAsync(string gmail, string contraseña)
         {
-            await _usuarioRepository.InicializarDatosAsync();
+            return await _usuarioRepository.LoginByGmailAsync(gmail, contraseña);
         }
+
+
     }
 }

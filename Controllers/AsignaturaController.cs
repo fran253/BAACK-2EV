@@ -62,7 +62,7 @@ namespace reto2_api.Controllers
                 existingAsignatura.Descripcion = updatedAsignatura.Descripcion;
                 existingAsignatura.Imagen = updatedAsignatura.Imagen;
                 existingAsignatura.FechaCreacion = updatedAsignatura.FechaCreacion;
-                existingAsignatura.CursoId = updatedAsignatura.CursoId;
+                existingAsignatura.IdCurso = updatedAsignatura.IdCurso;
 
                 await _serviceAsignatura.UpdateAsync(existingAsignatura);
                 return NoContent(); // Código 204, actualización exitosa sin contenido
@@ -87,5 +87,16 @@ namespace reto2_api.Controllers
            await _serviceAsignatura.DeleteAsync(id);
            return NoContent();
        }
+
+       //Metodo Mostrar todas las asignaturas de un curso
+        [HttpGet("curso/{cursoId}")]
+        public async Task<ActionResult<List<Asignatura>>> GetByIdCurso(int cursoId)
+        {
+            var asignaturas = await _serviceAsignatura.GetByIdCursoAsync(cursoId);
+            if (asignaturas == null || asignaturas.Count == 0)
+                return NotFound("no se encontraron asignaturas para este curso.");
+
+            return Ok(asignaturas);
+        }
    }
 }

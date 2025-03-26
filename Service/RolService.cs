@@ -50,11 +50,5 @@ namespace reto2_api.Service
             }
             await _rolRepository.DeleteAsync(id);
         }
-
-        // Inicializar datos de prueba
-        public async Task InicializarDatosAsync()
-        {
-            await _rolRepository.InicializarDatosAsync();
-        }
     }
 }

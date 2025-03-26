@@ -1,6 +1,5 @@
-
-using Microsoft.Data.SqlClient;
-
+using MySql.Data.MySqlClient;
+using System.Data;
 
 namespace reto2_api.Repositories
 {
@@ -17,14 +16,16 @@ namespace reto2_api.Repositories
         {
             var cursos = new List<Curso>();
 
-            using (var connection = new SqlConnection(_connectionString))
+            await  using (var connection = new MySqlConnection(_connectionString))
+
+            try {
             {
                 await connection.OpenAsync();
 
                 string query = "SELECT idCurso, nombre, descripcion, imagen, fechaCreacion FROM Curso";
-                using (var command = new SqlCommand(query, connection))
+                await using (var command = new MySqlCommand(query, connection))
                 {
-                    using (var reader = await command.ExecuteReaderAsync())
+                    await using (var reader = await command.ExecuteReaderAsync())
                     {
                         while (await reader.ReadAsync())
                         {
@@ -32,14 +33,23 @@ namespace reto2_api.Repositories
                             {
                                 IdCurso = reader.GetInt32(0),
                                 Nombre = reader.GetString(1),
-                                Descripcion = reader.GetString(2),
-                                Imagen = reader.GetString(3),
+                                Descripcion = reader.IsDBNull(2) ? null : reader.GetString(2),
+                                Imagen = reader.IsDBNull(3) ? null : reader.GetString(3),
                                 FechaCreacion = reader.GetDateTime(4)
-                            }; 
+                            };
 
                             cursos.Add(curso);
                         }
                     }
+                }
+            }
+            }catch(Exception ex){
+                return null;
+
+            }         
+            finally{  
+                if (connection.State != ConnectionState.Closed) {
+                    await connection.CloseAsync();
                 }
             }
             return cursos;
@@ -49,12 +59,12 @@ namespace reto2_api.Repositories
         {
             Curso curso = null;
 
-            using (var connection = new SqlConnection(_connectionString))
+            using (var connection = new MySqlConnection(_connectionString))
             {
                 await connection.OpenAsync();
 
-                string query = "SELECT idCurso, nombre, descripcion, imagen, fechaCreacion FROM Curso WHERE IdCurso = @IdCurso";
-                using (var command = new SqlCommand(query, connection))
+                string query = "SELECT idCurso, nombre, descripcion, imagen, fechaCreacion FROM Curso WHERE idCurso = @IdCurso";
+                using (var command = new MySqlCommand(query, connection))
                 {
                     command.Parameters.AddWithValue("@IdCurso", id);
 
@@ -66,8 +76,8 @@ namespace reto2_api.Repositories
                             {
                                 IdCurso = reader.GetInt32(0),
                                 Nombre = reader.GetString(1),
-                                Descripcion = reader.GetString(1),
-                                Imagen = reader.GetString(3),
+                                Descripcion = reader.IsDBNull(2) ? null : reader.GetString(2),
+                                Imagen = reader.IsDBNull(3) ? null : reader.GetString(3),
                                 FechaCreacion = reader.GetDateTime(4)
                             };
                         }
@@ -79,16 +89,16 @@ namespace reto2_api.Repositories
 
         public async Task AddAsync(Curso curso)
         {
-            using (var connection = new SqlConnection(_connectionString))
+            using (var connection = new MySqlConnection(_connectionString))
             {
                 await connection.OpenAsync();
 
                 string query = "INSERT INTO Curso (nombre, descripcion, imagen) VALUES (@nombre, @descripcion, @imagen)";
-                using (var command = new SqlCommand(query, connection))
+                using (var command = new MySqlCommand(query, connection))
                 {
                     command.Parameters.AddWithValue("@nombre", curso.Nombre);
-                    command.Parameters.AddWithValue("@descripcion", curso.Descripcion);
-                    command.Parameters.AddWithValue("@imagen", curso.Imagen);
+                    command.Parameters.AddWithValue("@descripcion", curso.Descripcion ?? (object)DBNull.Value);
+                    command.Parameters.AddWithValue("@imagen", curso.Imagen ?? (object)DBNull.Value);
 
                     await command.ExecuteNonQueryAsync();
                 }
@@ -97,17 +107,17 @@ namespace reto2_api.Repositories
 
         public async Task UpdateAsync(Curso curso)
         {
-            using (var connection = new SqlConnection(_connectionString))
+            using (var connection = new MySqlConnection(_connectionString))
             {
                 await connection.OpenAsync();
 
-                string query = "UPDATE Curso SET Nombre = @Nombre, Descripcion = @Descripcion, Imagen = @Imagen WHERE IdCurso = @IdCurso";
-                using (var command = new SqlCommand(query, connection))
+                string query = "UPDATE Curso SET nombre = @Nombre, descripcion = @Descripcion, imagen = @Imagen WHERE idCurso = @IdCurso";
+                using (var command = new MySqlCommand(query, connection))
                 {
                     command.Parameters.AddWithValue("@IdCurso", curso.IdCurso);
                     command.Parameters.AddWithValue("@Nombre", curso.Nombre);
-                    command.Parameters.AddWithValue("@Descripcion", curso.Descripcion);
-                    command.Parameters.AddWithValue("@Imagen", curso.Imagen);
+                    command.Parameters.AddWithValue("@Descripcion", curso.Descripcion ?? (object)DBNull.Value);
+                    command.Parameters.AddWithValue("@Imagen", curso.Imagen ?? (object)DBNull.Value);
 
                     await command.ExecuteNonQueryAsync();
                 }
@@ -116,24 +126,19 @@ namespace reto2_api.Repositories
 
         public async Task<bool> DeleteAsync(int id)
         {
-            using (var connection = new SqlConnection(_connectionString))
+            using (var connection = new MySqlConnection(_connectionString))
             {
                 await connection.OpenAsync();
 
-                string query = "DELETE FROM Curso WHERE IdCurso = @IdCurso";
-                using (var command = new SqlCommand(query, connection))
+                string query = "DELETE FROM Curso WHERE idCurso = @IdCurso";
+                using (var command = new MySqlCommand(query, connection))
                 {
                     command.Parameters.AddWithValue("@IdCurso", id);
 
-                   int rowsAffected = await command.ExecuteNonQueryAsync();
-                   return rowsAffected > 0;
+                    int rowsAffected = await command.ExecuteNonQueryAsync();
+                    return rowsAffected > 0;
                 }
             }
         }
-
-
-
-
     }
-
 }

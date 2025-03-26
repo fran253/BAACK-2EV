@@ -1,4 +1,4 @@
-using Microsoft.Data.SqlClient;
+using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -18,17 +18,18 @@ namespace reto2_api.Repositories
         {
             var usuarios = new List<Usuario>();
 
-            using (var connection = new SqlConnection(_connectionString))
+            using (var connection = new MySqlConnection(_connectionString))
             {
                 await connection.OpenAsync();
 
-                string query = "SELECT IdUsuario, Nombre, Apellido, Gmail, Telefono, Contraseña, IdRol FROM Usuario";
-                using (var command = new SqlCommand(query, connection))
+                string query = "SELECT idUsuario, nombre, apellidos, gmail, telefono, contraseña, idRol FROM Usuario";
+                using (var command = new MySqlCommand(query, connection))
                 {
                     using (var reader = await command.ExecuteReaderAsync())
                     {
                         while (await reader.ReadAsync())
                         {
+
                             var usuario = new Usuario
                             {
                                 IdUsuario = reader.GetInt32(0),
@@ -37,7 +38,7 @@ namespace reto2_api.Repositories
                                 Gmail = reader.GetString(3),
                                 Telefono = reader.GetString(4),
                                 Contraseña = reader.GetString(5),
-                                Rol = new Rol(reader.GetInt32(6))
+                                IdRol = reader.GetInt32(6)
                             };
 
                             usuarios.Add(usuario);
@@ -48,16 +49,63 @@ namespace reto2_api.Repositories
             return usuarios;
         }
 
+        public async Task<List<dynamic>> ClasificacionUsuarios()
+        {
+            var usuariosTop = new List<dynamic>();
+
+            using (var connection = new MySqlConnection(_connectionString))
+            {
+                await connection.OpenAsync();
+
+                string query = @"
+                    SELECT u.idUsuario, u.nombre, u.apellidos, u.gmail, u.telefono, u.contraseña, u.idRol, 
+                        COUNT(a.idArchivo) AS total_archivos
+                    FROM Usuario u
+                    JOIN Archivo a ON u.idUsuario = a.idUsuario
+                    GROUP BY u.idUsuario, u.nombre, u.apellidos, u.gmail, u.telefono, u.contraseña, u.idRol
+                    ORDER BY total_archivos DESC
+                    LIMIT 5";
+
+                using (var command = new MySqlCommand(query, connection))
+                {
+                    using (var reader = await command.ExecuteReaderAsync())
+                    {
+                        while (await reader.ReadAsync())
+                        {
+                            var usuarioTop = new
+                            {
+                                IdUsuario = reader.GetInt32(0),
+                                Nombre = reader.GetString(1),
+                                Apellido = reader.GetString(2),
+                                Gmail = reader.GetString(3),
+                                Telefono = reader.GetString(4),
+                                Contraseña = reader.GetString(5),
+                                IdRol = reader.GetInt32(6),
+                                TotalArchivos = reader.GetInt32(7) // Se obtiene solo en la consulta, no en la entidad
+                            };
+
+                            usuariosTop.Add(usuarioTop);
+                        }
+                    }
+                }
+            }
+
+            return usuariosTop;
+        }
+
+
+
+
         public async Task<Usuario> GetByIdAsync(int id)
         {
             Usuario usuario = null;
 
-            using (var connection = new SqlConnection(_connectionString))
+            using (var connection = new MySqlConnection(_connectionString))
             {
                 await connection.OpenAsync();
 
-                string query = "SELECT IdUsuario, Nombre, Apellido, Gmail, Telefono, Contraseña, IdRol FROM Usuario WHERE IdUsuario = @Id";
-                using (var command = new SqlCommand(query, connection))
+                string query = "SELECT idUsuario, nombre, apellidos, gmail, telefono, contraseña, idRol FROM Usuario WHERE idUsuario = @Id";
+                using (var command = new MySqlCommand(query, connection))
                 {
                     command.Parameters.AddWithValue("@Id", id);
 
@@ -73,7 +121,7 @@ namespace reto2_api.Repositories
                                 Gmail = reader.GetString(3),
                                 Telefono = reader.GetString(4),
                                 Contraseña = reader.GetString(5),
-                                Rol = new Rol (reader.GetInt32(6))
+                                IdRol = reader.GetInt32(6)
                             };
                         }
                     }
@@ -84,19 +132,19 @@ namespace reto2_api.Repositories
 
         public async Task AddAsync(Usuario usuario)
         {
-            using (var connection = new SqlConnection(_connectionString))
+            using (var connection = new MySqlConnection(_connectionString))
             {
                 await connection.OpenAsync();
 
-                string query = "INSERT INTO Usuario (Nombre, Apellido, Gmail, Telefono, Contraseña, IdRol) VALUES (@Nombre, @Apellido, @Gmail, @Telefono, @Contraseña, @IdRol)";
-                using (var command = new SqlCommand(query, connection))
+                string query = "INSERT INTO Usuario (nombre, apellidos, gmail, telefono, contraseña, idRol) VALUES (@Nombre, @Apellido, @Gmail, @Telefono, @Contraseña, @IdRol)";
+                using (var command = new MySqlCommand(query, connection))
                 {
                     command.Parameters.AddWithValue("@Nombre", usuario.Nombre);
                     command.Parameters.AddWithValue("@Apellido", usuario.Apellido);
                     command.Parameters.AddWithValue("@Gmail", usuario.Gmail);
                     command.Parameters.AddWithValue("@Telefono", usuario.Telefono);
                     command.Parameters.AddWithValue("@Contraseña", usuario.Contraseña);
-                    command.Parameters.AddWithValue("@IdRol", usuario.Rol.IdRol);
+                    command.Parameters.AddWithValue("@IdRol", usuario.IdRol);
 
                     await command.ExecuteNonQueryAsync();
                 }
@@ -105,12 +153,12 @@ namespace reto2_api.Repositories
 
         public async Task UpdateAsync(Usuario usuario)
         {
-            using (var connection = new SqlConnection(_connectionString))
+            using (var connection = new MySqlConnection(_connectionString))
             {
                 await connection.OpenAsync();
 
-                string query = "UPDATE Usuario SET Nombre = @Nombre, Apellido = @Apellido, Gmail = @Gmail, Telefono = @Telefono, Contraseña = @Contraseña, IdRol = @IdRol WHERE IdUsuario = @Id";
-                using (var command = new SqlCommand(query, connection))
+                string query = "UPDATE Usuario SET nombre = @Nombre, apellidos = @Apellido, gmail = @Gmail, telefono = @Telefono, Contraseña = @Contraseña, idRol = @IdRol WHERE idUsuario = @Id";
+                using (var command = new MySqlCommand(query, connection))
                 {
                     command.Parameters.AddWithValue("@Id", usuario.IdUsuario);
                     command.Parameters.AddWithValue("@Nombre", usuario.Nombre);
@@ -118,7 +166,7 @@ namespace reto2_api.Repositories
                     command.Parameters.AddWithValue("@Gmail", usuario.Gmail);
                     command.Parameters.AddWithValue("@Telefono", usuario.Telefono);
                     command.Parameters.AddWithValue("@Contraseña", usuario.Contraseña);
-                    command.Parameters.AddWithValue("@IdRol", usuario.Rol.IdRol);
+                    command.Parameters.AddWithValue("@IdRol", usuario.IdRol);
 
                     await command.ExecuteNonQueryAsync();
                 }
@@ -127,12 +175,12 @@ namespace reto2_api.Repositories
 
         public async Task<bool> DeleteAsync(int id)
         {
-            using (var connection = new SqlConnection(_connectionString))
+            using (var connection = new MySqlConnection(_connectionString))
             {
                 await connection.OpenAsync();
 
-                string query = "DELETE FROM Usuario WHERE IdUsuario = @Id";
-                using (var command = new SqlCommand(query, connection))
+                string query = "DELETE FROM Usuario WHERE idUsuario = @Id";
+                using (var command = new MySqlCommand(query, connection))
                 {
                     command.Parameters.AddWithValue("@Id", id);
 
@@ -142,37 +190,40 @@ namespace reto2_api.Repositories
             }
         }
 
-        public async Task InicializarDatosAsync()
+// Método para login por Gmail
+public async Task<Usuario> LoginByGmailAsync(string gmail, string contraseña)
+{
+    using (var connection = new MySqlConnection(_connectionString))
+    {
+        await connection.OpenAsync();
+
+        string query = "SELECT idUsuario, nombre, apellidos, gmail, telefono, contraseña, idRol FROM Usuario WHERE gmail = @Gmail AND contraseña = @Contraseña";
+        using (var command = new MySqlCommand(query, connection))
         {
-            using (var connection = new SqlConnection(_connectionString))
+            command.Parameters.AddWithValue("@Gmail", gmail);
+            command.Parameters.AddWithValue("@Contraseña", contraseña);
+
+            using (var reader = await command.ExecuteReaderAsync())
             {
-                await connection.OpenAsync();
-
-                var query = @"
-                    INSERT INTO Usuario (Nombre, Apellido, Gmail, Telefono, Contraseña, IdRol)
-                    VALUES 
-                    (@Nombre1, @Apellido1, @Gmail1, @Telefono1, @Contraseña1, @IdRol1),
-                    (@Nombre2, @Apellido2, @Gmail2, @Telefono2, @Contraseña2, @IdRol2)";
-
-                using (var command = new SqlCommand(query, connection))
+                if (await reader.ReadAsync())
                 {
-                    command.Parameters.AddWithValue("@Nombre1", "Juan");
-                    command.Parameters.AddWithValue("@Apellido1", "Pérez");
-                    command.Parameters.AddWithValue("@Gmail1", "juan.perez@example.com");
-                    command.Parameters.AddWithValue("@Telefono1", "123456789");
-                    command.Parameters.AddWithValue("@Contraseña1", "pass123");
-                    command.Parameters.AddWithValue("@IdRol1", 1);
-
-                    command.Parameters.AddWithValue("@Nombre2", "Ana");
-                    command.Parameters.AddWithValue("@Apellido2", "López");
-                    command.Parameters.AddWithValue("@Gmail2", "ana.lopez@example.com");
-                    command.Parameters.AddWithValue("@Telefono2", "987654321");
-                    command.Parameters.AddWithValue("@Contraseña2", "pass456");
-                    command.Parameters.AddWithValue("@IdRol2", 2);
-
-                    await command.ExecuteNonQueryAsync();
+                    return new Usuario
+                    {
+                        IdUsuario = reader.GetInt32(0),
+                        Nombre = reader.GetString(1),
+                        Apellido = reader.GetString(2),
+                        Gmail = reader.GetString(3),
+                        Telefono = reader.GetString(4),
+                        Contraseña = reader.GetString(5),
+                        IdRol = reader.GetInt32(6)
+                    };
                 }
             }
         }
+    }
+    return null;
+}
+        
+
     }
 }

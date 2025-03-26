@@ -7,10 +7,10 @@ public class Resultado
     public DateTime Fecha { get; set; } 
 
     public int IdUsuario { get; set; } 
-    public Usuario Usuario { get; set; }
+    public Usuario? Usuario { get; set; }
 
     public int IdPregunta { get; set; } 
-    public Pregunta Pregunta { get; set; } 
+    public Pregunta? Pregunta { get; set; } 
 
     public Resultado(int idResultado, int puntuacion, DateTime fecha, Usuario usuario, Pregunta pregunta)
     {
@@ -37,8 +37,4 @@ public class Resultado
 
     public Resultado() { }
 
-    public void MostrarDetalles()
-    {
-        Console.WriteLine($"resultado: {Puntuacion}, fecha: {Fecha}, usuario: {Usuario.Nombre}, pregunta id: {IdPregunta}");
-    }
 }

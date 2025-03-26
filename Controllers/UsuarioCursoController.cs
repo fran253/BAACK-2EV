@@ -1,10 +1,17 @@
 using Microsoft.AspNetCore.Mvc;
 using reto2_api.Service;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace reto2_api.Controllers
 {
+    public class UsuarioCursoDTO
+    {
+        public int IdUsuario { get; set; }
+        public int IdCurso { get; set; }
+    }
+
     [Route("api/[controller]")]
     [ApiController]
     public class UsuarioCursoController : ControllerBase
@@ -31,17 +38,27 @@ namespace reto2_api.Controllers
         }
 
         [HttpGet("curso/{idCurso}")]
-        public async Task<ActionResult<List<UsuarioCurso>>> GetByCursoId(int idCurso)
+        public async Task<ActionResult<List<UsuarioCurso>>> GetByIdCurso(int idCurso)
         {
-            var inscripciones = await _usuarioCursoService.GetByCursoIdAsync(idCurso);
+            var inscripciones = await _usuarioCursoService.GetByIdCursoAsync(idCurso);
             return Ok(inscripciones);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Add(UsuarioCurso usuarioCurso)
+        public async Task<IActionResult> Add([FromBody] UsuarioCursoDTO dto)
         {
-            await _usuarioCursoService.AddAsync(usuarioCurso);
-            return Ok("inscripción creada con éxito.");
+            try
+            {
+                // Crear un objeto UsuarioCurso usando solo los IDs
+                var usuarioCurso = new UsuarioCurso(dto.IdUsuario, dto.IdCurso);
+                
+                await _usuarioCursoService.AddAsync(usuarioCurso);
+                return Ok("inscripción creada con éxito.");
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         [HttpDelete]
