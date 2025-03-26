@@ -20,7 +20,7 @@ CREATE TABLE Curso (
     imagen TEXT,
     descripcion TEXT,
     fechaCreacion DATETIME DEFAULT CURRENT_TIMESTAMP
-); 
+);  
 
 CREATE TABLE Usuario_Curso (
     idUsuario INT NOT NULL,
