@@ -19,3 +19,13 @@ docker run --name reto2_api \
 //////////////////////////////////PARA INICIAR SWAGGER
 dotnet build .\reto2_api.csproj
 dotnet run
+
+
+/////////////////////////////////EN EL appsettings.json incluir despues del conection string lo siguiente para poder subir y mostrar archivos del s3
+
+"AWS": {
+    "AccessKey": "AKIA6OZEWFD6KSENSAEE",
+    "SecretKey": "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",
+    "BucketName": "archivos-academiq",
+    "Region": "us-east-1"
+  }
